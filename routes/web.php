@@ -142,7 +142,6 @@ use App\Http\Livewire\WishList;
 // });
 
 Route::get('', Index::class);
-Route::get('login', \App\Http\Livewire\Login::class);
 Route::get('index', Index::class);
 Route::get('about-us', AboutUs::class);
 Route::get('accordion', Accordion::class);
