@@ -1,0 +1,1561 @@
+/*------ Icons List ------*/
+
+.browser {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: inline-block;
+    background: no-repeat center/100% 100%;
+    vertical-align: bottom;
+    font-style: normal;
+}
+
+.browser-android-browser {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/android-browser.svg");
+}
+
+.browser-aol-explorer {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/aol-explorer.svg");
+}
+
+.browser-blackberry {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/blackberry.svg");
+}
+
+.browser-camino {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/camino.svg");
+}
+
+.browser-chrome {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/chrome.svg");
+}
+
+.browser-chromium {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/chromium.svg");
+}
+
+.browser-dolphin {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/dolphin.svg");
+}
+
+.browser-edge {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/edge.svg");
+}
+
+.browser-firefox {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/firefox.svg");
+}
+
+.browser-ie {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/ie.svg");
+}
+
+.browser-maxthon {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/maxthon.svg");
+}
+
+.browser-mozilla {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/mozilla.svg");
+}
+
+.browser-netscape {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/netscape.svg");
+}
+
+.browser-opera {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/opera.svg");
+}
+
+.browser-safari {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/safari.svg");
+}
+
+.browser-sleipnir {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/sleipnir.svg");
+}
+
+.browser-uc-browser {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/uc-browser.svg");
+}
+
+.browser-vivaldi {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/browsers/vivaldi.svg");
+}
+
+.flag {
+    width: 1.6rem;
+    height: 1.2rem;
+    display: block;
+    background: no-repeat center/100% 100%;
+    vertical-align: bottom;
+    font-style: normal;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.flag-ad {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ad.svg");
+}
+
+.flag-ae {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ae.svg");
+}
+
+.flag-af {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/af.svg");
+}
+
+.flag-ag {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ag.svg");
+}
+
+.flag-ai {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ai.svg");
+}
+
+.flag-al {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/al.svg");
+}
+
+.flag-am {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/am.svg");
+}
+
+.flag-ao {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ao.svg");
+}
+
+.flag-aq {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/aq.svg");
+}
+
+.flag-ar {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ar.svg");
+}
+
+.flag-as {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/as.svg");
+}
+
+.flag-at {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/at.svg");
+}
+
+.flag-au {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/au.svg");
+}
+
+.flag-aw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/aw.svg");
+}
+
+.flag-ax {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ax.svg");
+}
+
+.flag-az {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/az.svg");
+}
+
+.flag-ba {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ba.svg");
+}
+
+.flag-bb {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bb.svg");
+}
+
+.flag-bd {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bd.svg");
+}
+
+.flag-be {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/be.svg");
+}
+
+.flag-bf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bf.svg");
+}
+
+.flag-bg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bg.svg");
+}
+
+.flag-bh {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bh.svg");
+}
+
+.flag-bi {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bi.svg");
+}
+
+.flag-bj {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bj.svg");
+}
+
+.flag-bl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bl.svg");
+}
+
+.flag-bm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bm.svg");
+}
+
+.flag-bn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bn.svg");
+}
+
+.flag-bo {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bo.svg");
+}
+
+.flag-bq {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bq.svg");
+}
+
+.flag-br {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/br.svg");
+}
+
+.flag-bs {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bs.svg");
+}
+
+.flag-bt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bt.svg");
+}
+
+.flag-bv {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bv.svg");
+}
+
+.flag-bw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bw.svg");
+}
+
+.flag-by {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/by.svg");
+}
+
+.flag-bz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/bz.svg");
+}
+
+.flag-ca {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ca.svg");
+}
+
+.flag-cc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cc.svg");
+}
+
+.flag-cd {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cd.svg");
+}
+
+.flag-cf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cf.svg");
+}
+
+.flag-cg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cg.svg");
+}
+
+.flag-ch {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ch.svg");
+}
+
+.flag-ci {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ci.svg");
+}
+
+.flag-ck {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ck.svg");
+}
+
+.flag-cl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cl.svg");
+}
+
+.flag-cm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cm.svg");
+}
+
+.flag-cn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cn.svg");
+}
+
+.flag-co {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/co.svg");
+}
+
+.flag-cr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cr.svg");
+}
+
+.flag-cu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cu.svg");
+}
+
+.flag-cv {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cv.svg");
+}
+
+.flag-cw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cw.svg");
+}
+
+.flag-cx {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cx.svg");
+}
+
+.flag-cy {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cy.svg");
+}
+
+.flag-cz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/cz.svg");
+}
+
+.flag-de {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/de.svg");
+}
+
+.flag-dj {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/dj.svg");
+}
+
+.flag-dk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/dk.svg");
+}
+
+.flag-dm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/dm.svg");
+}
+
+.flag-do {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/do.svg");
+}
+
+.flag-dz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/dz.svg");
+}
+
+.flag-ec {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ec.svg");
+}
+
+.flag-ee {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ee.svg");
+}
+
+.flag-eg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/eg.svg");
+}
+
+.flag-eh {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/eh.svg");
+}
+
+.flag-er {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/er.svg");
+}
+
+.flag-es {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/es.svg");
+}
+
+.flag-et {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/et.svg");
+}
+
+.flag-eu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/eu.svg");
+}
+
+.flag-fi {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/fi.svg");
+}
+
+.flag-fj {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/fj.svg");
+}
+
+.flag-fk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/fk.svg");
+}
+
+.flag-fm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/fm.svg");
+}
+
+.flag-fo {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/fo.svg");
+}
+
+.flag-fr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/fr.svg");
+}
+
+.flag-ga {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ga.svg");
+}
+
+.flag-gb-eng {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gb-eng.svg");
+}
+
+.flag-gb-nir {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gb-nir.svg");
+}
+
+.flag-gb-sct {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gb-sct.svg");
+}
+
+.flag-gb-wls {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gb-wls.svg");
+}
+
+.flag-gb {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gb.svg");
+}
+
+.flag-gd {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gd.svg");
+}
+
+.flag-ge {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ge.svg");
+}
+
+.flag-gf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gf.svg");
+}
+
+.flag-gg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gg.svg");
+}
+
+.flag-gh {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gh.svg");
+}
+
+.flag-gi {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gi.svg");
+}
+
+.flag-gl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gl.svg");
+}
+
+.flag-gm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gm.svg");
+}
+
+.flag-gn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gn.svg");
+}
+
+.flag-gp {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gp.svg");
+}
+
+.flag-gq {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gq.svg");
+}
+
+.flag-gr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gr.svg");
+}
+
+.flag-gs {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gs.svg");
+}
+
+.flag-gt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gt.svg");
+}
+
+.flag-gu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gu.svg");
+}
+
+.flag-gw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gw.svg");
+}
+
+.flag-gy {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/gy.svg");
+}
+
+.flag-hk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/hk.svg");
+}
+
+.flag-hm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/hm.svg");
+}
+
+.flag-hn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/hn.svg");
+}
+
+.flag-hr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/hr.svg");
+}
+
+.flag-ht {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ht.svg");
+}
+
+.flag-hu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/hu.svg");
+}
+
+.flag-id {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/id.svg");
+}
+
+.flag-ie {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ie.svg");
+}
+
+.flag-il {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/il.svg");
+}
+
+.flag-im {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/im.svg");
+}
+
+.flag-in {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/in.svg");
+}
+
+.flag-io {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/io.svg");
+}
+
+.flag-iq {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/iq.svg");
+}
+
+.flag-ir {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ir.svg");
+}
+
+.flag-is {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/is.svg");
+}
+
+.flag-it {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/it.svg");
+}
+
+.flag-je {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/je.svg");
+}
+
+.flag-jm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/jm.svg");
+}
+
+.flag-jo {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/jo.svg");
+}
+
+.flag-jp {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/jp.svg");
+}
+
+.flag-ke {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ke.svg");
+}
+
+.flag-kg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kg.svg");
+}
+
+.flag-kh {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kh.svg");
+}
+
+.flag-ki {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ki.svg");
+}
+
+.flag-km {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/km.svg");
+}
+
+.flag-kn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kn.svg");
+}
+
+.flag-kp {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kp.svg");
+}
+
+.flag-kr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kr.svg");
+}
+
+.flag-kw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kw.svg");
+}
+
+.flag-ky {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ky.svg");
+}
+
+.flag-kz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/kz.svg");
+}
+
+.flag-la {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/la.svg");
+}
+
+.flag-lb {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lb.svg");
+}
+
+.flag-lc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lc.svg");
+}
+
+.flag-li {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/li.svg");
+}
+
+.flag-lk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lk.svg");
+}
+
+.flag-lr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lr.svg");
+}
+
+.flag-ls {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ls.svg");
+}
+
+.flag-lt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lt.svg");
+}
+
+.flag-lu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lu.svg");
+}
+
+.flag-lv {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/lv.svg");
+}
+
+.flag-ly {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ly.svg");
+}
+
+.flag-ma {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ma.svg");
+}
+
+.flag-mc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mc.svg");
+}
+
+.flag-md {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/md.svg");
+}
+
+.flag-me {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/me.svg");
+}
+
+.flag-mf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mf.svg");
+}
+
+.flag-mg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mg.svg");
+}
+
+.flag-mh {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mh.svg");
+}
+
+.flag-mk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mk.svg");
+}
+
+.flag-ml {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ml.svg");
+}
+
+.flag-mm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mm.svg");
+}
+
+.flag-mn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mn.svg");
+}
+
+.flag-mo {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mo.svg");
+}
+
+.flag-mp {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mp.svg");
+}
+
+.flag-mq {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mq.svg");
+}
+
+.flag-mr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mr.svg");
+}
+
+.flag-ms {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ms.svg");
+}
+
+.flag-mt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mt.svg");
+}
+
+.flag-mu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mu.svg");
+}
+
+.flag-mv {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mv.svg");
+}
+
+.flag-mw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mw.svg");
+}
+
+.flag-mx {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mx.svg");
+}
+
+.flag-my {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/my.svg");
+}
+
+.flag-mz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/mz.svg");
+}
+
+.flag-na {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/na.svg");
+}
+
+.flag-nc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/nc.svg");
+}
+
+.flag-ne {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ne.svg");
+}
+
+.flag-nf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/nf.svg");
+}
+
+.flag-ng {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ng.svg");
+}
+
+.flag-ni {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ni.svg");
+}
+
+.flag-nl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/nl.svg");
+}
+
+.flag-no {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/no.svg");
+}
+
+.flag-np {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/np.svg");
+}
+
+.flag-nr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/nr.svg");
+}
+
+.flag-nu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/nu.svg");
+}
+
+.flag-nz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/nz.svg");
+}
+
+.flag-om {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/om.svg");
+}
+
+.flag-pa {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pa.svg");
+}
+
+.flag-pe {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pe.svg");
+}
+
+.flag-pf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pf.svg");
+}
+
+.flag-pg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pg.svg");
+}
+
+.flag-ph {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ph.svg");
+}
+
+.flag-pk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pk.svg");
+}
+
+.flag-pl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pl.svg");
+}
+
+.flag-pm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pm.svg");
+}
+
+.flag-pn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pn.svg");
+}
+
+.flag-pr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pr.svg");
+}
+
+.flag-ps {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ps.svg");
+}
+
+.flag-pt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pt.svg");
+}
+
+.flag-pw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/pw.svg");
+}
+
+.flag-py {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/py.svg");
+}
+
+.flag-qa {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/qa.svg");
+}
+
+.flag-re {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/re.svg");
+}
+
+.flag-ro {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ro.svg");
+}
+
+.flag-rs {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/rs.svg");
+}
+
+.flag-ru {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ru.svg");
+}
+
+.flag-rw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/rw.svg");
+}
+
+.flag-sa {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sa.svg");
+}
+
+.flag-sb {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sb.svg");
+}
+
+.flag-sc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sc.svg");
+}
+
+.flag-sd {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sd.svg");
+}
+
+.flag-se {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/se.svg");
+}
+
+.flag-sg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sg.svg");
+}
+
+.flag-sh {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sh.svg");
+}
+
+.flag-si {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/si.svg");
+}
+
+.flag-sj {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sj.svg");
+}
+
+.flag-sk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sk.svg");
+}
+
+.flag-sl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sl.svg");
+}
+
+.flag-sm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sm.svg");
+}
+
+.flag-sn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sn.svg");
+}
+
+.flag-so {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/so.svg");
+}
+
+.flag-sr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sr.svg");
+}
+
+.flag-ss {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ss.svg");
+}
+
+.flag-st {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/st.svg");
+}
+
+.flag-sv {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sv.svg");
+}
+
+.flag-sx {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sx.svg");
+}
+
+.flag-sy {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sy.svg");
+}
+
+.flag-sz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/sz.svg");
+}
+
+.flag-tc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tc.svg");
+}
+
+.flag-td {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/td.svg");
+}
+
+.flag-tf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tf.svg");
+}
+
+.flag-tg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tg.svg");
+}
+
+.flag-th {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/th.svg");
+}
+
+.flag-tj {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tj.svg");
+}
+
+.flag-tk {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tk.svg");
+}
+
+.flag-tl {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tl.svg");
+}
+
+.flag-tm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tm.svg");
+}
+
+.flag-tn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tn.svg");
+}
+
+.flag-to {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/to.svg");
+}
+
+.flag-tr {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tr.svg");
+}
+
+.flag-tt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tt.svg");
+}
+
+.flag-tv {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tv.svg");
+}
+
+.flag-tw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tw.svg");
+}
+
+.flag-tz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/tz.svg");
+}
+
+.flag-ua {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ua.svg");
+}
+
+.flag-ug {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ug.svg");
+}
+
+.flag-um {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/um.svg");
+}
+
+.flag-un {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/un.svg");
+}
+
+.flag-us {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/us.svg");
+}
+
+.flag-uy {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/uy.svg");
+}
+
+.flag-uz {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/uz.svg");
+}
+
+.flag-va {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/va.svg");
+}
+
+.flag-vc {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/vc.svg");
+}
+
+.flag-ve {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ve.svg");
+}
+
+.flag-vg {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/vg.svg");
+}
+
+.flag-vi {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/vi.svg");
+}
+
+.flag-vn {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/vn.svg");
+}
+
+.flag-vu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/vu.svg");
+}
+
+.flag-wf {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/wf.svg");
+}
+
+.flag-ws {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ws.svg");
+}
+
+.flag-ye {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/ye.svg");
+}
+
+.flag-yt {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/yt.svg");
+}
+
+.flag-za {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/za.svg");
+}
+
+.flag-zm {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/zm.svg");
+}
+
+.flag-zw {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/flags/zw.svg");
+}
+
+.payment {
+    width: 1.8rem;
+    height: 1.1rem;
+    display: inline-block;
+    background: no-repeat center/100% 100%;
+    vertical-align: bottom;
+    font-style: normal;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.payment-2checkout-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/2checkout-dark.svg");
+}
+
+.payment-2checkout {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/2checkout.svg");
+}
+
+.payment-alipay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/alipay-dark.svg");
+}
+
+.payment-alipay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/alipay.svg");
+}
+
+.payment-amazon-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/amazon-dark.svg");
+}
+
+.payment-amazon {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/amazon.svg");
+}
+
+.payment-americanexpress-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/americanexpress-dark.svg");
+}
+
+.payment-americanexpress {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/americanexpress.svg");
+}
+
+.payment-applepay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/applepay-dark.svg");
+}
+
+.payment-applepay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/applepay.svg");
+}
+
+.payment-bancontact-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/bancontact-dark.svg");
+}
+
+.payment-bancontact {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/bancontact.svg");
+}
+
+.payment-bitcoin-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/bitcoin-dark.svg");
+}
+
+.payment-bitcoin {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/bitcoin.svg");
+}
+
+.payment-bitpay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/bitpay-dark.svg");
+}
+
+.payment-bitpay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/bitpay.svg");
+}
+
+.payment-cirrus-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/cirrus-dark.svg");
+}
+
+.payment-cirrus {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/cirrus.svg");
+}
+
+.payment-clickandbuy-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/clickandbuy-dark.svg");
+}
+
+.payment-clickandbuy {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/clickandbuy.svg");
+}
+
+.payment-coinkite-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/coinkite-dark.svg");
+}
+
+.payment-coinkite {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/coinkite.svg");
+}
+
+.payment-dinersclub-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/dinersclub-dark.svg");
+}
+
+.payment-dinersclub {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/dinersclub.svg");
+}
+
+.payment-directdebit-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/directdebit-dark.svg");
+}
+
+.payment-directdebit {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/directdebit.svg");
+}
+
+.payment-discover-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/discover-dark.svg");
+}
+
+.payment-discover {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/discover.svg");
+}
+
+.payment-dwolla-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/dwolla-dark.svg");
+}
+
+.payment-dwolla {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/dwolla.svg");
+}
+
+.payment-ebay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ebay-dark.svg");
+}
+
+.payment-ebay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ebay.svg");
+}
+
+.payment-eway-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/eway-dark.svg");
+}
+
+.payment-eway {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/eway.svg");
+}
+
+.payment-giropay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/giropay-dark.svg");
+}
+
+.payment-giropay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/giropay.svg");
+}
+
+.payment-googlewallet-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/googlewallet-dark.svg");
+}
+
+.payment-googlewallet {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/googlewallet.svg");
+}
+
+.payment-ingenico-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ingenico-dark.svg");
+}
+
+.payment-ingenico {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ingenico.svg");
+}
+
+.payment-jcb-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/jcb-dark.svg");
+}
+
+.payment-jcb {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/jcb.svg");
+}
+
+.payment-klarna-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/klarna-dark.svg");
+}
+
+.payment-klarna {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/klarna.svg");
+}
+
+.payment-laser-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/laser-dark.svg");
+}
+
+.payment-laser {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/laser.svg");
+}
+
+.payment-maestro-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/maestro-dark.svg");
+}
+
+.payment-maestro {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/maestro.svg");
+}
+
+.payment-mastercard-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/mastercard-dark.svg");
+}
+
+.payment-mastercard {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/mastercard.svg");
+}
+
+.payment-monero-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/monero-dark.svg");
+}
+
+.payment-monero {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/monero.svg");
+}
+
+.payment-neteller-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/neteller-dark.svg");
+}
+
+.payment-neteller {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/neteller.svg");
+}
+
+.payment-ogone-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ogone-dark.svg");
+}
+
+.payment-ogone {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ogone.svg");
+}
+
+.payment-okpay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/okpay-dark.svg");
+}
+
+.payment-okpay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/okpay.svg");
+}
+
+.payment-paybox-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paybox-dark.svg");
+}
+
+.payment-paybox {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paybox.svg");
+}
+
+.payment-paymill-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paymill-dark.svg");
+}
+
+.payment-paymill {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paymill.svg");
+}
+
+.payment-payone-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payone-dark.svg");
+}
+
+.payment-payone {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payone.svg");
+}
+
+.payment-payoneer-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payoneer-dark.svg");
+}
+
+.payment-payoneer {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payoneer.svg");
+}
+
+.payment-paypal-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paypal-dark.svg");
+}
+
+.payment-paypal {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paypal.svg");
+}
+
+.payment-paysafecard-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paysafecard-dark.svg");
+}
+
+.payment-paysafecard {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/paysafecard.svg");
+}
+
+.payment-payu-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payu-dark.svg");
+}
+
+.payment-payu {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payu.svg");
+}
+
+.payment-payza-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payza-dark.svg");
+}
+
+.payment-payza {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/payza.svg");
+}
+
+.payment-ripple-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ripple-dark.svg");
+}
+
+.payment-ripple {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ripple.svg");
+}
+
+.payment-sage-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/sage-dark.svg");
+}
+
+.payment-sage {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/sage.svg");
+}
+
+.payment-sepa-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/sepa-dark.svg");
+}
+
+.payment-sepa {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/sepa.svg");
+}
+
+.payment-shopify-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/shopify-dark.svg");
+}
+
+.payment-shopify {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/shopify.svg");
+}
+
+.payment-skrill-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/skrill-dark.svg");
+}
+
+.payment-skrill {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/skrill.svg");
+}
+
+.payment-solo-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/solo-dark.svg");
+}
+
+.payment-solo {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/solo.svg");
+}
+
+.payment-square-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/square-dark.svg");
+}
+
+.payment-square {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/square.svg");
+}
+
+.payment-stripe-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/stripe-dark.svg");
+}
+
+.payment-stripe {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/stripe.svg");
+}
+
+.payment-switch-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/switch-dark.svg");
+}
+
+.payment-switch {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/switch.svg");
+}
+
+.payment-ukash-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ukash-dark.svg");
+}
+
+.payment-ukash {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/ukash.svg");
+}
+
+.payment-unionpay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/unionpay-dark.svg");
+}
+
+.payment-unionpay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/unionpay.svg");
+}
+
+.payment-verifone-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/verifone-dark.svg");
+}
+
+.payment-verifone {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/verifone.svg");
+}
+
+.payment-verisign-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/verisign-dark.svg");
+}
+
+.payment-verisign {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/verisign.svg");
+}
+
+.payment-visa-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/visa-dark.svg");
+}
+
+.payment-visa {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/visa.svg");
+}
+
+.payment-webmoney-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/webmoney-dark.svg");
+}
+
+.payment-webmoney {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/webmoney.svg");
+}
+
+.payment-westernunion-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/westernunion-dark.svg");
+}
+
+.payment-westernunion {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/westernunion.svg");
+}
+
+.payment-worldpay-dark {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/worldpay-dark.svg");
+}
+
+.payment-worldpay {
+    background-image: url("http://127.0.0.1:8000/build/assets/img/payments/worldpay.svg");
+}
+
+svg {
+    -ms-touch-action: none;
+    touch-action: none;
+}
