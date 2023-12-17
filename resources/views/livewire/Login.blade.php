@@ -41,18 +41,29 @@
 													<div class="panel-body p-0">
 														<div class="tab-content mt-3">
 															<div class="tab-pane active" id="signinTab1">
-																<form action="#">
+																<form action="{{ route('login') }}" method="POST">
+                                                                    @csrf
 																	<div class="form-group">
-																		<input class="form-control" placeholder="Email" type="email">
+																		<input class="form-control" name="email" id="email" value="{{ old('email') }}" placeholder="Email" type="email">
 																	</div>
 																	<div class="form-group">
-																		<input class="form-control" placeholder="Password" type="password">
+																		<input class="form-control" name="password" id="password" placeholder="Password" type="password">
 																	</div>
 																	<div class="d-flex align-items-center justify-content-between">
 																		<p class="mb-0"><a href="javascript:void(0);" class="tx-primary">Forgot password?</a></p>
-																		<a href="{{url('signup')}}"  class="btn btn-primary">Log In</a>
+																		<button type="submit" class="btn btn-primary">Log In</button>
 																	</div>
 																</form>
+
+                                                                @if ($errors->any())
+                                                                    <div class="alert alert-danger mb-0 mt-2">
+                                                                        <ul class="mb-0">
+                                                                            @foreach ($errors->all() as $error)
+                                                                                <li>{{ $error }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </div>
+                                                                @endif
                                                                 {{--<div class="divider my-4 or tx-muted"></div>
                                                                 <a href="javascript:void(0);" class="btn btn-block btn-outline-primary tx-center flex-center"><i class="bx bxl-google tx-22 me-2"></i>Signin With Google</a>
                                                                 <div class="d-flex">
