@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('customer-portal.layouts.app')
 
 @section('styles')
 @endsection
@@ -19,6 +19,20 @@
         </div>
     @endif
 
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="left-content">
+            <span class="main-content-title tx-primary mg-b-0 mg-b-lg-1">Clients</span>
+        </div>
+        {{--<div class="justify-content-center mt-2">
+            <ol class="breadcrumb breadcrumb-style3">
+                <li class="breadcrumb-item tx-15"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Main</li>
+            </ol>
+        </div>--}}
+    </div>
+    <!-- /breadcrumb -->
+
     <!-- Row -->
     <div class="row row-sm">
         <div class="col-lg-12">
@@ -26,7 +40,9 @@
                 <div class="card-header">
                     <div class="card-title">
                         <div class="d-flex flex-row w-full justify-content-between align-items-center">
-                            Clients
+                            <div>
+                                All Clients
+                            </div>
                             <button type="button" class="btn btn-outline-primary mx-2 button-icon" id="addClientModalBtn" data-bs-toggle="modal"
                                 data-bs-target="#addClientModal">
                                 <i class="fe fe-plus me-2"></i> Add Client
@@ -36,7 +52,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive  export-table">
+                    <div class="table-responsive export-table">
                         <table id="fieExportDataTable" class="table table-bordered text-nowrap key-buttons border-bottom">
                             <thead>
                                 <tr>
