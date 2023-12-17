@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('livewire.login');
+        return view('customer-portal.login');
     }
 
     /**

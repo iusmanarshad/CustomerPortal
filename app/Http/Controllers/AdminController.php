@@ -10,6 +10,6 @@ class AdminController extends Controller
     public function index()
     {
         $clients = User::where('role_id', 2)->get();
-        return view('livewire.portal.admin.index', compact('clients'));
+        return view('customer-portal.index', compact('clients'));
     }
 }

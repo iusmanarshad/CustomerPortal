@@ -1,4 +1,4 @@
-@extends('layouts.custom-app')
+@extends('customer-portal.layouts.custom-app')
 
 @section('styles')
 
