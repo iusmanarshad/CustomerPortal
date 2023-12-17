@@ -9,11 +9,12 @@ use Carbon\Carbon;
 
 class ChatService
 {
-    public function createChannel($slug, $name, $description = '')
+    public function createChannel($slug, $name, $type = '', $description = '')
     {
         $channelData = [
             'slug' => $slug,
             'name' => $name,
+            'type' => $type,
             'is_active' => true
         ];
 
@@ -37,6 +38,11 @@ class ChatService
     public function deactivateChannel($channelId)
     {
         return ChatChannel::where('id', '=', $channelId)->update(['is_active' => false]);
+    }
+
+    public function getChannelMembers($channelId)
+    {
+        return ChatChannelMember::where('channel_id', '=', $channelId)->get();
     }
 
     public function addChannelMember($channelId, $userId)
