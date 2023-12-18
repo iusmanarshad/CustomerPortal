@@ -41,7 +41,7 @@
 													<div class="panel-body p-0">
 														<div class="tab-content mt-3">
 															<div class="tab-pane active" id="signinTab1">
-																<form action="{{ route('login') }}" method="POST">
+																<form action="{{ route('portal.postLogin') }}" method="POST">
                                                                     @csrf
 																	<div class="form-group">
 																		<input class="form-control" name="email" id="email" value="{{ old('email') }}" placeholder="Email" type="email">
