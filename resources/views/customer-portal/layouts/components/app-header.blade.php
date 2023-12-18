@@ -617,9 +617,10 @@
 														<div class="avatar"><img alt="avatar" class="rounded-circle"
 																src="{{asset('build/assets/img/users/11.jpg')}}"></div>
 														<div class="ms-3 my-auto">
-															<h6 class="tx-15 text-black font-weight-semibold mb-0">Json
-																Taylor</h6><span class="text-black op-8 tx-11">Web
-																Designer</span>
+															<h6 class="tx-15 text-black font-weight-semibold mb-0">Usman Arshad</h6>
+                                                            <span class="text-black op-8 tx-11">
+                                                                Web Developer
+                                                            </span>
 														</div>
 													</div>
 												</li>
@@ -629,9 +630,18 @@
 															class="fe fe-mail"></i>Inbox</a></li>
 												<li><a class="dropdown-item" href="{{url('settings')}}"><i
 															class="fe fe-settings"></i>Settings</a></li>
-												<li><a class="dropdown-item" href="{{url('login')}}"><i
-															class="fe fe-power"></i>Log Out</a></li>
+												<li>
+                                                    <a href="#" class="dropdown-item"
+                                                        onclick="event.preventDefault();
+                                                                document.getElementById('logout-form').submit();">
+                                                        <i class="fe fe-power"></i>Log Out
+                                                    </a>
+                                                </li>
 											</ul>
+
+                                            <form id="logout-form" action="{{ route('portal.postLogout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
 										</li>
 									</ul>
 								</div>
