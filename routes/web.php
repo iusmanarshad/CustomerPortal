@@ -2,11 +2,6 @@
 
 use App\Http\Controllers;
 use App\Http\Controllers\CustomerPortal;
-use App\Http\Controllers\AdminClientController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CustomerPortal\AuthenticationController;
-use App\Http\Controllers\CustomerPortal\ClientController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\AboutUs;
