@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers;
+use App\Http\Controllers\CustomerPortal;
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerPortal\AuthenticationController;
@@ -146,7 +148,7 @@ use App\Http\Livewire\WishList;
 //     return view('welcome');
 // });
 
-Route::get('', Index::class);
+//Route::get('', Index::class);
 Route::get('index', Index::class);
 Route::get('about-us', AboutUs::class);
 Route::get('accordion', Accordion::class);
@@ -274,26 +276,30 @@ Route::get('width', Width::class);
 Route::get('wish-list', WishList::class);
 
 
+Route::get('', function () {
+    return redirect()->route('portal.dashboard');
+});
+
 Route::prefix('portal')->group(function () {
     // Authentication
-    Route::get('login', [AuthenticationController::class, 'login'])->name('portal.login');
-    Route::post('login', [AuthenticationController::class, 'authenticate'])->name('portal.postLogin');
-    Route::post('logout', [AuthenticationController::class, 'logout'])->name('portal.postLogout');
+    Route::get('login', [CustomerPortal\AuthenticationController::class, 'login'])->name('portal.login');
+    Route::post('login', [CustomerPortal\AuthenticationController::class, 'authenticate'])->name('portal.postLogin');
+    Route::post('logout', [CustomerPortal\AuthenticationController::class, 'logout'])->name('portal.postLogout');
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
-        Route::resource('clients', ClientController::class)->only([
+        Route::resource('clients', CustomerPortal\ClientController::class)->only([
             'index', 'show', 'create', 'edit'
         ]);
 
 
-        Route::get('dashboard', [AdminController::class, 'index'])->name('portal.dashboard');
+        Route::get('dashboard', [Controllers\AdminController::class, 'index'])->name('portal.dashboard');
 
-        //Route::get('client/view', [AdminClientController::class, 'index'])->name('admin.client.view');
-        Route::get('client/create', [AdminClientController::class, 'index'])->name('portal.client.view');
-        Route::post('client/create', [AdminClientController::class, 'create'])->name('portal.client.create');
-        Route::get('clients/{client}/edit', [AdminClientController::class, 'edit'])->name('portal.client.getForEdit');
-        Route::post('client/edit', [AdminClientController::class, 'edit'])->name('portal.client.edit');
-        Route::post('client/delete', [AdminClientController::class, 'delete'])->name('portal.client.delete');
+        //Route::get('client/view', [Controllers\AdminClientController::class, 'index'])->name('admin.client.view');
+        Route::get('client/create', [Controllers\AdminClientController::class, 'index'])->name('portal.client.view');
+        Route::post('client/create', [Controllers\AdminClientController::class, 'create'])->name('portal.client.create');
+        Route::get('clients/{client}/edit', [Controllers\AdminClientController::class, 'edit'])->name('portal.client.getForEdit');
+        Route::post('client/edit', [Controllers\AdminClientController::class, 'edit'])->name('portal.client.edit');
+        Route::post('client/delete', [Controllers\AdminClientController::class, 'delete'])->name('portal.client.delete');
     });
 
 
