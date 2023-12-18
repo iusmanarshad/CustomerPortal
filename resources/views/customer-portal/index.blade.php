@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="createClientForm" action="{{ route('admin.client.create') }}" method="POST">
+                    <form id="createClientForm" action="{{ route('portal.client.create') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="inpFirstName">First Name</label>

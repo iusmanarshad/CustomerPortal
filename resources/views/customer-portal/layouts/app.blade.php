@@ -27,6 +27,11 @@
 
 	<body class="ltr main-body app sidebar-mini">
 
+        <div class="loader-container">
+            <div class="loader"></div>
+        </div>
+
+
     	<!-- Progress bar on scroll -->
 		<div class="progress-top-bar"></div>
 
@@ -55,12 +60,10 @@
             </div>
 
 			<!-- main-content -->
-			<div class="main-content app-content">
-
+			<div class="main-content app-content" id="app">
 				<!-- container -->
 				<div class="main-container container-fluid">
                     @yield('content')
-
                 </div>
 				<!-- Container closed -->
 			</div>
@@ -93,5 +96,33 @@
         <!-- sticky js-->
 		<script src="{{asset('build/assets/sticky.js')}}"></script>
 
+        <style>
+            .loader-container {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.9);
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+
+            .loader {
+                border: 16px solid #f3f3f3;
+                border-top: 16px solid #3498db;
+                border-radius: 50%;
+                width: 80px;
+                height: 80px;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
 	</body>
 </html>
