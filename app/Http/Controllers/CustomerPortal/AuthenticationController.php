@@ -30,8 +30,7 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->route('portal.dashboard');
+            return redirect('/portal/clients');
         }
 
         return back()->withErrors([

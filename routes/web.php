@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerPortal\AuthenticationController;
+use App\Http\Controllers\CustomerPortal\ClientController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Index;
@@ -280,6 +281,11 @@ Route::prefix('portal')->group(function () {
     Route::post('logout', [AuthenticationController::class, 'logout'])->name('portal.postLogout');
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
+        Route::resource('clients', ClientController::class)->only([
+            'index', 'show', 'create', 'edit'
+        ]);
+
+
         Route::get('dashboard', [AdminController::class, 'index'])->name('portal.dashboard');
 
         //Route::get('client/view', [AdminClientController::class, 'index'])->name('admin.client.view');

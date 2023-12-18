@@ -9,43 +9,47 @@ use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
-
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return view('livewire.portal.admin.create-client');
+        return view('customer-portal.clients.index');
     }
 
-    public function view(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $client = User::where('id', $request->id)->get();
+        return view('customer-portal.clients.create');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        $client = User::where('id', $user->id)->get();
         return view('livewire.portal.admin.view-client', compact('client'));
     }
 
-    public function create(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
     {
-
-        $validated = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['sometimes'],
-            'owner_name' => ['sometimes'],
-            'email' => ['required', 'email'],
-            'password' => ['required_with:email'],
-        ]);
-
-        $clientData = [
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-            'owner_name' => $validated['owner_name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ];
-
-        User::updateOrCreate([
-            'email' => $clientData['email']
-        ], $clientData);
-
-        return redirect('/admin/dashboard')->with('status', 'success-alert')
-            ->with('alert-heading', 'Created!')
-            ->with('alert-text', 'Your client has been created successfully!');
+        //
     }
+
 }

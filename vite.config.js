@@ -1,13 +1,15 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
     plugins: [
+        vue(),
         laravel({
             input: [
                 'resources/sass/app.scss',
-                'resources/css/app.css', 
+                'resources/css/app.css',
                 'resources/js/app.js',
 
                 // Resources assets js file paths
@@ -99,13 +101,13 @@ export default defineConfig({
             refresh: true,
         }),
 
-        
+
         viteStaticCopy({
             targets: [
               {
                 src: ([
-                'resources/assets/img/', 
-                'resources/assets/plugins/', 
+                'resources/assets/img/',
+                'resources/assets/plugins/',
                 'resources/assets/js/sticky.js',
                 'resources/assets/js/chart.flot.sampledata.js',
                 'resources/assets/js/cookie.js',
