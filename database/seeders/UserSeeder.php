@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             DB::table('users')->insert([
                 'role_id' => $i == 0 ? 1 : 2,
                 'first_name' => $i == 0 ? 'Admin' : 'Client',
-                'first_name' => $i == 0 ? null : $i,
+                'last_name' => $i == 0 ? null : $i,
                 'owner_name' => $i == 0 ? null : 'Drumm Law',
                 'email' => $i == 0 ? 'admin@drummlaw.com' :  'client' . ($i + 1) . '@example.com',
                 'password' => bcrypt('password'),
