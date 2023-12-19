@@ -17,6 +17,7 @@
         "sass": "^1.57.1",
         "vite-plugin-static-copy": "^0.13.0",
         "vue": "^3.2.36",
-        "vue-loader": "^17.3.1"
+        "vue-loader": "^17.3.1",
+        "vue3-form-wizard": "^0.2.3"
     }
 }
