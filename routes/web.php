@@ -305,6 +305,10 @@ Route::prefix('portal')->group(function () {
         Route::resource('clients', ClientController::class)->only([
             'index', 'show', 'create', 'edit'
         ]);
+
+        Route::prefix('announcements')->group(function () {
+            Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
+        });
     });
 
 });
