@@ -282,9 +282,14 @@ Route::prefix('portal')->group(function () {
     Route::post('logout', [CustomerPortal\AuthenticationController::class, 'logout'])->name('portal.postLogout');
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
+
         Route::resource('clients', CustomerPortal\ClientController::class)->only([
             'index', 'show', 'create', 'edit'
         ]);
+
+        Route::prefix('announcements')->group(function () {
+            Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
+        });
 
 
         Route::get('dashboard', [Controllers\AdminController::class, 'index'])->name('portal.dashboard');

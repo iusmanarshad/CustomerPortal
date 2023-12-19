@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ChatChannelMessage extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['created_at', 'updated_at'];
 }

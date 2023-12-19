@@ -27,12 +27,14 @@ import SuccessMessage from './components/SuccessMessage.vue';
 import ErrorMessage from './components/ErrorMessage.vue';
 import Clients from './components/customer-portal/clients/index.vue';
 import CreateClient from './components/customer-portal/clients/create.vue';
+import Announcements from "./components/customer-portal/chat/announcements.vue";
 
 
 app.component('error-message', ErrorMessage);
 app.component('success-message', SuccessMessage);
 app.component('clients', Clients);
 app.component('create-client', CreateClient);
+app.component('announcements', Announcements);
 
 
 

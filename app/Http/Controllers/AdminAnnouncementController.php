@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
+use App\Http\Requests\GetAnnouncementMessagesRequest;
+use App\Http\Requests\SendAnnouncementMessageRequest;
 use App\Http\Resources\AdminChannelMessageResource;
 use App\Http\Resources\AdminChannelResource;
 use App\Http\Resources\AdminClientResource;
@@ -10,6 +13,7 @@ use App\Models\ChatChannelMember;
 use App\Models\ChatChannelMessage;
 use App\Models\User;
 use App\Services\ChatService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminAnnouncementController extends Controller
@@ -22,16 +26,48 @@ class AdminAnnouncementController extends Controller
         $this->chatService = new ChatService();
     }
 
+    public function index()
+    {
+        return view('customer-portal.chat.announcements');
+    }
+
     public function getClients()
     {
         $clients = User::where('role_id', '=', 2)->get();
         return response()->json(['clients' => AdminClientResource::collection($clients)]);
     }
 
-    public function getChannels()
+    public function getGroups()
     {
-        $channels = ChatChannel::where('type', '=', 'announcement')->get();
-        return response()->json(['channels' => AdminChannelResource::collection($channels)]);
+        $groups = ChatChannel::where('type', '=', 'announcement')->get();
+        return response()->json(['groups' => AdminChannelResource::collection($groups)]);
+    }
+
+    public function getGroupMessages(GetAnnouncementMessagesRequest $request)
+    {
+        $messages = ChatChannel::where('channel_id', '=', $request->channel_id)->get();
+        return response()->json(['messages' => AdminChannelMessageResource::collection($messages)]);
+    }
+
+    public function createGroup(CreateAnnouncementGroupRequest $request)
+    {
+        $group = $this->chatService->createChannel($request->slug, $request->name, 'announcement', $request->description);
+        return response()->json([
+            'message' => 'Group created successfully',
+            'group' => new AdminChannelResource($group)
+        ]);
+    }
+
+    public function sendMessage(SendAnnouncementMessageRequest $request)
+    {
+        $messageData = [
+            'type' => 'text',
+            'message' => $request->message,
+            'timestamp' => Carbon::now()
+        ];
+        $message = $this->chatService->addChannelMessage($request->channel_id, $request->user_id, $messageData);
+
+        return response()->json(['message' => 'message sent successfully', 'new_message' => new AdminChannelResource($message)]);
     }
 
     public function getChannelMessages(Request $request)
@@ -62,7 +98,7 @@ class AdminAnnouncementController extends Controller
                     'is_active' => true
                 ];
             }
-            
+
             ChatChannelMember::insert($usersData);
             $members = $this->chatService->getChannelMembers($channel->id);
             $data['members'] = AdminClientResource::collection($members);
