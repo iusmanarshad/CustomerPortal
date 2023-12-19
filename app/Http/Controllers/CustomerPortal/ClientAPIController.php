@@ -40,19 +40,12 @@ class ClientAPIController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['sometimes'],
-            'owner_name' => ['sometimes'],
-            'email' => ['required', 'email'],
-            'password' => ['required_with:email'],
-        ]);
         $validator = Validator::make($request->all(), [
             'first_name' => ['required'],
-            'last_name' => ['sometimes'],
+            'last_name' => ['required'],
             'owner_name' => ['sometimes'],
-            'email' => ['required', 'email'],
-            'password' => ['required_with:email'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:8'],
         ]);
 
         if ($validator->fails()) {
@@ -60,18 +53,13 @@ class ClientAPIController extends Controller
         }
 
         $clientData = [
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-            'owner_name' => $validated['owner_name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'owner_name' => $request->owner_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
             'role_id' => 2,
         ];
-
-        $existingUser = User::where('email', $clientData['email'])->first() ?? null;
-        if ($existingUser) {
-            return response()->json(['errors' => ['This email has already been taken']], 422);
-        }
 
         User::create($clientData);
 
