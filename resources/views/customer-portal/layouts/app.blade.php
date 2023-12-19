@@ -10,10 +10,10 @@
 		<meta name="Keywords" content="laravel admin, admin dashboard, admin laravel dashboard template, admin panel template, laravel admin template, laravel bootstrap 5 admin template, bootstrap ui kit, laravel dashboard bootstrap 5, laravel envato templates, flat ui, html and css templates, laravel html dashboard template, laravel html5, laravel jquery html, laravel premium, premium quality, sidebar bootstrap 5, laravel template admin bootstrap 5">
 
 		<!-- Title -->
-		<title> Zem - Premium dashboard ui bootstrap rwd admin html5 template </title>
+		<title> DrummLaw </title>
 
 		<!-- Favicon -->
-		<link rel="icon" href="{{asset('build/assets/img/brand/favicon-white.png')}}" type="image/x-icon">
+		<link rel="icon" href="{{asset('assets/images/brand/favicon.png')}}" type="image/x-icon"/>
 
         <!-- BOOTSTRAP CSS -->
 	    <link id="style" href="{{asset('build/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" >

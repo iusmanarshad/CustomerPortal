@@ -608,14 +608,16 @@
 											</form>
 										</li>
 										<li class="dropdown main-profile-menu nav-item">
-											<a class="new nav-link profile-user rounded-circle shadow d-flex"
-												href="javascript:void(0)" data-bs-toggle="dropdown"><img alt=""
-													src="{{asset('build/assets/img/users/11.jpg')}}"></a>
+											<a class="new nav-link profile-user rounded-circle shadow d-flex avatar"
+												href="javascript:void(0)" data-bs-toggle="dropdown">
+                                                <i class="far fa-user-circle tx-primary"></i>
+                                            </a>
 											<ul class="dropdown-menu">
 												<li class="bg-primary p-3 br-ts-5 br-te-5 ">
 													<div class="d-flex wd-100p">
-														<div class="avatar"><img alt="avatar" class="rounded-circle"
-																src="{{asset('build/assets/img/users/11.jpg')}}"></div>
+														<div class="avatar">
+                                                            <i class="far fa-user-circle"></i>
+                                                        </div>
 														<div class="ms-3 my-auto">
 															<h6 class="tx-15 text-black font-weight-semibold mb-0">Usman Arshad</h6>
                                                             <span class="text-black op-8 tx-11">
@@ -624,11 +626,11 @@
 														</div>
 													</div>
 												</li>
-												<li><a class="dropdown-item" href="{{url('profile')}}"><i
+												<li><a class="dropdown-item" href="javascript:void(0)"><i
 															class="fe fe-user"></i>Profile</a></li>
-												<li><a class="dropdown-item" href="{{url('mail-read')}}"><i
+												<li><a class="dropdown-item" href="javascript:void(0)"><i
 															class="fe fe-mail"></i>Inbox</a></li>
-												<li><a class="dropdown-item" href="{{url('settings')}}"><i
+												<li><a class="dropdown-item" href="javascript:void(0)"><i
 															class="fe fe-settings"></i>Settings</a></li>
 												<li>
                                                     <a href="#" class="dropdown-item"

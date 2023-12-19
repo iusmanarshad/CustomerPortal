@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class PortalController extends Controller
 {
-    public function index()
+    public function dashboard(Request $request)
     {
-        $clients = User::where('role_id', 2)->get();
-        return view('customer-portal.index', compact('clients'));
+        return view('customer-portal.index');
     }
+
 }
