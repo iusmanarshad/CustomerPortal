@@ -17,12 +17,12 @@
 
         <!-- BOOTSTRAP CSS -->
 	    <link id="style" href="{{asset('build/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" >
-       
+
         <!-- APP CSS & APP SCSS -->
         @vite(['resources/css/app.css' , 'resources/sass/app.scss'])
 
         @yield('styles')
-        
+
 	</head>
 
 	<body class="ltr error-page1 bg-primary">
@@ -65,9 +65,13 @@
         <!-- APP JS-->
 		@vite('resources/js/app.js')
         <!-- END SCRIPTS -->
-		
+
         <!-- sticky js-->
 		<script src="{{asset('build/assets/sticky.js')}}"></script>
-		
+
+        <script>
+            localStorage.setItem("zemthemecolors", 'light');
+        </script>
+
 	</body>
 </html>
