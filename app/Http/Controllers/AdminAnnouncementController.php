@@ -39,19 +39,21 @@ class AdminAnnouncementController extends Controller
 
     public function getGroups()
     {
-        $groups = ChatChannel::where('type', '=', 'announcement')->get();
+        $groups = ChatChannel::where('type', '=', 'announcement')->orderByDesc('last_activity')->get();
         return response()->json(['groups' => AdminChannelResource::collection($groups)]);
     }
 
     public function getGroupMessages(GetAnnouncementMessagesRequest $request)
     {
-        $messages = ChatChannel::where('channel_id', '=', $request->channel_id)->get();
+        $messages = ChatChannelMessage::where('channel_id', '=', $request->group_id)->get();
         return response()->json(['messages' => AdminChannelMessageResource::collection($messages)]);
     }
 
     public function createGroup(CreateAnnouncementGroupRequest $request)
     {
         $group = $this->chatService->createChannel($request->slug, $request->name, 'announcement', $request->description);
+        $adminUser = User::where('role_id', '=', 1)->first();
+        $this->chatService->addChannelMember($group->id, $adminUser->id);
         return response()->json([
             'message' => 'Group created successfully',
             'group' => new AdminChannelResource($group)
@@ -65,9 +67,13 @@ class AdminAnnouncementController extends Controller
             'message' => $request->message,
             'timestamp' => Carbon::now()
         ];
-        $message = $this->chatService->addChannelMessage($request->channel_id, $request->user_id, $messageData);
+        $adminUser = User::where('role_id', '=', 1)->first();
+        $group = ChatChannel::where('id', '=', $request->group_id)->first();
+        $message = $this->chatService->addChannelMessage($group->id, $adminUser->id, $messageData);
+        $group->last_activity = Carbon::now();
+        $group->save();
 
-        return response()->json(['message' => 'message sent successfully', 'new_message' => new AdminChannelResource($message)]);
+        return response()->json(['message' => 'message sent successfully', 'new_message' => new AdminChannelMessageResource($message)]);
     }
 
     public function getChannelMessages(Request $request)

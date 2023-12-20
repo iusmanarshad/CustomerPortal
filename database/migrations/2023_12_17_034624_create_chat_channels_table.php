@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('type');
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(false);
+            $table->dateTime('last_activity')->nullable();
             $table->timestamps();
         });
     }

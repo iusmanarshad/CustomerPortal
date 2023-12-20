@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminChannelMessageResource extends JsonResource
@@ -18,7 +19,7 @@ class AdminChannelMessageResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'message' => $this->message,
-            'timestamp' => $this->timestamp
+            'timestamp' => Carbon::parse($this->timestamp)->diffForHumans()
         ];
     }
 }

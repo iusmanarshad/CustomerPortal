@@ -24,7 +24,8 @@ class GetAnnouncementMessagesRequest extends FormRequest
     public function rules()
     {
         return [
-            'channel_id' => 'required'
+            //'user_id' => 'required',
+            'group_id' => 'required'
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminChannelResource extends JsonResource
@@ -18,7 +19,13 @@ class AdminChannelResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'description' => $this->description
+            'description' => $this->description,
+            'last_activity' => $this->lastActivity()
         ];
+    }
+
+    private function lastActivity()
+    {
+        return Carbon::parse($this->last_activity)->diffForHumans(null, true, true);
     }
 }
