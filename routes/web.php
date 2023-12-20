@@ -4,6 +4,7 @@ use App\Http\Controllers;
 use App\Http\Controllers\CustomerPortal;
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientApp\QuestionnaireController;
 use App\Http\Controllers\CustomerPortal\AuthenticationController;
 use App\Http\Controllers\CustomerPortal\ClientController;
 use App\Http\Controllers\CustomerPortal\PortalController;
@@ -309,6 +310,10 @@ Route::prefix('portal')->group(function () {
         Route::prefix('announcements')->group(function () {
             Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
         });
+    });
+
+    Route::middleware(['userHasRole:client', 'web'])->group(function () {
+        Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('portal.questionnaire');
     });
 
 });
