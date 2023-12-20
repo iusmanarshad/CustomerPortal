@@ -17,7 +17,7 @@ return [
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1,3.143.247.66,3.143.247.66:80,3.143.247.66:8000,3.143.247.66:3000,3.143.247.66:8080,192.168.56.56,192.168.56.56:80,192.168.56.56:3000,customer-portal.local,customer-portal.local:80,customer-portal.local:8080',
         Sanctum::currentApplicationUrlWithPort()
     ))),
 
@@ -64,4 +64,5 @@ return [
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
     ],
 
+    'domain' => env('SANCTUM_STATEFUL_DOMAINS', 'http://customer-portal.local'),
 ];

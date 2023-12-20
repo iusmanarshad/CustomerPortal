@@ -51,7 +51,7 @@ $(function (e) {
 
 	//______File-Export Data Table
 	var table = $('#fieExportDataTable').DataTable({
-		buttons: ['copy', 'excel', 'pdf', 'colvis'],
+		buttons: ['copy', 'excel', 'pdf'],
 		responsive: true,
 		language: {
 			searchPlaceholder: 'Search...',
@@ -82,7 +82,7 @@ $(function (e) {
 	});
 
 
-	//______Select2 
+	//______Select2
 	$('.select2').select2({
 		minimumResultsForSearch: Infinity,
 		width: "auto",

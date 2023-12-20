@@ -12,8 +12,12 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@vitejs/plugin-vue": "^4.5.2",
         "apexcharts": "^3.36.3",
         "sass": "^1.57.1",
-        "vite-plugin-static-copy": "^0.13.0"
+        "vite-plugin-static-copy": "^0.13.0",
+        "vue": "^3.2.36",
+        "vue-loader": "^17.3.1",
+        "vue3-form-wizard": "^0.2.3"
     }
 }

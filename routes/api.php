@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers;
+use App\Http\Controllers\CustomerPortal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::prefix('customer-portal')->group(function () {
+        Route::apiResource('clients', CustomerPortal\ClientAPIController::class);
+
+        Route::prefix('announcements')->group(function () {
+            Route::get('/clients', [Controllers\AdminAnnouncementController::class, 'getClients']);
+            Route::get('/groups', [Controllers\AdminAnnouncementController::class, 'getGroups']);
+            Route::post('/groups', [Controllers\AdminAnnouncementController::class, 'createGroup']);
+            Route::get('/messages', [Controllers\AdminAnnouncementController::class, 'getGroupMessages']);
+            Route::post('/messages', [Controllers\AdminAnnouncementController::class, 'sendMessage']);
+        });
+    });
 });
+
+
