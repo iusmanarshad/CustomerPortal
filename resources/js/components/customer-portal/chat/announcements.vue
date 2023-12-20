@@ -21,7 +21,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="main-chat-list" id="ChatList">
+                                <div class="main-chat-list overflow-auto" id="ChatList">
                                     <div class="panel-body p-0 border-0 overflow-scroll">
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="style2tab1">
@@ -36,13 +36,13 @@
                                                         <div class="flex-1">
                                                             <div class="flex-between mb-1">
                                                                 <h6 class="mb-0">{{ group.name }}</h6>
-                                                                <span class="tx-muted tx-11 align-self-start min-w-fit-content">2 hr</span>
+                                                                <span class="tx-muted tx-11 align-self-start min-w-fit-content">{{ group.last_activity }}</span>
                                                             </div>
                                                             <p class="mb-0 tx-12">Consetetur sanctus consetetur amet amet stet,.</p>
                                                         </div>
                                                     </div>
                                                 </template>
-                                                <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed">
+<!--                                                <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed">
                                                     <div class="mg-e-10">
                                                         <span class="avatar avatar-status"><img alt="" src="../../../../../public/build/assets/img/users/5.jpg" class="rounded-circle"></span>
                                                     </div>
@@ -53,7 +53,7 @@
                                                         <p class="mb-0 tx-12">Consetetur sanctus consetetur amet amet stet,.</p>
                                                     </div>
                                                 </div>
-<!--                                                <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed">
+                                                <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed">
                                                     <div class="mg-e-10">
                                                         <span class="avatar"><img alt="" src="../../../../../public/build/assets/img/users/2.jpg" class="rounded-circle"></span>
                                                     </div>
@@ -230,12 +230,24 @@
                                         </div>
                                     </div>
                                 </div><!-- main-chat-header -->
-                                <div class="main-chat-body" id="ChatBody">
+                                <div class="main-chat-body overflow-auto" id="ChatBody">
                                     <div class="content-inner chat">
                                         <div class="chat-box-single-line">
                                             <span class="timestamp">Today</span>
                                         </div>
-                                        <div class="d-flex justify-content-start chat_block">
+                                        <template v-for="message in messages">
+                                            <div class="d-flex justify-content-end chat_block">
+                                                <div class="msg_block_send">
+                                                    <div class="msg_container_send">
+                                                        <div class="msg_cotainer_send-main">
+                                                            <span>{{ message.message }}</span>
+                                                        </div>
+                                                        <span class="msg_time_send" style="width: 100px; text-align: right">{{ message.timestamp }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+<!--                                        <div class="d-flex justify-content-start chat_block">
                                             <div class="me-1 d-flex align-items-end">
                                                 <div class="avatar avatar-sm">
                                                     <img src="../../../../../public/build/assets/img/users/6.jpg" class="rounded-circle" alt="img">
@@ -422,14 +434,11 @@
                                                     <span class="tx-10 tx-muted msg_time">9:46 AM</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <template>
-
-                                        </template>
+                                        </div>-->
                                     </div>
                                 </div>
                                 <div class="main-chat-footer br-bs-10 br-be-10">
-                                    <input class="form-control radius-7" v-model="newMessage" placeholder="Type your message here..." type="text">
+                                    <input class="form-control radius-7" v-on:keyup.enter="sendMessage" v-model="newMessage" placeholder="Type your message here..." type="text">
                                     <a class="btn btn-outline-primary btn-icon me-2" data-bs-toggle="tooltip" href="javascript:void(0);" title="Attach Files"><i class="fe fe-paperclip"></i></a>
                                     <a class="btn btn-primary btn-icon text-white" @click="sendMessage"><i class="fe fe-send"></i></a>
                                 </div>
@@ -703,6 +712,11 @@ export default {
                 console.log(response);
                 this.groups.unshift(response.data.group);
                 console.log(this.groups)
+                this.groupForm = {
+                    name: '',
+                    slug: '',
+                    description: ''
+                };
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
@@ -717,17 +731,19 @@ export default {
         },
         fetchMessages() {
             document.querySelector('.loader-container').style.display = 'flex';
+            console.log(this.userId)
 
             axios({
                 method: 'get',
                 url: 'api/customer-portal/announcements/messages',
                 baseURL: window.location.origin,
                 params: {
-                    user_id: this.userId,
+                    //user_id: this.userId,
+                    group_id: this.selectedGroup.id
                 }
             }).then(response => {
                 console.log(response);
-                this.clients = response.data.clients;
+                this.messages = response.data.messages;
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
@@ -743,14 +759,14 @@ export default {
                 url: 'api/customer-portal/announcements/messages',
                 baseURL: window.location.origin,
                 data: {
-                    user_id: this.userId,
+                    //user_id: this.userId,
                     group_id: this.selectedGroup.id,
                     message: this.newMessage,
                 }
             }).then(response => {
                 console.log(response);
                 this.newMessage = '';
-                this.messages.push(response.data.message);
+                this.messages.push(response.data.new_message);
                 //document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);

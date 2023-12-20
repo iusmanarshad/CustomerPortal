@@ -15,7 +15,8 @@ class ChatService
             'slug' => $slug,
             'name' => $name,
             'type' => $type,
-            'is_active' => true
+            'is_active' => true,
+            'last_activity' => Carbon::now()
         ];
 
         if (!empty($description)) {
