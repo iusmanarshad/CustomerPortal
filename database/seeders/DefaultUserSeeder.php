@@ -19,11 +19,9 @@ class DefaultUserSeeder extends Seeder
 
         if (!$user) {
             User::create([
-                'first_name' => 'Admin',
-                'last_name' => 'User',
+                'name' => 'Admin',
                 'email' => 'admin@admin.com',
-                'password' => bcrypt('password'),
-                'role_id' => 1,
+                'password' => bcrypt('password')
             ]);
         }
     }

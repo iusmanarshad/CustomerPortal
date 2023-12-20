@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers;
-use App\Http\Controllers\ClientApp\QuestionnaireAPIController;
 use App\Http\Controllers\CustomerPortal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,13 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/messages', [Controllers\AdminAnnouncementController::class, 'getGroupMessages']);
             Route::post('/messages', [Controllers\AdminAnnouncementController::class, 'sendMessage']);
         });
-    });
-
-
-    Route::prefix('client-app')->group(function () {
-        Route::apiResource('questionnaire', QuestionnaireAPIController::class)->only([
-            'create', 'store', 'update', 'edit'
-        ]);
     });
 });
 
