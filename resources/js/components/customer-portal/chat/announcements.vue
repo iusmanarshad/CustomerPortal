@@ -31,7 +31,7 @@
                                                          @click="openGroupChat(group)"
                                                     >
                                                         <div class="mg-e-10">
-                                                            <span class="avatar avatar-status"><img alt="" src="/public/build/assets/img/users/5.jpg" class="rounded-circle"></span>
+                                                            <span class="avatar avatar-status"><img alt="" src="/build/assets/img/users/5.jpg" class="rounded-circle"></span>
                                                         </div>
                                                         <div class="flex-1">
                                                             <div class="flex-between mb-1">
@@ -214,7 +214,7 @@
                                         <a href="javascript:void(0);" class="tx-inverse" id="ChatBodyHide"><i class="icon ion-md-arrow-back"></i></a>
                                     </div>
                                     <div class="mg-e-10">
-                                        <span class="avatar"><img alt="" src="/public/build/assets/img/users/9.jpg" class="rounded-circle"></span>
+                                        <span class="avatar"><img alt="" src="/build/assets/img/users/9.jpg" class="rounded-circle"></span>
                                     </div>
                                     <div class="flex-1">
                                         <div class="flex-between d-block d-sm-flex">
