@@ -7,8 +7,10 @@
     --color: #b0bbc7;
     --color2: rgba(255, 255, 255, 0.75);
     --primary-rgb: 77, 238, 234;
-    --background-rgb: 18, 55, 61;
-    --main-gradient-bg: transparentize(),//radial-gradient(circle, rgb(var(--background-rgb)) 0%, #121923,#121923 100%);
+    --background-rgb: 255, 255, 255;
+    --main-gradient-bg: radial-gradient(circle, rgb(var(--background-rgb)) 0%, #FFFFFF,#FFFFFF 100%);
+    //--background-rgb: 18, 55, 61;
+    //--main-gradient-bg: radial-gradient(circle, rgb(var(--background-rgb)) 0%, #121923,#121923 100%);
     --primary-bg-color: rgb(var(--primary-rgb));
     --primary-bg-hover: rgb(var(--primary-rgb));
     --primary-bg-border: rgb(var(--primary-rgb));
