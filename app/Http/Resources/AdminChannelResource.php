@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\ChatChannelMember;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,12 +22,20 @@ class AdminChannelResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description,
-            'last_activity' => $this->lastActivity()
+            'last_activity' => $this->lastActivity(),
+            'members' => $this->members()
         ];
     }
 
     private function lastActivity()
     {
-        return Carbon::parse($this->last_activity)->diffForHumans(null, true, true);
+        return Carbon::parse($this->last_activity)->diffForHumans(null, true);
+    }
+
+    private function members()
+    {
+        $groupMembers = ChatChannelMember::where('channel_id', '=', $this->id)->get();
+        $members = User::where('role_id', '=', 2)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
+        return AdminClientResource::collection($members);
     }
 }

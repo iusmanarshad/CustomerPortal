@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/clients', [Controllers\AdminAnnouncementController::class, 'getClients']);
             Route::get('/groups', [Controllers\AdminAnnouncementController::class, 'getGroups']);
             Route::post('/groups', [Controllers\AdminAnnouncementController::class, 'createGroup']);
+            Route::delete('/groups', [Controllers\AdminAnnouncementController::class, 'removeGroup']);
+            Route::post('/members', [Controllers\AdminAnnouncementController::class, 'updateGroupMembers']);
             Route::get('/messages', [Controllers\AdminAnnouncementController::class, 'getGroupMessages']);
             Route::post('/messages', [Controllers\AdminAnnouncementController::class, 'sendMessage']);
         });
