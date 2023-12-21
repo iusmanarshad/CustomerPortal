@@ -152,6 +152,35 @@ class ClientAPIController extends Controller
         }
         $user->save();
 
+        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
+        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
+        $emailQuestion = Question::where('key', 'email')->first() ?? null;
+
+        ClientQuestionnaire::updateOrCreate([
+            'client_id' => $user->id,
+            'question_id' => $firstNameQuestion->id,
+        ],[
+            'client_id' => $user->id,
+            'question_id' => $firstNameQuestion->id,
+            'answer' => $request->first_name,
+        ]);
+        ClientQuestionnaire::updateOrCreate([
+            'client_id' => $user->id,
+            'question_id' => $lastNameQuestion->id,
+        ], [
+            'client_id' => $user->id,
+            'question_id' => $lastNameQuestion->id,
+            'answer' => $request->last_name,
+        ]);
+        ClientQuestionnaire::updateOrCreate([
+            'client_id' => $user->id,
+            'question_id' => $emailQuestion->id,
+        ], [
+            'client_id' => $user->id,
+            'question_id' => $emailQuestion->id,
+            'answer' => $request->email,
+        ]);
+
         return response()->json(['messgae' => 'Success!']);
     }
 
@@ -163,6 +192,7 @@ class ClientAPIController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
+        ClientQuestionnaire::where('client_id', $id)->delete();
         return response()->json(['messgae' => 'Success!']);
     }
 }
