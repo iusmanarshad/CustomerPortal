@@ -47,11 +47,11 @@
             <div class="layout-position-binder">
 
                 <!-- app-Header -->
-                @include('customer-portal.layouts.components.app-header')
+                @include('client-app.layouts.components.app-header')
                 <!-- /app-Header -->
 
                 <!--App-Sidebar-->
-                @include('customer-portal.layouts.components.app-sidebar')
+                @include('client-app.layouts.components.app-sidebar')
                 <!-- /App-Sidebar-->
 
             </div>
@@ -67,15 +67,15 @@
 			<!-- main-content closed -->
 
             <!-- Sidebar-right-->
-            @include('customer-portal.layouts.components.sidebar-right')
+            @include('client-app.layouts.components.sidebar-right')
             <!--/Sidebar-right-->
 
             <!-- Country-selector modal-->
-            @include('customer-portal.layouts.components.modal')
+            @include('client-app.layouts.components.modal')
             <!-- Country-selector modal-->
 
             <!-- Footer opened -->
-			@include('customer-portal.layouts.components.footer')
+			@include('client-app.layouts.components.footer')
             <!-- Footer closed -->
 
             @yield('modals')
@@ -84,7 +84,7 @@
         <!-- END PAGE-->
 
         <!-- SCRIPTS -->
-        @include('customer-portal.layouts.components.scripts')
+        @include('client-app.layouts.components.scripts')
 
         <!-- APP JS-->
 		@vite('resources/js/app.js')
@@ -92,10 +92,6 @@
 
         <!-- sticky js-->
 		<script src="{{asset('build/assets/sticky.js')}}"></script>
-
-        <script>
-            localStorage.setItem("zemthemecolors", 'light');
-        </script>
 
         <style>
             .loader-container {

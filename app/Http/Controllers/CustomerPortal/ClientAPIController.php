@@ -4,6 +4,8 @@ namespace App\Http\Controllers\CustomerPortal;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ClientResource;
+use App\Models\ClientQuestionnaire;
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -61,7 +63,27 @@ class ClientAPIController extends Controller
             'role_id' => 2,
         ];
 
-        User::create($clientData);
+        $client = User::create($clientData);
+
+        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
+        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
+        $emailQuestion = Question::where('key', 'email')->first() ?? null;
+
+        ClientQuestionnaire::create([
+            'client_id' => $client->id,
+            'question_id' => $firstNameQuestion->id,
+            'answer' => $request->first_name,
+        ]);
+        ClientQuestionnaire::create([
+            'client_id' => $client->id,
+            'question_id' => $lastNameQuestion->id,
+            'answer' => $request->last_name,
+        ]);
+        ClientQuestionnaire::create([
+            'client_id' => $client->id,
+            'question_id' => $emailQuestion->id,
+            'answer' => $request->email,
+        ]);
 
         return response()->json(['messgae' => 'Success!']);
     }
@@ -130,6 +152,35 @@ class ClientAPIController extends Controller
         }
         $user->save();
 
+        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
+        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
+        $emailQuestion = Question::where('key', 'email')->first() ?? null;
+
+        ClientQuestionnaire::updateOrCreate([
+            'client_id' => $user->id,
+            'question_id' => $firstNameQuestion->id,
+        ],[
+            'client_id' => $user->id,
+            'question_id' => $firstNameQuestion->id,
+            'answer' => $request->first_name,
+        ]);
+        ClientQuestionnaire::updateOrCreate([
+            'client_id' => $user->id,
+            'question_id' => $lastNameQuestion->id,
+        ], [
+            'client_id' => $user->id,
+            'question_id' => $lastNameQuestion->id,
+            'answer' => $request->last_name,
+        ]);
+        ClientQuestionnaire::updateOrCreate([
+            'client_id' => $user->id,
+            'question_id' => $emailQuestion->id,
+        ], [
+            'client_id' => $user->id,
+            'question_id' => $emailQuestion->id,
+            'answer' => $request->email,
+        ]);
+
         return response()->json(['messgae' => 'Success!']);
     }
 
@@ -141,6 +192,7 @@ class ClientAPIController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
+        ClientQuestionnaire::where('client_id', $id)->delete();
         return response()->json(['messgae' => 'Success!']);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\ClientQuestionnaire;
+use App\Models\Question;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -30,6 +32,38 @@ class UserSeeder extends Seeder
                 'email_verified_at' => Carbon::now()->toDateTimeString(),
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
+
+        $users = User::where('role_id', 2)->get();
+        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
+        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
+        $emailQuestion = Question::where('key', 'email')->first() ?? null;
+        foreach ($users as $key => $user) {
+
+            ClientQuestionnaire::updateOrCreate([
+                'client_id' => $user->id,
+                'question_id' => $firstNameQuestion->id,
+            ], [
+                'client_id' => $user->id,
+                'question_id' => $firstNameQuestion->id,
+                'answer' => $user->first_name,
+            ]);
+            ClientQuestionnaire::updateOrCreate([
+                'client_id' => $user->id,
+                'question_id' => $lastNameQuestion->id,
+            ], [
+                'client_id' => $user->id,
+                'question_id' => $lastNameQuestion->id,
+                'answer' => $user->last_name,
+            ]);
+            ClientQuestionnaire::updateOrCreate([
+                'client_id' => $user->id,
+                'question_id' => $emailQuestion->id,
+            ], [
+                'client_id' => $user->id,
+                'question_id' => $emailQuestion->id,
+                'answer' => $user->email,
             ]);
         }
 

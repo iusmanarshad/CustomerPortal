@@ -4,6 +4,7 @@ use App\Http\Controllers;
 use App\Http\Controllers\CustomerPortal;
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientApp\QuestionnaireController;
 use App\Http\Controllers\CustomerPortal\AuthenticationController;
 use App\Http\Controllers\CustomerPortal\ClientController;
 use App\Http\Controllers\CustomerPortal\PortalController;
@@ -281,7 +282,7 @@ Route::get('/', function () {
     // Check if the user is authenticated
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
-        return redirect('/portal/clients');
+        return auth()->user()->role_id == 1 ? redirect('/portal/clients') : redirect('/portal/questionnaire');
     } else {
         // User is not authenticated, redirect to login
         return redirect('/portal/login');
@@ -313,6 +314,10 @@ Route::prefix('portal')->group(function () {
         Route::prefix('announcements')->group(function () {
             Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
         });
+    });
+
+    Route::middleware(['userHasRole:client', 'web'])->group(function () {
+        Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('portal.questionnaire');
     });
 
 });
