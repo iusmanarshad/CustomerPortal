@@ -28,6 +28,7 @@ class ChatService
 
     public function removeChannel($channelId)
     {
+        ChatChannelMember::where('channel_id', '=', $channelId)->delete();
         return ChatChannel::where('id', '=', $channelId)->delete();
     }
 

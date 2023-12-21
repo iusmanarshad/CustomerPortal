@@ -281,15 +281,19 @@ Route::get('/', function () {
     // Check if the user is authenticated
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
-        return redirect('/portal/dashboard');
+        return redirect('/portal/clients');
     } else {
         // User is not authenticated, redirect to login
         return redirect('/portal/login');
     }
 })->name('home');
 
+Route::get('/portal', function () {
+    return redirect('/portal/clients');
+})->name('portal');
+
 Route::get('', function () {
-    return redirect()->route('portal.dashboard');
+    return redirect()->route('portal');
 });
 
 Route::prefix('portal')->group(function () {
@@ -300,7 +304,7 @@ Route::prefix('portal')->group(function () {
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
 
-        Route::get('dashboard', [PortalController::class, 'dashboard'])->name('portal.dashboard');
+        //Route::get('dashboard', [PortalController::class, 'dashboard'])->name('portal.dashboard');
 
         Route::resource('clients', ClientController::class)->only([
             'index', 'show', 'create', 'edit'
