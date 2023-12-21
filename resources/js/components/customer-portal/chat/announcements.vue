@@ -208,6 +208,7 @@
                     </div>
 
                     <div class="modal-body">
+                        <input class="form-control radius-4 mb-2" v-model="search" placeholder="Search..." type="text">
                         <div class="main-chat-list" style="cursor: pointer">
                             <template v-for="user in filteredClients">
                                 <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed rounded-3 mb-2"
@@ -226,7 +227,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" type="button" @click="search = ''">Close</button>
                         <button class="btn btn-sm btn-primary" data-bs-dismiss="modal" type="button" id="createClientButton" @click="updateGroupMembers">Save Changes</button>
                     </div>
                 </div>
@@ -285,7 +286,8 @@ export default {
             messages: [],
             newMessage: '',
             activeView: 'chat',
-            selectedMembers: []
+            selectedMembers: [],
+            search: ''
         }
     },
     methods: {
@@ -474,7 +476,7 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
-                this.newMessage = '';
+                this.search = '';
                 let index = this.groups.findIndex(group => group.id === this.selectedGroup.id);
                 this.groups.splice(index, 1);
                 this.selectedGroup = response.data.group;
@@ -493,7 +495,11 @@ export default {
         this.fetchGroups();
     },
     watch: {
-
+        search: function (value) {
+            this.filteredClients = this.clients.filter(function (client) {
+                return (client.first_name + ' ' + client.last_name).includes(value)
+            })
+        }
     },
 }
 </script>
