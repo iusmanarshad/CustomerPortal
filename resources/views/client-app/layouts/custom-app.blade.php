@@ -69,9 +69,5 @@
         <!-- sticky js-->
 		<script src="{{asset('build/assets/sticky.js')}}"></script>
 
-        <script>
-            localStorage.setItem("zemthemecolors", 'light');
-        </script>
-
 	</body>
 </html>
