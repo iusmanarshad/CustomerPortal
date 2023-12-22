@@ -30,7 +30,7 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return auth()->user()->role_id == 2 ? redirect('/portal/questionnaire') : redirect('/portal/clients');
+            return auth()->user()->role_id == 2 ? redirect('/questionnaire') : redirect('/portal/clients');
         }
 
         return back()->withErrors([
@@ -46,6 +46,6 @@ class AuthenticationController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('portal.login');
+        return redirect()->route('login');
     }
 }
