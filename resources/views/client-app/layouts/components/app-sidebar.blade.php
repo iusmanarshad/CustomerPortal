@@ -3,7 +3,7 @@
 				<div class="sticky">
 					<aside class="app-sidebar">
 						<div class="main-sidebar-header active">
-							<a class="header-logo active" href="/portal/questionnaire">
+							<a class="header-logo active" href="/questionnaire">
 								<img src="{{asset('build/assets/img/brand/logo-white.png')}}" class="main-logo  desktop-dark" alt="logo">
 								<img src="{{asset('assets/images/brand/logo-horizontal.png')}}" class="main-logo  desktop-dark-1" alt="logo">
 								<img src="{{asset('build/assets/img/brand/favicon-white.png')}}" class="main-logo  mobile-dark" alt="logo">
@@ -17,7 +17,7 @@
 								</svg></div>
 							<ul class="side-menu">
 								<li class="slide">
-									<a class="side-menu__item {{ request()->is('portal/questionnaire') ? 'active' : '' }}" data-bs-toggle="slide" href="/portal/questionnaire">
+									<a class="side-menu__item {{ request()->is('questionnaire') ? 'active' : '' }}" data-bs-toggle="slide" href="/questionnaire">
                                         <svg class="ionicon side-menu__icon"
 												viewBox="0 0 512 512">
 												<title>Questionnaire</title>
