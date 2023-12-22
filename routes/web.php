@@ -303,7 +303,7 @@ Route::prefix('/')->group(function () {
     Route::post('logout', [CustomerPortal\AuthenticationController::class, 'logout'])->name('postLogout');
 
     Route::middleware(['userHasRole:client', 'web'])->group(function () {
-        Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('portal.questionnaire');
+        Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
     });
 
 });
