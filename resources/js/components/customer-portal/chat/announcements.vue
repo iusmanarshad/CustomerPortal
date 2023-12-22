@@ -16,36 +16,15 @@
                                                     <i class="fe fe-plus me-2"></i> Add New Group
                                                 </button>
                                             </li>
-<!--                                            <li class="nav-item flex-1"><a class="nav-link" data-bs-toggle="tab" href="javascript:void(0);">Groups</a></li>
-                                            <li class="nav-item flex-1"><a class="nav-link" data-bs-toggle="tab" href="javascript:void(0);">Calls</a></li>-->
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="main-chat-list overflow-auto" id="ChatList">
-                                    <div class="panel-body p-0 border-0 overflow-scroll">
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="style2tab1">
-                                                <template v-for="group in groups">
-                                                    <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed"
-                                                         :class="{'selected': selectedGroup && selectedGroup.id === group.id }"
-                                                         @click="openGroupChat(group)"
-                                                    >
-                                                        <div class="mg-e-10">
-                                                            <span class="avatar avatar-status" style="background: #D3D3D3; height: 48px; width: 48px;"></span>
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <div class="flex-between mb-1">
-                                                                <h6 class="mb-0">{{ group.name }}</h6>
-                                                                <span class="tx-muted tx-11 align-self-start min-w-fit-content">{{ group.last_activity }}</span>
-                                                            </div>
-                                                            <p class="mb-0 tx-12">Consetetur sanctus consetetur amet amet stet,.</p>
-                                                        </div>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <!-- chats list -->
+                                <group-list :groups="groups"
+                                            :selected-channel="selectedGroup"
+                                            v-on:open-chat="openGroupChat"
+                                ></group-list>
                             </div>
 
                         </div>
@@ -55,6 +34,7 @@
                     <div class="card" v-if="selectedGroup">
                         <div class="main-content-app">
                             <div class="main-content-body main-content-body-chat">
+                                <!-- main-chat-header -->
                                 <div class="main-chat-header">
                                     <div class="main-header-arrow me-3">
                                         <a href="javascript:void(0);" class="tx-inverse" id="ChatBodyHide"><i class="icon ion-md-arrow-back"></i></a>
@@ -69,36 +49,23 @@
                                                 <span class="tx-muted tx-12">2 online</span>
                                             </div>
                                             <div class="btn-list d-flex align-items-center ms-auto">
-<!--                                                <a class="btn btn-sm btn-def tx-muted" href="javascript:void(0);" data-bs-toggle="tooltip" title="Call"><i class="fe fe-phone"></i></a>-->
                                                 <a class="btn btn-sm btn-def tx-muted" href="javascript:void(0);" data-bs-toggle="tooltip" title="Delete Group"><i class="fe fe-trash" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i></a>
                                                 <a class="btn btn-sm btn-def tx-muted" href="javascript:void(0);" data-bs-toggle="tooltip" title="View Group Info and Manage Members" @click="showGroupInfo"><i class="fe fe-alert-circle"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- main-chat-header -->
+
                                 <template v-if="activeView === 'chat' && selectedGroup.members.length > 0">
-                                    <div class="main-chat-body overflow-auto" id="ChatBody">
-                                        <div class="content-inner chat">
-                                            <template v-for="message in messages">
-                                                <div class="d-flex justify-content-end chat_block">
-                                                    <div class="msg_block_send">
-                                                        <div class="msg_container_send">
-                                                            <div class="msg_cotainer_send-main">
-                                                                <span>{{ message.message }}</span>
-                                                            </div>
-                                                            <span class="msg_time_send" style="width: 100px; text-align: right">{{ message.timestamp }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
+
+                                    <!-- chat messages -->
+                                    <group-messages :user-id="userId" :messages="messages"></group-messages>
+
                                     <div class="main-chat-footer br-bs-10 br-be-10">
-                                    <input class="form-control radius-7" v-on:keyup.enter="sendMessage" v-model="newMessage" placeholder="Type your message here..." type="text">
-                                    <a class="btn btn-outline-primary btn-icon me-2" data-bs-toggle="tooltip" href="javascript:void(0);" title="Attach Files"><i class="fe fe-paperclip"></i></a>
-                                    <a class="btn btn-primary btn-icon text-white" @click="sendMessage"><i class="fe fe-send"></i></a>
-                                </div>
+                                        <input class="form-control radius-7" v-on:keyup.enter="sendMessage" v-model="newMessage" placeholder="Type your message here..." type="text">
+                                        <a class="btn btn-outline-primary btn-icon me-2" data-bs-toggle="tooltip" href="javascript:void(0);" title="Attach Files"><i class="fe fe-paperclip"></i></a>
+                                        <a class="btn btn-primary btn-icon text-white" @click="sendMessage"><i class="fe fe-send"></i></a>
+                                    </div>
                                 </template>
                                 <template v-else>
                                     <div class="group-info p-4 overflow-auto">
@@ -114,24 +81,15 @@
                                             </div>
                                             <a class="btn btn-sm btn-def tx-muted" href="javascript:void(0);" @click="editGroupMembers" data-bs-toggle="tooltip" title="Edit Group Members"><i class="fe fe-edit" data-bs-toggle="modal" data-bs-target="#addGroupMembers"></i></a>
                                         </div>
-                                        <div class="members-list" v-if="selectedGroup.members.length > 0">
-                                            <template v-for="member in selectedGroup.members">
-                                                <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed">
-                                                    <div class="mg-e-10">
-                                                        <span class="avatar avatar-status" style="background: #D3D3D3; height: 48px; width: 48px;"></span>
-                                                    </div>
-                                                    <div class="flex-1">
-                                                        <div class="flex-between mb-1">
-                                                            <h6 class="mb-0">{{ member.first_name }} {{ member.last_name }}</h6>
-                                                        </div>
-                                                        <p class="mb-0 tx-12">{{ member.owner_name }}</p>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                        <div v-else>
-                                            <p>No members! add members to group.</p>
-                                        </div>
+                                        <template v-if="selectedGroup.members.length > 0">
+                                            <!-- chat members -->
+                                            <group-members :users="selectedGroup.members" :selectable="false" :selected-users="[]"></group-members>
+                                        </template>
+                                        <template v-else>
+                                            <div>
+                                                <p>No members! add members to group.</p>
+                                            </div>
+                                        </template>
                                     </div>
                                 </template>
                             </div>
@@ -209,22 +167,12 @@
 
                     <div class="modal-body">
                         <input class="form-control radius-4 mb-2" v-model="search" placeholder="Search..." type="text">
-                        <div class="main-chat-list" style="cursor: pointer">
-                            <template v-for="user in filteredClients">
-                                <div class="chat-item d-flex pd-x-13 py-3 border-bottom-dashed rounded-3 mb-2"
-                                     :class="{'selected': selectedMembers.includes(user.id) }" @click="selectMember(user.id)">
-                                    <div class="mg-e-10">
-                                        <span class="avatar avatar-status" style="background: #D3D3D3; height: 48px; width: 48px;"></span>
-                                    </div>
-                                    <div class="flex-1">
-                                        <div class="flex-between mb-1">
-                                            <h6 class="mb-0">{{ user.first_name }} {{ user.last_name }}</h6>
-                                        </div>
-                                        <p class="mb-0 tx-12">{{ user.owner_name }}</p>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
+                        <!-- clients -->
+                        <group-members :users="filteredClients"
+                                       :selectable="true"
+                                       :selected-users="selectedMembers"
+                                       v-on:select="selectMember"
+                        ></group-members>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" type="button" @click="search = ''">Close</button>
@@ -235,45 +183,25 @@
             </div>
         </div>
 
-        <!-- Delete confirmation modal -->
-        <div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this group?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" @click="deleteGroup">Yes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Delete confirmation modal -->
+        <delete-confirmation-modal :message="'Are you sure you want to delete this group?'" v-on:confirm="deleteGroup"></delete-confirmation-modal>
 
     </div>
     <!-- End Row -->
 </template>
 
 <script>
+import GroupList from "../../chat/group-list.vue";
+import GroupMembers from "../../chat/group-members.vue";
+import GroupMessages from "../../chat/group-messages.vue";
+import DeleteConfirmationModal from "../../common/delete-confirmation-modal.vue";
+
 export default {
-    props: [],
+    components: {GroupList, GroupMembers, GroupMessages, DeleteConfirmationModal},
+    props: ["userId"],
     data() {
         return {
             loading: true,
             errors: null,
-            first_name: '',
-            last_name: '',
-            owner_name: '',
-            email: '',
-            password: '',
-            clientId: null,
             clients: [],
             filteredClients: [],
             groupForm: {

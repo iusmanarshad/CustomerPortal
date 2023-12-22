@@ -41,6 +41,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('questionnaire', QuestionnaireAPIController::class)->only([
             'create', 'store', 'update', 'edit'
         ]);
+
+        Route::prefix('announcements')->group(function () {
+            Route::get('/groups', [Controllers\ClientAnnouncementController::class, 'getGroups']);
+            Route::get('/messages', [Controllers\ClientAnnouncementController::class, 'getGroupMessages']);
+        });
     });
 });
 

@@ -304,6 +304,7 @@ Route::prefix('/')->group(function () {
 
     Route::middleware(['userHasRole:client', 'web'])->group(function () {
         Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
+        Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
     });
 
 });
