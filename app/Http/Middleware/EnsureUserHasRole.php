@@ -27,11 +27,11 @@ class EnsureUserHasRole
             if (auth()->user()->role_id == 1) {
                 return redirect('/portal/clients');
             } elseif (auth()->user()->role_id == 2) {
-                return redirect('/portal/questionnaire');
+                return redirect('/questionnaire');
             }
         }
 
         // Redirect...
-        return redirect()->route('portal.login');
+        return redirect()->route('login');
     }
 }

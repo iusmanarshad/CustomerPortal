@@ -278,14 +278,14 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('width', Width::class);
 // Route::get('wish-list', WishList::class);
 
-Route::get('/', function () {
+Route::get('', function () {
     // Check if the user is authenticated
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
-        return auth()->user()->role_id == 1 ? redirect('/portal/clients') : redirect('/portal/questionnaire');
+        return auth()->user()->role_id == 1 ? redirect('/portal/clients') : redirect('/questionnaire');
     } else {
         // User is not authenticated, redirect to login
-        return redirect('/portal/login');
+        return redirect('/login');
     }
 })->name('home');
 
@@ -293,15 +293,23 @@ Route::get('/portal', function () {
     return redirect('/portal/clients');
 })->name('portal');
 
-Route::get('', function () {
-    return redirect()->route('portal');
+
+// client app routes
+Route::prefix('/')->group(function () {
+
+    // Authentication
+    Route::get('login', [CustomerPortal\AuthenticationController::class, 'login'])->name('login');
+    Route::post('login', [CustomerPortal\AuthenticationController::class, 'authenticate'])->name('postLogin');
+    Route::post('logout', [CustomerPortal\AuthenticationController::class, 'logout'])->name('postLogout');
+
+    Route::middleware(['userHasRole:client', 'web'])->group(function () {
+        Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
+    });
+
 });
 
+// customer portal routes
 Route::prefix('portal')->group(function () {
-    // Authentication
-    Route::get('login', [CustomerPortal\AuthenticationController::class, 'login'])->name('portal.login');
-    Route::post('login', [CustomerPortal\AuthenticationController::class, 'authenticate'])->name('portal.postLogin');
-    Route::post('logout', [CustomerPortal\AuthenticationController::class, 'logout'])->name('portal.postLogout');
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
 
@@ -316,8 +324,5 @@ Route::prefix('portal')->group(function () {
         });
     });
 
-    Route::middleware(['userHasRole:client', 'web'])->group(function () {
-        Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('portal.questionnaire');
-    });
-
 });
+

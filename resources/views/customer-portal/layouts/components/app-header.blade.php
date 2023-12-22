@@ -641,7 +641,7 @@
                                                 </li>
 											</ul>
 
-                                            <form id="logout-form" action="{{ route('portal.postLogout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ route('postLogout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
 										</li>
