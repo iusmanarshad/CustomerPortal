@@ -28,7 +28,7 @@
 												</a>
 											</div>
 											<div class="mt-1">
-												<h5 class="tx-medium tx-primary">Customer Portal</h5>
+												<h5 class="tx-medium tx-primary">Customer Portal test message</h5>
 												<h2 class="tx-medium tx-primary">Welcome back!</h2>
 												<h6 class="font-weight-semibold mb-4 text-muted">Please sign in to continue.</h6>
 												<div class="panel tabs-style7 scaleX mt-2">
