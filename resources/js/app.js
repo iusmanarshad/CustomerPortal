@@ -28,6 +28,7 @@ import ErrorMessage from './components/ErrorMessage.vue';
 import Clients from './components/customer-portal/clients/index.vue';
 import CreateClient from './components/customer-portal/clients/create.vue';
 import PortalAnnouncements from "./components/customer-portal/chat/announcements.vue";
+import PortalMessages from "./components/customer-portal/chat/messages.vue";
 import Questionnaire from './components/client-app/questionnaire.vue';
 import ClientAnnouncements from "./components/client-app/chat/announcements.vue";
 
@@ -39,6 +40,7 @@ app.component('success-message', SuccessMessage);
 app.component('clients', Clients);
 app.component('create-client', CreateClient);
 app.component('portal-announcements', PortalAnnouncements);
+app.component('portal-messages', PortalMessages);
 
 // Client app
 app.component('questionnaire', Questionnaire);

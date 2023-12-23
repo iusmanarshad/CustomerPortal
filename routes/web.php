@@ -323,6 +323,10 @@ Route::prefix('portal')->group(function () {
         Route::prefix('announcements')->group(function () {
             Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
         });
+
+        Route::prefix('messages')->group(function () {
+            Route::get('/', [Controllers\AdminMessagesController::class, 'index']);
+        });
     });
 
 });
