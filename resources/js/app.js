@@ -31,6 +31,7 @@ import PortalAnnouncements from "./components/customer-portal/chat/announcements
 import PortalMessages from "./components/customer-portal/chat/messages.vue";
 import Questionnaire from './components/client-app/questionnaire.vue';
 import ClientAnnouncements from "./components/client-app/chat/announcements.vue";
+import ClientMessages from "./components/client-app/chat/messages.vue";
 
 
 app.component('error-message', ErrorMessage);
@@ -45,6 +46,7 @@ app.component('portal-messages', PortalMessages);
 // Client app
 app.component('questionnaire', Questionnaire);
 app.component('client-announcements', ClientAnnouncements);
+app.component('client-messages', ClientMessages);
 
 
 
