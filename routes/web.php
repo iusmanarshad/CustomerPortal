@@ -305,6 +305,7 @@ Route::prefix('/')->group(function () {
     Route::middleware(['userHasRole:client', 'web'])->group(function () {
         Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
         Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
+        Route::get('messages', [Controllers\ClientMessageController::class, 'index']);
     });
 
 });
@@ -320,13 +321,8 @@ Route::prefix('portal')->group(function () {
             'index', 'show', 'create', 'edit'
         ]);
 
-        Route::prefix('announcements')->group(function () {
-            Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
-        });
-
-        Route::prefix('messages')->group(function () {
-            Route::get('/', [Controllers\AdminMessagesController::class, 'index']);
-        });
+        Route::get('announcements', [Controllers\AdminAnnouncementController::class, 'index']);
+        Route::get('messages', [Controllers\AdminMessageController::class, 'index']);
     });
 
 });

@@ -41,6 +41,15 @@
                                         <span class="side-menu__label mx-2">Announcements</span>
                                     </a>
                                 </li>
+                                <li class="slide">
+                                    <a class="side-menu__item {{ request()->is('messages*') ? 'active' : '' }}" data-bs-toggle="slide" href="/messages">
+                                        <svg class="ionicon side-menu__icon" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1">
+                                            <path fill="none" stroke="currentColor" stroke-width="1.2" d="M14.86,5.3H5.32A3.81,3.81,0,0,0,1.5,9.11v5.73a3.82,3.82,0,0,0,3.82,3.82H7.23l2.86,2.86L13,18.66h1.91a3.82,3.82,0,0,0,3.82-3.82V9.11A3.81,3.81,0,0,0,14.86,5.3Z" fill="none"/>
+                                            <path fill="none" stroke="currentColor" stroke-width="1.2" d="M18.68,14.84A3.82,3.82,0,0,0,22.5,11V5.3a3.82,3.82,0,0,0-3.82-3.82H9.14A3.82,3.82,0,0,0,5.32,5.3" fill="none" />
+                                        </svg>
+                                        <span class="side-menu__label mx-2">Messages</span>
+                                    </a>
+                                </li>
 							</ul>
 							<div class="slide-right" id="slide-right">
                                 <svg fill="#7b8191"

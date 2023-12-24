@@ -16,7 +16,7 @@ use App\Services\ChatService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class AdminMessagesController extends Controller
+class AdminMessageController extends Controller
 {
     private $chatService;
 

@@ -36,11 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
         });
 
         Route::prefix('messages')->group(function () {
-            Route::get('/clients', [Controllers\AdminMessagesController::class, 'getClients']);
-            Route::get('/groups', [Controllers\AdminMessagesController::class, 'getGroups']);
-            Route::post('/groups', [Controllers\AdminMessagesController::class, 'createGroup']);
-            Route::get('/messages', [Controllers\AdminMessagesController::class, 'getGroupMessages']);
-            Route::post('/messages', [Controllers\AdminMessagesController::class, 'sendMessage']);
+            Route::get('/clients', [Controllers\AdminMessageController::class, 'getClients']);
+            Route::get('/groups', [Controllers\AdminMessageController::class, 'getGroups']);
+            Route::post('/groups', [Controllers\AdminMessageController::class, 'createGroup']);
+            Route::get('/messages', [Controllers\AdminMessageController::class, 'getGroupMessages']);
+            Route::post('/messages', [Controllers\AdminMessageController::class, 'sendMessage']);
         });
     });
 
@@ -53,6 +53,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('announcements')->group(function () {
             Route::get('/groups', [Controllers\ClientAnnouncementController::class, 'getGroups']);
             Route::get('/messages', [Controllers\ClientAnnouncementController::class, 'getGroupMessages']);
+        });
+
+        Route::prefix('messages')->group(function () {
+            Route::get('/messages', [Controllers\ClientMessageController::class, 'getGroupMessages']);
+            Route::post('/messages', [Controllers\ClientMessageController::class, 'sendMessage']);
         });
     });
 });
