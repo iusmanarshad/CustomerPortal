@@ -304,6 +304,7 @@ Route::prefix('/')->group(function () {
 
     Route::middleware(['userHasRole:client', 'web'])->group(function () {
         Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
+        Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
     });
 
 });
@@ -321,6 +322,10 @@ Route::prefix('portal')->group(function () {
 
         Route::prefix('announcements')->group(function () {
             Route::get('/', [Controllers\AdminAnnouncementController::class, 'index']);
+        });
+
+        Route::prefix('messages')->group(function () {
+            Route::get('/', [Controllers\AdminMessagesController::class, 'index']);
         });
     });
 

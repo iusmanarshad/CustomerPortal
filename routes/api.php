@@ -34,6 +34,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/messages', [Controllers\AdminAnnouncementController::class, 'getGroupMessages']);
             Route::post('/messages', [Controllers\AdminAnnouncementController::class, 'sendMessage']);
         });
+
+        Route::prefix('messages')->group(function () {
+            Route::get('/clients', [Controllers\AdminMessagesController::class, 'getClients']);
+            Route::get('/groups', [Controllers\AdminMessagesController::class, 'getGroups']);
+            Route::post('/groups', [Controllers\AdminMessagesController::class, 'createGroup']);
+            Route::get('/messages', [Controllers\AdminMessagesController::class, 'getGroupMessages']);
+            Route::post('/messages', [Controllers\AdminMessagesController::class, 'sendMessage']);
+        });
     });
 
 
@@ -41,6 +49,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('questionnaire', QuestionnaireAPIController::class)->only([
             'create', 'store', 'update', 'edit'
         ]);
+
+        Route::prefix('announcements')->group(function () {
+            Route::get('/groups', [Controllers\ClientAnnouncementController::class, 'getGroups']);
+            Route::get('/messages', [Controllers\ClientAnnouncementController::class, 'getGroupMessages']);
+        });
     });
 });
 

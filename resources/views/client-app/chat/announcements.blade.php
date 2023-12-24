@@ -1,4 +1,4 @@
-@extends('customer-portal.layouts.app')
+@extends('client-app.layouts.app')
 
 @section('styles')
 @endsection
@@ -12,7 +12,7 @@
         </div>
     </div>
     <!-- /breadcrumb -->
-    <portal-announcements :user-id="{{ auth()->user()->id }}"></portal-announcements>
+    <client-announcements :user-id="{{ auth()->user()->id }}"></client-announcements>
 
     <!-- Delete confirmation modal -->
     <div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

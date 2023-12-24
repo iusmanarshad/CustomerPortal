@@ -20,11 +20,22 @@ class AdminChannelResource extends JsonResource
         return [
             'id' => $this->id,
             'slug' => $this->slug,
-            'name' => $this->name,
+            'name' => $this->name(),
             'description' => $this->description,
             'last_activity' => $this->lastActivity(),
             'members' => $this->members()
         ];
+    }
+
+    private function name()
+    {
+        $channelName = $this->name;
+        if ($this->type === 'one-to-one') {
+            $groupMembers = ChatChannelMember::where('channel_id', '=', $this->id)->get();
+            $members = User::where('role_id', '=', 2)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
+            $channelName = $members[0]->first_name . ' ' . $members[0]->last_name;
+        }
+        return $channelName;
     }
 
     private function lastActivity()

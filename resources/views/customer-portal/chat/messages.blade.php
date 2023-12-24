@@ -8,33 +8,11 @@
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
-            <span class="main-content-title tx-primary mg-b-0 mg-b-lg-1">Announcements</span>
+            <span class="main-content-title tx-primary mg-b-0 mg-b-lg-1">Messages</span>
         </div>
     </div>
     <!-- /breadcrumb -->
-    <portal-announcements :user-id="{{ auth()->user()->id }}"></portal-announcements>
-
-    <!-- Delete confirmation modal -->
-    <div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this user?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Yes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Delete confirmation modal -->
+    <portal-messages :user-id="{{ auth()->user()->id }}"></portal-messages>
 
 @endsection
 
