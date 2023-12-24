@@ -9,6 +9,7 @@ use App\Http\Resources\AdminChannelMessageResource;
 use App\Http\Resources\AdminChannelResource;
 use App\Http\Resources\AdminClientResource;
 use App\Models\ChatChannel;
+use App\Models\ChatChannelMember;
 use App\Models\ChatChannelMessage;
 use App\Models\User;
 use App\Services\ChatService;
@@ -54,11 +55,27 @@ class AdminMessagesController extends Controller
         $groupData = [
             'name' => 'admin_' . $clientUser->first_name,
             'slug' => 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id,
-            'type' => 'one-to-one'
+            'type' => 'one-to-one',
+            'is_active' => true,
+            'last_activity' => Carbon::now()
         ];
-        $group = $this->chatService->createChannel($groupData['slug'], $groupData['name'], $groupData['type']);
-        $this->chatService->addChannelMember($group->id, $adminUser->id);
-        $this->chatService->addChannelMember($group->id, $clientUser->id);
+
+        if (!empty($description)) {
+            $groupData['description'] = $description;
+        }
+
+        ChatChannel::updateOrCreate(['slug' => $groupData['slug']], $groupData);
+        $group = ChatChannel::where('slug', '=', $groupData['slug'])->first();
+
+        ChatChannelMember::updateOrCreate(
+            ['channel_id' => $group->id, 'user_id' => $adminUser->id],
+            ['channel_id' => $group->id, 'user_id' => $adminUser->id, 'is_active' => true]
+        );
+        ChatChannelMember::updateOrCreate(
+            ['channel_id' => $group->id, 'user_id' => $clientUser->id],
+            ['channel_id' => $group->id, 'user_id' => $clientUser->id, 'is_active' => true]
+        );
+
         return response()->json([
             'message' => 'Group created successfully',
             'group' => new AdminChannelResource($group)

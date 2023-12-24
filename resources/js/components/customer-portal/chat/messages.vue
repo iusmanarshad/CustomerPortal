@@ -187,7 +187,13 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
-                this.groups.unshift(response.data.group);
+                let newGroup = response.data.group;
+                let index = this.groups.findIndex(group => group.id === newGroup.id);
+                console.log(index)
+                if (index >= 0) {
+                    this.groups.splice(index, 1);
+                }
+                this.groups.unshift(newGroup);
                 this.selectedMembers = [];
                 console.log(this.groups)
                 document.querySelector('.loader-container').style.display = 'none';
