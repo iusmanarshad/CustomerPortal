@@ -122,7 +122,50 @@ export default {
                 this.loading = false;
                 //document.querySelector('.loader-container').style.display = 'none';
             });
+        },
+        appendMessage(message) {
+            this.messages.push(message);
         }
+    },
+    created() {
+        const self = this;
+
+        var presenceChannel = window.Echo.join('chat')
+            .here((users) => {
+                console.log('webhooks connected')
+                console.log(users.length)
+                //this.usersCount = users.length;
+            })
+            .joining((user) => {
+                console.log('joining chat')
+                console.log(user)
+                //this.usersCount = this.usersCount+1;
+            })
+            .leaving((user) => {
+                console.log('leaving chat')
+                console.log(user)
+                /*this.usersCount = this.usersCount-1;
+                if (this.usersCount < 0) {
+                    this.usersCount = 0;
+                }*/
+            })
+            .listen('MessageSent', (e) => {
+                console.log('new message sent')
+
+                self.appendMessage(e.message)
+
+                //let showChat = localStorage.getItem("global-chat");
+                /*if (showChat == 'false') {
+                    console.log('show notification')
+                    console.log(e.message);
+                    self.newMessage = e.message;
+                    self.showNotification = true;
+
+                    setTimeout(function () {
+                        self.hideNotification();
+                    }, 5000)
+                }*/
+            });
     },
     mounted() {
         this.fetchMessages();
