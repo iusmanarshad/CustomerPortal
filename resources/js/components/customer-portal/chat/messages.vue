@@ -189,13 +189,11 @@ export default {
                 console.log(response);
                 let newGroup = response.data.group;
                 let index = this.groups.findIndex(group => group.id === newGroup.id);
-                console.log(index)
                 if (index >= 0) {
                     this.groups.splice(index, 1);
                 }
                 this.groups.unshift(newGroup);
                 this.selectedMembers = [];
-                console.log(this.groups)
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
@@ -204,13 +202,11 @@ export default {
             });
         },
         openGroupChat(group) {
-            console.log(this.selectedGroup)
             this.selectedGroup = group;
             this.fetchMessages();
         },
         fetchMessages() {
             document.querySelector('.loader-container').style.display = 'flex';
-            console.log(this.userId)
 
             axios({
                 method: 'get',
@@ -223,6 +219,7 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.messages = response.data.messages;
+                this.scrollToBottom();
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
@@ -243,10 +240,9 @@ export default {
                     message: this.newMessage,
                 }
             }).then(response => {
-                console.log(this.groups)
                 console.log(response);
                 this.newMessage = '';
-                this.messages.push(response.data.new_message);
+                this.appendMessage(response.data.new_message)
                 let index = this.groups.findIndex(group => group.id === this.selectedGroup.id);
                 this.groups.splice(index, 1);
                 this.selectedGroup = response.data.group;
@@ -260,6 +256,18 @@ export default {
         },
         appendMessage(message) {
             this.messages.push(message);
+            this.scrollToBottom();
+        },
+
+        scrollToBottom() {
+            setTimeout(function () {
+                let parentContainer = document.getElementById('ChatBody')
+                let childContainer = document.getElementById('messages')
+                if (parentContainer && childContainer) {
+                    console.log(childContainer.scrollHeight)
+                    parentContainer.scrollTop = childContainer.scrollHeight
+                }
+            }, 100)
         },
         selectMember(id) {
             this.selectedMembers = [id];
@@ -275,13 +283,11 @@ export default {
                 //this.usersCount = users.length;
             })
             .joining((user) => {
-                console.log('joining chat')
-                console.log(user)
+                //console.log(user)
                 //this.usersCount = this.usersCount+1;
             })
             .leaving((user) => {
-                console.log('leaving chat')
-                console.log(user)
+                //console.log(user)
                 /*this.usersCount = this.usersCount-1;
                 if (this.usersCount < 0) {
                     this.usersCount = 0;

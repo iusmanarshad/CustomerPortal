@@ -79,7 +79,6 @@ export default {
         },
         fetchMessages() {
             document.querySelector('.loader-container').style.display = 'flex';
-            console.log(this.userId)
 
             axios({
                 method: 'get',
@@ -91,6 +90,7 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.messages = response.data.messages;
+                this.scrollToBottom();
                 //this.selectedGroup = response.data.group;
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
@@ -114,7 +114,7 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.newMessage = '';
-                this.messages.push(response.data.new_message);
+                this.appendMessage(response.data.new_message)
                 //this.selectedGroup = response.data.group;
                 //document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
@@ -125,7 +125,19 @@ export default {
         },
         appendMessage(message) {
             this.messages.push(message);
-        }
+            this.scrollToBottom();
+        },
+
+        scrollToBottom() {
+            setTimeout(function () {
+                let parentContainer = document.getElementById('ChatBody')
+                let childContainer = document.getElementById('messages')
+                if (parentContainer && childContainer) {
+                    console.log(childContainer.scrollHeight)
+                    parentContainer.scrollTop = childContainer.scrollHeight
+                }
+            }, 100)
+        },
     },
     created() {
         const self = this;
@@ -137,13 +149,11 @@ export default {
                 //this.usersCount = users.length;
             })
             .joining((user) => {
-                console.log('joining chat')
-                console.log(user)
+                //console.log(user)
                 //this.usersCount = this.usersCount+1;
             })
             .leaving((user) => {
-                console.log('leaving chat')
-                console.log(user)
+                //console.log(user)
                 /*this.usersCount = this.usersCount-1;
                 if (this.usersCount < 0) {
                     this.usersCount = 0;
