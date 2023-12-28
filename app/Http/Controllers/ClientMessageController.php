@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RoleEnum;
+use App\Events\MessageSent;
 use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
 use App\Http\Requests\SendAnnouncementMessageRequest;
@@ -70,12 +71,14 @@ class ClientMessageController extends Controller
             'timestamp' => Carbon::now()
         ];
         $message = $this->chatService->addChannelMessage($group->id, $clientUser->id, $messageData);
+        $newMessage = new AdminChannelMessageResource($message);
         $group->last_activity = Carbon::now();
         $group->save();
 
+        broadcast(new MessageSent($clientUser, $newMessage))->toOthers();
         return response()->json([
             'message' => 'message sent successfully',
-            'new_message' => new AdminChannelMessageResource($message),
+            'new_message' => $newMessage,
             //'group' => new AdminChannelResource($group)
         ]);
     }
