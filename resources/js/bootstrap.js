@@ -35,10 +35,10 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'customer_portal_pusher_key',
     wsHost: window.location.hostname,
-    wsPort: 6001,
-    //wssPort: 6002,
+    wsPort: 6002,
+    wssPort: 6002,
     forceTLS: false,
     disableStats: true,
     cluster: 'customer_portal_pusher_cluster',
-    //enabledTransports: ['ws', 'wss'],
+    enabledTransports: ['ws', 'wss'],
 });
