@@ -51,6 +51,7 @@ class ClientMessageController extends Controller
         $adminUser = User::where('role_id', '=', 1)->first();
         $clientUser = auth()->user();
 
+        // create & get chat group
         $groupData = [
             'name' => 'admin_' . $clientUser->first_name,
             'slug' => 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id,
@@ -64,6 +65,17 @@ class ClientMessageController extends Controller
         ChatChannel::updateOrCreate(['slug' => $groupData['slug']], $groupData);
         $group = ChatChannel::where('slug', '=', $groupData['slug'])->first();
 
+        // create and get group members
+        ChatChannelMember::updateOrCreate(
+            ['channel_id' => $group->id, 'user_id' => $adminUser->id],
+            ['channel_id' => $group->id, 'user_id' => $adminUser->id, 'is_active' => true]
+        );
+        ChatChannelMember::updateOrCreate(
+            ['channel_id' => $group->id, 'user_id' => $clientUser->id],
+            ['channel_id' => $group->id, 'user_id' => $clientUser->id, 'is_active' => true]
+        );
+
+        // send message in group
         $messageData = [
             'type' => 'text',
             'message' => $request->message,
