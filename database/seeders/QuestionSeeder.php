@@ -106,6 +106,7 @@ class QuestionSeeder extends Seeder
                 'question' => 'Is there an Opposing Party?',
                 'type' => 'boolean',
                 'is_required' => 1,
+                'default' => '0',
             ],
             [
                 'section' => 'opposing_party',
@@ -137,6 +138,7 @@ class QuestionSeeder extends Seeder
                 'question' => 'Same as Contact Details',
                 'type' => 'boolean',
                 'is_required' => 1,
+                'default' => '1',
             ],
             [
                 'section' => 'billing_details',
@@ -168,6 +170,7 @@ class QuestionSeeder extends Seeder
                 'question' => 'Same as Contact Details',
                 'type' => 'boolean',
                 'is_required' => 1,
+                'default' => '1',
             ],
             [
                 'section' => 'trademark_details',
@@ -192,6 +195,14 @@ class QuestionSeeder extends Seeder
                 'question' => 'Trademark Contact Phone',
                 'type' => 'phone',
                 'is_required' => 1,
+            ],
+            [
+                'section' => 'associates',
+                'key' => 'is_there_any_associate',
+                'question' => 'Is there any associate',
+                'type' => 'boolean',
+                'is_required' => 1,
+                'default' => '0',
             ],
             [
                 'section' => 'feedback',

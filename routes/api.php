@@ -3,6 +3,7 @@
 use App\Http\Controllers;
 use App\Http\Controllers\ClientApp\QuestionnaireAPIController;
 use App\Http\Controllers\CustomerPortal;
+use App\Http\Controllers\CustomerPortal\ClientQuestionnaireAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('customer-portal')->group(function () {
         Route::apiResource('clients', CustomerPortal\ClientAPIController::class);
+
+        Route::prefix('clients')->group(function () {
+            Route::put('/invite/{id}', [CustomerPortal\ClientAPIController::class, 'inviteClientByEmail']);
+        });
+
+        Route::apiResource('questionnaire', ClientQuestionnaireAPIController::class)->only([
+            'create', 'store', 'update', 'edit'
+        ]);
 
         Route::prefix('announcements')->group(function () {
             Route::get('/clients', [Controllers\AdminAnnouncementController::class, 'getClients']);

@@ -75,6 +75,7 @@
                                 </div>
                                 <template v-if="associates">
                                     <template v-for="(associate, associateIndex) in associates">
+
                                         <div class="row row-sm" v-show="index == 'is_there_any_associate' && sectionQuestions.question.value == 1">
 
                                             <template v-for="(question, questionIndex) in associate.questions">
@@ -91,6 +92,12 @@
                                                 <div class="col-md-5 col-lg-6 mt-4">
                                                     <button type="button" style="background-color: rgb(9, 72, 153); border-color: rgb(9, 72, 153); color: white;" @click="removeAssociate(associateIndex)">Remove this associate</button>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-sm my-4">
+                                            <div class="col-md-5">
+                                                <span v-if="associate.status == 'invited'" class="tag rounded-pill tag-outline-info me-1">Invited</span>
+                                                <span v-else-if="associate.status == 'accepted'" class="tag rounded-pill tag-outline-success me-1">Invite Accepted</span>
                                             </div>
                                         </div>
                                         <hr class="my-4" v-show="index == 'is_there_any_associate' && sectionQuestions.question.value == 1">
@@ -140,6 +147,7 @@ export default {
         FormWizard,
         TabContent
     },
+    props: ['client_id'],
     data() {
         return {
             questions: null,
@@ -236,8 +244,12 @@ export default {
 
             axios({
                 method: 'get',
-                url: 'api/client-app/questionnaire/create',
+                url: 'api/customer-portal/questionnaire/create',
                 baseURL: window.location.origin,
+                params: {
+                    client_id: this.client_id
+                    // Add more parameters if needed
+                }
             })
                 .then(response => {
                     console.log(response);
@@ -339,11 +351,12 @@ export default {
             document.querySelector('.loader-container').style.display = 'flex';
             axios({
                 method: 'post',
-                url: 'api/client-app/questionnaire',
+                url: 'api/customer-portal/questionnaire',
                 baseURL: window.location.origin,
                 data: {
                     questions: this.questions,
                     associates: this.associates,
+                    client_id: this.client_id
                 }
             })
                 .then(response => {

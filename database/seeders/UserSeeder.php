@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RoleEnum;
 use App\Models\ClientQuestionnaire;
 use App\Models\Question;
 use App\Models\User;
@@ -23,7 +24,7 @@ class UserSeeder extends Seeder
         // Insert multiple users using a loop or other logic
         for ($i = 0; $i < 5; $i++) {
             DB::table('users')->insert([
-                'role_id' => $i == 0 ? 1 : 2,
+                'role_id' => $i == 0 ? RoleEnum::ADMINROLE : RoleEnum::CLIENTROLE,
                 'first_name' => $i == 0 ? 'Admin' : 'Client',
                 'last_name' => $i == 0 ? null : ($i + 1),
                 'owner_name' => $i == 0 ? null : 'Drumm Law',
@@ -35,7 +36,7 @@ class UserSeeder extends Seeder
             ]);
         }
 
-        $users = User::where('role_id', 2)->get();
+        $users = User::where('role_id', RoleEnum::CLIENTROLE)->get();
         $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
         $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
         $emailQuestion = Question::where('key', 'email')->first() ?? null;

@@ -32,6 +32,7 @@
 										<span class="side-menu__label mx-2">Dashboard</span>
                                     </a>
 								</li>
+
                                 <li class="slide is-expanded">
                                     <a class="side-menu__item {{ request()->is('portal/clients*') ? 'active' : '' }}" data-bs-toggle="slide" href="/portal/clients">
                                         <svg class="ionicon side-menu__icon" viewBox="0 0 32 32" version="1.1">

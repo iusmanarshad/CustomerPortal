@@ -26,5 +26,10 @@ class RolesSeeder extends Seeder
         ], [
             'name' => 'client'
         ]);
+        Role::updateOrCreate([
+            'name' => 'associate'
+        ], [
+            'name' => 'associate'
+        ]);
     }
 }

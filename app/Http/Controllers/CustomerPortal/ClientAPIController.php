@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\CustomerPortal;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ClientResource;
+use App\Mail\InviteClient;
 use App\Models\ClientQuestionnaire;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +24,7 @@ class ClientAPIController extends Controller
      */
     public function index()
     {
-        return ClientResource::collection(User::where('role_id', 2)->get());
+        return ClientResource::collection(User::where('role_id', RoleEnum::CLIENTROLE)->paginate(10));
     }
 
     /**
@@ -47,7 +50,6 @@ class ClientAPIController extends Controller
             'last_name' => ['required'],
             'owner_name' => ['sometimes'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8'],
         ]);
 
         if ($validator->fails()) {
@@ -59,33 +61,12 @@ class ClientAPIController extends Controller
             'last_name' => $request->last_name,
             'owner_name' => $request->owner_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => 2,
+            'role_id' => RoleEnum::CLIENTROLE,
         ];
 
-        $client = User::create($clientData);
+        User::create($clientData);
 
-        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
-        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
-        $emailQuestion = Question::where('key', 'email')->first() ?? null;
-
-        ClientQuestionnaire::create([
-            'client_id' => $client->id,
-            'question_id' => $firstNameQuestion->id,
-            'answer' => $request->first_name,
-        ]);
-        ClientQuestionnaire::create([
-            'client_id' => $client->id,
-            'question_id' => $lastNameQuestion->id,
-            'answer' => $request->last_name,
-        ]);
-        ClientQuestionnaire::create([
-            'client_id' => $client->id,
-            'question_id' => $emailQuestion->id,
-            'answer' => $request->email,
-        ]);
-
-        return response()->json(['messgae' => 'Success!']);
+        return response()->json(['message' => 'Success!']);
     }
 
     /**
@@ -121,17 +102,17 @@ class ClientAPIController extends Controller
         $user = User::findOrFail($id);
         $validated = $request->validate([
             'first_name' => ['required'],
-            'last_name' => ['sometimes'],
+            'last_name' => ['required'],
             'owner_name' => ['sometimes'],
             'email' => ['required', 'email'],
-            'password' => ['sometimes'],
+            'is_active' => ['sometimes'],
         ]);
         $validator = Validator::make($request->all(), [
             'first_name' => ['required'],
-            'last_name' => ['sometimes'],
+            'last_name' => ['required'],
             'owner_name' => ['sometimes'],
             'email' => ['required', 'email'],
-            'password' => ['sometimes'],
+            'is_active' => ['sometimes'],
         ]);
 
         if ($validator->fails()) {
@@ -147,9 +128,7 @@ class ClientAPIController extends Controller
         $user->last_name = $validated['last_name'];
         $user->owner_name = $validated['owner_name'];
         $user->email = $validated['email'];
-        if (isset($validated['password'])) {
-            $user->password = Hash::make($validated['password']);
-        }
+        $user->is_active = $validated['is_active'];
         $user->save();
 
         $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
@@ -181,7 +160,7 @@ class ClientAPIController extends Controller
             'answer' => $request->email,
         ]);
 
-        return response()->json(['messgae' => 'Success!']);
+        return response()->json(['message' => 'Success!']);
     }
 
     /**
@@ -193,6 +172,14 @@ class ClientAPIController extends Controller
     {
         User::where('id', $id)->delete();
         ClientQuestionnaire::where('client_id', $id)->delete();
-        return response()->json(['messgae' => 'Success!']);
+        return response()->json(['message' => 'Success!']);
+    }
+
+    public function inviteClientByEmail(Request $request)
+    {
+        $client = User::where('id', $request->id)->first();
+        // send the email
+        Mail::to($client->email)->send(new InviteClient($client));
+        return response()->json(['message' => 'Invitation sent successfully!']);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers;
 use App\Http\Controllers\CustomerPortal;
 use App\Http\Controllers\AdminClientController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ClientApp\QuestionnaireController;
 use App\Http\Controllers\CustomerPortal\AuthenticationController;
 use App\Http\Controllers\CustomerPortal\ClientController;
 use App\Http\Controllers\CustomerPortal\PortalController;
+use App\Http\Controllers\InviteController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Index;
@@ -282,7 +284,7 @@ Route::get('', function () {
     // Check if the user is authenticated
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
-        return auth()->user()->role_id == 1 ? redirect('/portal/clients') : redirect('/questionnaire');
+        return auth()->user()->role_id == RoleEnum::ADMINROLE ? redirect('/portal/clients') : redirect('/questionnaire');
     } else {
         // User is not authenticated, redirect to login
         return redirect('/login');
@@ -297,6 +299,11 @@ Route::get('/portal', function () {
 // client app routes
 Route::prefix('/')->group(function () {
 
+    Route::post('signup/invite', [InviteController::class, 'signupByInvite'])->name('postSignupByInvite');
+    Route::post('signup', [InviteController::class, 'signup'])->name('postSignup');
+    Route::get('signup/invite/{email}', [InviteController::class, 'showSignupByInviteForm'])->name('signupByInvite');
+    Route::get('signup/{token}', [InviteController::class, 'index'])->name('signup');
+
     // Authentication
     Route::get('login', [CustomerPortal\AuthenticationController::class, 'login'])->name('login');
     Route::post('login', [CustomerPortal\AuthenticationController::class, 'authenticate'])->name('postLogin');
@@ -304,6 +311,8 @@ Route::prefix('/')->group(function () {
 
     Route::middleware(['userHasRole:client', 'web'])->group(function () {
         Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
+    });
+    Route::middleware(['userHasRole:client,associate', 'web'])->group(function () {
         Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
         Route::get('messages', [Controllers\ClientMessageController::class, 'index']);
     });
@@ -314,13 +323,11 @@ Route::prefix('/')->group(function () {
 Route::prefix('portal')->group(function () {
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
-
         //Route::get('dashboard', [PortalController::class, 'dashboard'])->name('portal.dashboard');
-
         Route::resource('clients', ClientController::class)->only([
             'index', 'show', 'create', 'edit'
         ]);
-
+        Route::get('clients/questionnaire/{client_id}', [Controllers\CustomerPortal\ClientQuestionnaireController::class, 'index'])->name('portal.client.questionnaire');
         Route::get('announcements', [Controllers\AdminAnnouncementController::class, 'index']);
         Route::get('messages', [Controllers\AdminMessageController::class, 'index']);
     });

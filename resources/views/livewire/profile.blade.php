@@ -949,7 +949,7 @@
 		<!-- smart photo master js -->
 		<script src="{{asset('build/assets/plugins/SmartPhoto-master/smartphoto.js')}}"></script>
 		@vite('resources/assets/js/gallery.js')
-	
+
 		<!-- eva-icons js -->
 		<script src="{{asset('build/assets/plugins/eva-icons/eva-icons.min.js')}}"></script>
 
