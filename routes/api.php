@@ -65,11 +65,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('schema')->group(function () {
     Route::get('/jobs/drop', function () {
         \Illuminate\Support\Facades\Schema::dropIfExists('jobs');
-        return response()->json(['message' => 'schema dropped successfully']);
     });
     Route::get('/websockets/drop', function () {
         \Illuminate\Support\Facades\Schema::dropIfExists('websockets_statistics_entries');
-        return response()->json(['message' => 'schema dropped successfully']);
     });
 });
 
