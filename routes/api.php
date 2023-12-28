@@ -63,8 +63,11 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('schema')->group(function () {
-    Route::get('/jobs/drop', function () {
-        \Illuminate\Support\Facades\Schema::dropIfExists('jobs');
+    Route::get('/chat/truncate', function () {
+        \App\Models\ChatChannel::truncate();
+        \App\Models\ChatChannelMember::truncate();
+        \App\Models\ChatChannelMessage::truncate();
+        return response()->json(['message' => 'completed successfully']);
     });
     Route::get('/websockets/drop', function () {
         \Illuminate\Support\Facades\Schema::dropIfExists('websockets_statistics_entries');
