@@ -66,6 +66,39 @@
                                     </div>
                                 </template>
                             </template>
+
+                            <template v-if="index == 'is_there_any_associate'">
+                                <div v-show="index == 'is_there_any_associate' && sectionQuestions.question.value == 1" class="row row-sm">
+                                    <div class="col-md-5 col-lg-6 mt-2">
+                                        <button type="button" style="background-color: rgb(9, 72, 153); border-color: rgb(9, 72, 153); color: white;" @click="addAssociate()">Add more associate</button>
+                                    </div>
+                                </div>
+                                <template v-if="associates">
+                                    <template v-for="(associate, associateIndex) in associates">
+                                        <div class="row row-sm" v-show="index == 'is_there_any_associate' && sectionQuestions.question.value == 1">
+
+                                            <template v-for="(question, questionIndex) in associate.questions">
+
+                                                <div class="col-md-5 col-lg-6">
+                                                    <label :for="question.key + associateIndex" class="form-label">{{ question.question }}: <span class="tx-danger" v-if="question.is_required == 1">*</span></label>
+                                                    <input :type="getInputType(question.type)" :id="question.key + associateIndex" class="form-control" :readonly="question.is_read_only == 1"
+                                                            :class="{ 'is-invalid': question.is_required == 1 && (question.error || question.value == '' || question.value == null) }" :name="question.key + associateIndex"
+                                                            v-model="question.value">
+                                                </div>
+
+                                            </template>
+                                            <div v-show="index == 'is_there_any_associate' && sectionQuestions.question.value == 1 && associates.length > 1 && associate.is_removable == 1" class="row row-sm">
+                                                <div class="col-md-5 col-lg-6 mt-4">
+                                                    <button type="button" style="background-color: rgb(9, 72, 153); border-color: rgb(9, 72, 153); color: white;" @click="removeAssociate(associateIndex)">Remove this associate</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="my-4" v-show="index == 'is_there_any_associate' && sectionQuestions.question.value == 1">
+                                    </template>
+                                </template>
+                            </template>
+
+
                         </template>
                     </div>
                 </TabContent>
@@ -117,13 +150,30 @@ export default {
             thirdSectionKey: 'opposing_party',
             fourthSectionKey: 'billing_details',
             fifthSectionKey: 'trademark_details',
-            sixthSectionKey: 'feedback',
+            sixthSectionKey: 'associates',
+            seventhSectionKey: 'feedback',
             loading: true,
             errors: null,
-            successMessage: 'Test'
+            successMessage: '',
+            associates: null,
         }
     },
     methods: {
+        removeAssociate(index) {
+            // Use splice to remove the associate at the specified index
+            this.associates.splice(index, 1);
+        },
+        addAssociate() {
+            const newAssociate = {
+                questions: [
+                    { type: 'string', question: 'First Name', is_required: 1, key: 'associate_first_name',  value: '' },
+                    { type: 'string', question: 'Last Name', is_required: 1, key: 'associate_last_name',  value: '' },
+                    { type: 'email', question: 'Email', is_required: 1, key: 'associate_email', value: '' },
+                ],
+                is_removable: 1
+            };
+            this.associates.push(newAssociate);
+        },
         handleTabChange(prevIndex, nextIndex) {
             if (nextIndex == 0) {
                 this.currentSection = this.questions[this.firstSectionKey];
@@ -143,6 +193,9 @@ export default {
             } else if (nextIndex == 5) {
                 this.currentSection = this.questions[this.sixthSectionKey];
                 this.currentSectionKey = this.sixthSectionKey;
+            } else if (nextIndex == 6) {
+                this.currentSection = this.questions[this.seventhSectionKey];
+                this.currentSectionKey = this.seventhSectionKey;
             }
             console.log("Prev: " + prevIndex + ", Next: " + nextIndex);
         },
@@ -171,6 +224,8 @@ export default {
             } else if (key == this.fifthSectionKey) {
                 title = 'Trademark Contact Details';
             } else if (key == this.sixthSectionKey) {
+                title = 'Associates';
+            } else if (key == this.seventhSectionKey) {
                 title = 'Feedback';
             }
 
@@ -187,6 +242,7 @@ export default {
                 .then(response => {
                     console.log(response);
                     this.questions = response.data.data;
+                    this.associates = response.data.associateQuestions;
                     this.currentSection = this.questions.contact_details;
                     this.currentSectionKey = 'contact_details';
 
@@ -206,6 +262,23 @@ export default {
             Object.keys(section).forEach((key) => {
                 console.log(key)
                 let questionBlock = section[key];
+
+                if (key == 'is_there_any_associate' && questionBlock.question.value == 1) {
+                    Object.keys(this.associates).forEach((associateKey) => {
+                        let associate = this.associates[associateKey];
+                        let questions = associate.questions;
+                        Object.keys(questions).forEach((questionKey) => {
+                            let question = questions[questionKey];
+                            if (question.is_required == 1 && (question.value == null || question.value == '')) {
+                                allowSwitchTab = false;
+                                return;
+                            }
+                        });
+
+                    });
+                }
+
+
                 let verifyFurtherQuestions = (key == 'is_there_an_opposing_party' && questionBlock.question.value == 1) || (key != 'is_there_an_opposing_party' && questionBlock.question.value == 0)
                 Object.keys(questionBlock).forEach((questionKey) => {
 
@@ -231,6 +304,7 @@ export default {
                     }
                 });
             });
+
             return allowSwitchTab;
         },
         setCurrentSection(){
@@ -269,6 +343,7 @@ export default {
                 baseURL: window.location.origin,
                 data: {
                     questions: this.questions,
+                    associates: this.associates,
                 }
             })
                 .then(response => {

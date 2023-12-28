@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\RoleEnum;
 use App\Models\ChatChannelMember;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,7 +33,7 @@ class AdminChannelResource extends JsonResource
         $channelName = $this->name;
         if ($this->type === 'one-to-one') {
             $groupMembers = ChatChannelMember::where('channel_id', '=', $this->id)->get();
-            $members = User::where('role_id', '=', 2)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
+            $members = User::where('role_id', '=', RoleEnum::CLIENTROLE)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
             $channelName = $members[0]->first_name . ' ' . $members[0]->last_name;
         }
         return $channelName;
@@ -46,7 +47,7 @@ class AdminChannelResource extends JsonResource
     private function members()
     {
         $groupMembers = ChatChannelMember::where('channel_id', '=', $this->id)->get();
-        $members = User::where('role_id', '=', 2)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
+        $members = User::where('role_id', '=', RoleEnum::CLIENTROLE)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
         return AdminClientResource::collection($members);
     }
 }

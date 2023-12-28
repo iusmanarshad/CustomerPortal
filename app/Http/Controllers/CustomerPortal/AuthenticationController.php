@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CustomerPortal;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return auth()->user()->role_id == 2 ? redirect('/questionnaire') : redirect('/portal/clients');
+            return auth()->user()->role_id == RoleEnum::CLIENTROLE ? redirect('/questionnaire') : redirect('/portal/clients');
         }
 
         return back()->withErrors([

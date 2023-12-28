@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CustomerPortal;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ClientResource;
 use App\Models\ClientQuestionnaire;
@@ -21,7 +22,7 @@ class ClientAPIController extends Controller
      */
     public function index()
     {
-        return ClientResource::collection(User::where('role_id', 2)->get());
+        return ClientResource::collection(User::where('role_id', RoleEnum::CLIENTROLE)->get());
     }
 
     /**
@@ -60,30 +61,10 @@ class ClientAPIController extends Controller
             'owner_name' => $request->owner_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => 2,
+            'role_id' => RoleEnum::CLIENTROLE,
         ];
 
-        $client = User::create($clientData);
-
-        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
-        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
-        $emailQuestion = Question::where('key', 'email')->first() ?? null;
-
-        ClientQuestionnaire::create([
-            'client_id' => $client->id,
-            'question_id' => $firstNameQuestion->id,
-            'answer' => $request->first_name,
-        ]);
-        ClientQuestionnaire::create([
-            'client_id' => $client->id,
-            'question_id' => $lastNameQuestion->id,
-            'answer' => $request->last_name,
-        ]);
-        ClientQuestionnaire::create([
-            'client_id' => $client->id,
-            'question_id' => $emailQuestion->id,
-            'answer' => $request->email,
-        ]);
+        User::create($clientData);
 
         return response()->json(['messgae' => 'Success!']);
     }

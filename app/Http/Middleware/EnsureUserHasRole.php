@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use Closure;
 
 class EnsureUserHasRole
@@ -24,9 +25,9 @@ class EnsureUserHasRole
         }
 
         if (auth()->user()) {
-            if (auth()->user()->role_id == 1) {
+            if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
                 return redirect('/portal/clients');
-            } elseif (auth()->user()->role_id == 2) {
+            } elseif (auth()->user()->role_id == RoleEnum::CLIENTROLE) {
                 return redirect('/questionnaire');
             }
         }

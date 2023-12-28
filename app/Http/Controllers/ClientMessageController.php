@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
 use App\Http\Requests\SendAnnouncementMessageRequest;
@@ -33,7 +34,7 @@ class ClientMessageController extends Controller
     public function getGroupMessages(Request $request)
     {
         $messages = [];
-        $adminUser = User::where('role_id', '=', 1)->first();
+        $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
         $clientUser = auth()->user();
         $slug = 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id;
         $group = ChatChannel::where('slug', '=', $slug)->first();
@@ -47,7 +48,7 @@ class ClientMessageController extends Controller
 
     public function sendMessage(Request $request)
     {
-        $adminUser = User::where('role_id', '=', 1)->first();
+        $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
         $clientUser = auth()->user();
 
         $groupData = [

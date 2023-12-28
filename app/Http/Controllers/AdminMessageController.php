@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
 use App\Http\Requests\SendAnnouncementMessageRequest;
@@ -32,7 +33,7 @@ class AdminMessageController extends Controller
 
     public function getClients()
     {
-        $clients = User::where('role_id', '=', 2)->get();
+        $clients = User::where('role_id', '=', RoleEnum::CLIENTROLE)->get();
         return response()->json(['clients' => AdminClientResource::collection($clients)]);
     }
 
@@ -89,7 +90,7 @@ class AdminMessageController extends Controller
             'message' => $request->message,
             'timestamp' => Carbon::now()
         ];
-        $adminUser = User::where('role_id', '=', 1)->first();
+        $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
         $group = ChatChannel::where('id', '=', $request->group_id)->first();
         $message = $this->chatService->addChannelMessage($group->id, $adminUser->id, $messageData);
         $group->last_activity = Carbon::now();
