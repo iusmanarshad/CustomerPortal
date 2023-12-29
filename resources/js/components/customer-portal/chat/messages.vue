@@ -22,7 +22,7 @@
 
                                 <!-- chats list -->
                                 <group-list :groups="groups"
-                                            :selected-channel="selectedGroup"
+                                            :selected-group="selectedGroup"
                                             v-on:open-chat="openGroupChat"
                                 ></group-list>
                             </div>
