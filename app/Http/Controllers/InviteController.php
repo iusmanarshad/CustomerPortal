@@ -79,7 +79,7 @@ class InviteController extends Controller
             // delete the invite so it can't be used again
             $invite->delete();
 
-            return auth()->user()->role_id == RoleEnum::CLIENTROLE ? redirect('/questionnaire') : redirect('/portal/clients');
+            return redirect('/announcements');
         }
 
         return back()->withErrors([
