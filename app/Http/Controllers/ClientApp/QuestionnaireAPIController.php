@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\ClientApp;
 
-use App\Enums\QuestionSectionsEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Services\InvitationService;
 use App\Models\Associate;

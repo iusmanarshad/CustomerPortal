@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invites', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email');
-            $table->string('token', 16)->unique();
-            $table->string('invited_by');
-            $table->string('status')->default('invited');;
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            if (!Schema::hasColumn('users', 'is_active')) {
+                $table->boolean('is_active')->after('password')->default(1);
+            }
         });
     }
 
@@ -30,6 +27,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invites');
+        Schema::table('users', function (Blueprint $table) {
+            if (Schema::hasColumn('users', 'is_active')) {
+                $table->dropColumn('is_active');
+            }
+        });
     }
 };

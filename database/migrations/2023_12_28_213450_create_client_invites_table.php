@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invites', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email');
-            $table->string('token', 16)->unique();
-            $table->string('invited_by');
-            $table->string('status')->default('invited');;
+        Schema::create('client_invites', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('client_id');
+            $table->string('status')->default('invited');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invites');
+        Schema::dropIfExists('invites_history');
     }
 };

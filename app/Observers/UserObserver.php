@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Enums\RoleEnum;
 use App\Models\ClientQuestionnaire;
 use App\Models\Question;
 use App\Models\User;
@@ -16,25 +17,28 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
-        $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
-        $emailQuestion = Question::where('key', 'email')->first() ?? null;
+        if ($user->role_id == RoleEnum::CLIENTROLE) {
+            $firstNameQuestion = Question::where('key', 'first_name')->first() ?? null;
+            $lastNameQuestion = Question::where('key', 'last_name')->first() ?? null;
+            $emailQuestion = Question::where('key', 'email')->first() ?? null;
 
-        ClientQuestionnaire::create([
-            'client_id' => $user->id,
-            'question_id' => $firstNameQuestion->id,
-            'answer' => $user->first_name,
-        ]);
-        ClientQuestionnaire::create([
-            'client_id' => $user->id,
-            'question_id' => $lastNameQuestion->id,
-            'answer' => $user->last_name,
-        ]);
-        ClientQuestionnaire::create([
-            'client_id' => $user->id,
-            'question_id' => $emailQuestion->id,
-            'answer' => $user->email,
-        ]);
+            ClientQuestionnaire::create([
+                'client_id' => $user->id,
+                'question_id' => $firstNameQuestion->id,
+                'answer' => $user->first_name,
+            ]);
+            ClientQuestionnaire::create([
+                'client_id' => $user->id,
+                'question_id' => $lastNameQuestion->id,
+                'answer' => $user->last_name,
+            ]);
+            ClientQuestionnaire::create([
+                'client_id' => $user->id,
+                'question_id' => $emailQuestion->id,
+                'answer' => $user->email,
+            ]);
+        }
+
     }
 
     /**

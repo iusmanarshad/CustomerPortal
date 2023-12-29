@@ -32,6 +32,7 @@ import PortalMessages from "./components/customer-portal/chat/messages.vue";
 import Questionnaire from './components/client-app/questionnaire.vue';
 import ClientAnnouncements from "./components/client-app/chat/announcements.vue";
 import ClientMessages from "./components/client-app/chat/messages.vue";
+import ClientQuestionnaie from "./components/customer-portal/clients/questionnaire.vue"
 
 
 app.component('error-message', ErrorMessage);
@@ -40,6 +41,7 @@ app.component('success-message', SuccessMessage);
 // Customer portal
 app.component('clients', Clients);
 app.component('create-client', CreateClient);
+app.component('client-questionnaie', ClientQuestionnaie);
 app.component('portal-announcements', PortalAnnouncements);
 app.component('portal-messages', PortalMessages);
 
