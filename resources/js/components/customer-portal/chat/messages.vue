@@ -22,7 +22,7 @@
 
                                 <!-- chats list -->
                                 <group-list :groups="groups"
-                                            :selected-channel="selectedGroup"
+                                            :selected-group="selectedGroup"
                                             v-on:open-chat="openGroupChat"
                                 ></group-list>
                             </div>
@@ -46,7 +46,7 @@
                                         <div class="flex-between d-block d-sm-flex">
                                             <div>
                                                 <h5 class="mb-0">{{ selectedGroup.name }}</h5>
-                                                <span class="tx-muted tx-12">2 online</span>
+<!--                                                <span class="tx-muted tx-12">{{ usersCount }} online</span>-->
                                             </div>
                                         </div>
                                     </div>
@@ -130,6 +130,7 @@ export default {
             newMessage: '',
             selectedMembers: [],
             search: '',
+            usersCount: 0
         }
     },
     methods: {
@@ -280,18 +281,18 @@ export default {
             .here((users) => {
                 console.log('webhooks connected')
                 console.log(users.length)
-                //this.usersCount = users.length;
+                this.usersCount = users.length;
             })
             .joining((user) => {
                 //console.log(user)
-                //this.usersCount = this.usersCount+1;
+                this.usersCount = this.usersCount+1;
             })
             .leaving((user) => {
                 //console.log(user)
-                /*this.usersCount = this.usersCount-1;
+                this.usersCount = this.usersCount-1;
                 if (this.usersCount < 0) {
                     this.usersCount = 0;
-                }*/
+                }
             })
             .listen('MessageSent', (e) => {
                 console.log('new message sent')

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Enums\RoleEnum;
 use App\Models\ChatChannelMember;
+use App\Models\ChatChannelMessage;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,6 +25,7 @@ class AdminChannelResource extends JsonResource
             'name' => $this->name(),
             'description' => $this->description,
             'last_activity' => $this->lastActivity(),
+            'last_message' => $this->latestMessage(),
             'members' => $this->members()
         ];
     }
@@ -42,6 +44,12 @@ class AdminChannelResource extends JsonResource
     private function lastActivity()
     {
         return Carbon::parse($this->last_activity)->diffForHumans(null, true);
+    }
+
+    private function latestMessage()
+    {
+        $message = ChatChannelMessage::where('channel_id', '=', $this->id)->latest()->first();
+        return $message->message ?? '';
     }
 
     private function members()
