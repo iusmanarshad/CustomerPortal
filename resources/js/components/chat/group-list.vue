@@ -28,7 +28,7 @@ export default {
                                     <h6 class="mb-0">{{ group.name }}</h6>
                                     <span class="tx-muted tx-11 align-self-start min-w-fit-content">{{ group.last_activity }}</span>
                                 </div>
-                                <p class="mb-0 tx-12">Consetetur sanctus consetetur amet amet stet,.</p>
+                                <p class="mb-0 tx-12">{{ group.last_message.length > 40 ? group.last_message.substring(0, 40) + '...' : group.last_message }}</p>
                             </div>
                         </div>
                     </template>

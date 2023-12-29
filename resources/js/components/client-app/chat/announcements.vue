@@ -40,7 +40,7 @@
                                         <div class="flex-between d-block d-sm-flex">
                                             <div>
                                                 <h5 class="mb-0">{{ selectedGroup.name }}</h5>
-                                                <span class="tx-muted tx-12">2 online</span>
+<!--                                                <span class="tx-muted tx-12">2 online</span>-->
                                             </div>
                                         </div>
                                     </div>
