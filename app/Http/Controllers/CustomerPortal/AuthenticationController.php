@@ -16,6 +16,17 @@ class AuthenticationController extends Controller
 {
     public function login()
     {
+        // Check if the user is authenticated
+        if (Auth::check()) {
+            // User is authenticated, redirect to dashboard
+            if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
+                return redirect('/portal/clients');
+            } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
+                return redirect('/questionnaire');
+            } else {
+                return redirect('/announcements');
+            }
+        }
         return view('customer-portal.login');
     }
 

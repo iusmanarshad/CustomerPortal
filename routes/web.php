@@ -284,7 +284,13 @@ Route::get('', function () {
     // Check if the user is authenticated
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
-        return auth()->user()->role_id == RoleEnum::ADMINROLE ? redirect('/portal/clients') : redirect('/questionnaire');
+        if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
+            return redirect('/portal/clients');
+        } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
+            return redirect('/questionnaire');
+        } else {
+            return redirect('/announcements');
+        }
     } else {
         // User is not authenticated, redirect to login
         return redirect('/login');
