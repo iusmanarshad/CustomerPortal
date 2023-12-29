@@ -65,7 +65,7 @@ class InviteController extends Controller
             'associate_id' => $user ? $user->id : null,
             'first_name' => $associate ? $associate->first_name : null,
             'last_name' => $associate ? $associate->last_name : null,
-            'role_id' => RoleEnum::ASSOCIATE,
+            'role_id' => RoleEnum::ASSOCIATEROLE,
             'email_verified_at' => Carbon::now()->toDateTimeString(),
             'status' => ClientStatusEnum::ACTIVE,
         ];
