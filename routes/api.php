@@ -66,6 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::prefix('messages')->group(function () {
             Route::get('/messages', [Controllers\ClientMessageController::class, 'getGroupMessages']);
+            Route::get('/unread-count', [Controllers\ClientMessageController::class, 'getUnreadMessagesCount']);
             Route::post('/messages', [Controllers\ClientMessageController::class, 'sendMessage']);
         });
     });

@@ -63,6 +63,8 @@
                     @yield('content')
                 </div>
 				<!-- Container closed -->
+
+                <client-notifications :user-id="{{ auth()->user()->id }}"></client-notifications>
 			</div>
 			<!-- main-content closed -->
 

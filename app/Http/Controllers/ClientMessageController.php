@@ -47,6 +47,27 @@ class ClientMessageController extends Controller
         return response()->json(['group' => $group, 'messages' => $messages]);
     }
 
+    public function getUnreadMessagesCount()
+    {
+        $announcementCount = 0;
+        $messagesCount = 0;
+        $user = auth()->user();
+        $groups = ChatChannelMember::where('user_id', '=', $user->id)->get();
+        foreach ($groups as $group) {
+            $channel = ChatChannel::find($group->channel_id);
+            if ($channel) {
+                if ($channel->type === 'announcement') {
+                    $announcementCount = $announcementCount + $group->unread_message_count;
+                }
+                if ($channel->type === 'one-to-one') {
+                    $messagesCount = $messagesCount + $group->unread_message_count;
+                }
+            }
+        }
+
+        return response()->json(['announcements' => $announcementCount, 'messages' => $messagesCount]);
+    }
+
     public function sendMessage(Request $request)
     {
         $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();

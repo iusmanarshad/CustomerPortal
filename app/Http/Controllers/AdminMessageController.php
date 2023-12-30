@@ -98,11 +98,27 @@ class AdminMessageController extends Controller
         $group->last_activity = Carbon::now();
         $group->save();
 
+        // add unread message count
+        $this->addUnreadMessageCount($group->id, $adminUser->id);
+
         broadcast(new MessageSent($adminUser, $newMessage))->toOthers();
         return response()->json([
             'message' => 'message sent successfully',
             'new_message' => $newMessage,
             'group' => new AdminChannelResource($group)
         ]);
+    }
+
+    private function addUnreadMessageCount($groupId, $senderId)
+    {
+        $members = ChatChannelMember::query()
+            ->where('channel_id', '=', $groupId)
+            ->where('user_id', '!=', $senderId)
+            ->get();
+
+        foreach ($members as $member) {
+            $member->unread_message_count += 1;
+            $member->save();
+        }
     }
 }
