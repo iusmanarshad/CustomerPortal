@@ -36,8 +36,9 @@ window.Echo = new Echo({
     key: 'customer_portal_pusher_key',
     wsHost: window.location.hostname,
     wsPort: 6001,
+    wssPort: 6001,
     forceTLS: false,
     disableStats: true,
     cluster: 'customer_portal_pusher_cluster',
-    enabledTransports: ['ws'],
+    enabledTransports: ['ws', 'wss'],
 });
