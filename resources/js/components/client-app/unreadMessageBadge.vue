@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: "group-list",
+    name: "unread-message-badge",
     props: ["userId"],
     methods: {
         fetchUnreadMessages() {
@@ -16,9 +16,6 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.manageUnreadBadges(response.data.announcements, response.data.messages);
-                //this.messages = response.data.messages;
-                //his.scrollToBottom();
-                //this.selectedGroup = response.data.group;
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);

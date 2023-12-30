@@ -320,7 +320,7 @@ Route::prefix('/')->group(function () {
     });
     Route::middleware(['userHasRole:client,associate', 'web'])->group(function () {
         Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
-        Route::get('messages', [Controllers\ClientMessageController::class, 'index']);
+        Route::get('messages', [Controllers\ClientChatController::class, 'index']);
     });
 
 });

@@ -64,15 +64,17 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/messages', [Controllers\ClientAnnouncementController::class, 'getGroupMessages']);
         });
 
-        Route::prefix('messages')->group(function () {
-            Route::get('/messages', [Controllers\ClientMessageController::class, 'getGroupMessages']);
-            Route::get('/unread-count', [Controllers\ClientMessageController::class, 'getUnreadMessagesCount']);
-            Route::post('/messages', [Controllers\ClientMessageController::class, 'sendMessage']);
+        Route::prefix('chat')->group(function () {
+            Route::get('/messages', [Controllers\ClientChatController::class, 'getChannelMessages']);
+            Route::put('/read-receipt', [Controllers\ClientChatController::class, 'readMessages']);
+            Route::post('/messages', [Controllers\ClientChatController::class, 'sendMessage']);
         });
+
+        Route::get('/messages/unread-count', [Controllers\ClientChatController::class, 'getUnreadMessagesCount']);
     });
 });
 
-Route::prefix('schema')->group(function () {
+/*Route::prefix('schema')->group(function () {
     Route::get('/chat/truncate', function () {
         \App\Models\ChatChannel::truncate();
         \App\Models\ChatChannelMember::truncate();
@@ -82,6 +84,6 @@ Route::prefix('schema')->group(function () {
     Route::get('/websockets/drop', function () {
         \Illuminate\Support\Facades\Schema::dropIfExists('websockets_statistics_entries');
     });
-});
+});*/
 
 

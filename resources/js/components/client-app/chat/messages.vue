@@ -77,58 +77,8 @@ export default {
         showMessages() {
             this.messageView = true
         },
-        fetchMessages() {
-            document.querySelector('.loader-container').style.display = 'flex';
-
-            axios({
-                method: 'get',
-                url: 'api/client-app/messages/messages',
-                baseURL: window.location.origin,
-                params: {
-                    user_id: this.userId,
-                }
-            }).then(response => {
-                console.log(response);
-                this.messages = response.data.messages;
-                this.scrollToBottom();
-                //this.selectedGroup = response.data.group;
-                document.querySelector('.loader-container').style.display = 'none';
-            }).catch((error) => {
-                console.log(error);
-                this.loading = false;
-                document.querySelector('.loader-container').style.display = 'none';
-            });
-        },
-        sendMessage() {
-            //document.querySelector('.loader-container').style.display = 'flex';
-
-            axios({
-                method: 'post',
-                url: 'api/client-app/messages/messages',
-                baseURL: window.location.origin,
-                data: {
-                    user_id: this.userId,
-                    //group_id: this.selectedGroup.id,
-                    message: this.newMessage,
-                }
-            }).then(response => {
-                console.log(response);
-                this.newMessage = '';
-                this.appendMessage(response.data.new_message)
-                //this.selectedGroup = response.data.group;
-                //document.querySelector('.loader-container').style.display = 'none';
-            }).catch((error) => {
-                console.log(error);
-                this.loading = false;
-                //document.querySelector('.loader-container').style.display = 'none';
-            });
-        },
-        appendMessage(message) {
-            this.messages.push(message);
-            this.scrollToBottom();
-        },
-
         scrollToBottom() {
+            const self = this;
             setTimeout(function () {
                 let parentContainer = document.getElementById('ChatBody')
                 let childContainer = document.getElementById('messages')
@@ -136,8 +86,95 @@ export default {
                     console.log(childContainer.scrollHeight)
                     parentContainer.scrollTop = childContainer.scrollHeight
                 }
+                console.log('scrolled to bottom')
+                self.readMessages();
             }, 100)
         },
+
+        fetchMessages() {
+            document.querySelector('.loader-container').style.display = 'flex';
+
+            axios({
+                method: 'get',
+                url: 'api/client-app/chat/messages',
+                baseURL: window.location.origin,
+                params: {
+                    user_id: this.userId,
+                }
+            }).then(response => {
+                console.log(response);
+                this.selectedGroup = response.data.channel;
+                this.messages = response.data.messages;
+                this.scrollToBottom();
+                document.querySelector('.loader-container').style.display = 'none';
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
+                document.querySelector('.loader-container').style.display = 'none';
+            });
+        },
+        readMessages() {
+            axios({
+                method: 'put',
+                url: 'api/client-app/chat/read-receipt',
+                baseURL: window.location.origin,
+                params: {
+                    user_id: this.userId,
+                    channel_id: this.selectedGroup.id,
+                }
+            }).then(response => {
+                console.log(response);
+                this.updateUnreadMessageBadges(response.data.announcements, response.data.messages)
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
+            });
+        },
+        sendMessage() {
+            axios({
+                method: 'post',
+                url: 'api/client-app/chat/messages',
+                baseURL: window.location.origin,
+                data: {
+                    user_id: this.userId,
+                    message: this.newMessage,
+                }
+            }).then(response => {
+                console.log(response);
+                this.newMessage = '';
+                this.appendMessage(response.data.new_message)
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
+            });
+        },
+        appendMessage(message) {
+            this.messages.push(message);
+            this.scrollToBottom();
+        },
+
+
+        updateUnreadMessageBadges(announcements, messages) {
+            if (announcements > 0) {
+                let element = document.getElementById('unread-announcement-count');
+                element.innerHTML = "" + announcements;
+                element.classList.remove('invisible')
+            } else {
+                let element = document.getElementById('unread-announcement-count');
+                element.innerHTML = "";
+                element.classList.add('invisible')
+            }
+
+            if (messages > 0) {
+                let element = document.getElementById('unread-message-count');
+                element.innerHTML = "" + messages;
+                element.classList.remove('invisible')
+            } else {
+                let element = document.getElementById('unread-message-count');
+                element.innerHTML = "";
+                element.classList.add('invisible')
+            }
+        }
     },
     created() {
         const self = this;

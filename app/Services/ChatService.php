@@ -9,6 +9,11 @@ use Carbon\Carbon;
 
 class ChatService
 {
+    public function getChannel($slug)
+    {
+        return ChatChannel::where('slug', '=', $slug)->first();
+    }
+
     public function createChannel($slug, $name, $type = '', $description = '')
     {
         $channelData = [
@@ -78,6 +83,14 @@ class ChatService
             ->where('channel_id', '=', $channelId)
             ->where('user_id', '=', $userId)
             ->update(['is_active' => true]);
+    }
+
+    public function getChannelMessages($channelId)
+    {
+        return ChatChannelMessage::query()
+            ->where('channel_id', '=', $channelId)
+            ->where('is_blocked', '=', 0)
+            ->get();
     }
 
     public function addChannelMessage($channelId, $userId, $data)

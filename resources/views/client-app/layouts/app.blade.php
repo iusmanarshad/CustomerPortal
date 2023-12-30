@@ -64,7 +64,7 @@
                 </div>
 				<!-- Container closed -->
 
-                <client-notifications :user-id="{{ auth()->user()->id }}"></client-notifications>
+                <unread-message-badge :user-id="{{ auth()->user()->id }}"></unread-message-badge>
 			</div>
 			<!-- main-content closed -->
 

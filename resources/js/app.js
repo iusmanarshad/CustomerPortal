@@ -25,6 +25,7 @@ const app = createApp({
 
 import SuccessMessage from './components/SuccessMessage.vue';
 import ErrorMessage from './components/ErrorMessage.vue';
+import UnreadMessageBadge from "./components/client-app/unreadMessageBadge.vue";
 import Clients from './components/customer-portal/clients/index.vue';
 import CreateClient from './components/customer-portal/clients/create.vue';
 import PortalAnnouncements from "./components/customer-portal/chat/announcements.vue";
@@ -33,11 +34,11 @@ import Questionnaire from './components/client-app/questionnaire.vue';
 import ClientAnnouncements from "./components/client-app/chat/announcements.vue";
 import ClientMessages from "./components/client-app/chat/messages.vue";
 import ClientQuestionnaie from "./components/customer-portal/clients/questionnaire.vue"
-import ClientNotifications from "./components/client-app/notifications.vue";
 
 
 app.component('error-message', ErrorMessage);
 app.component('success-message', SuccessMessage);
+app.component('unread-message-badge', UnreadMessageBadge);
 
 // Customer portal
 app.component('clients', Clients);
@@ -50,7 +51,6 @@ app.component('portal-messages', PortalMessages);
 app.component('questionnaire', Questionnaire);
 app.component('client-announcements', ClientAnnouncements);
 app.component('client-messages', ClientMessages);
-app.component('client-notifications', ClientNotifications);
 
 
 

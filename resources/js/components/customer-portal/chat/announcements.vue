@@ -423,7 +423,7 @@ export default {
         this.fetchClients();
         this.fetchGroups();
 
-        var presenceChannel = window.Echo.join('chat')
+        var presenceChannel = window.Echo.join('announcements')
             .here((users) => {
                 console.log('webhooks connected')
                 console.log(users.length)

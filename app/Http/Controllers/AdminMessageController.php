@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RoleEnum;
-use App\Events\MessageSent;
+use App\Events\ChatMessageSent;
 use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
 use App\Http\Requests\SendAnnouncementMessageRequest;
@@ -101,7 +101,7 @@ class AdminMessageController extends Controller
         // add unread message count
         $this->addUnreadMessageCount($group->id, $adminUser->id);
 
-        broadcast(new MessageSent($adminUser, $newMessage))->toOthers();
+        broadcast(new ChatMessageSent($adminUser, $newMessage))->toOthers();
         return response()->json([
             'message' => 'message sent successfully',
             'new_message' => $newMessage,
