@@ -81,7 +81,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-/*Route::prefix('schema')->group(function () {
+Route::prefix('schema')->group(function () {
     Route::get('/chat/truncate', function () {
         \App\Models\ChatChannel::truncate();
         \App\Models\ChatChannelMember::truncate();
@@ -91,6 +91,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/websockets/drop', function () {
         \Illuminate\Support\Facades\Schema::dropIfExists('websockets_statistics_entries');
     });
-});*/
+});
 
 
