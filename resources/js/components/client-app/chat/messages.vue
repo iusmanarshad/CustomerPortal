@@ -83,12 +83,15 @@ export default {
                 let parentContainer = document.getElementById('ChatBody')
                 let childContainer = document.getElementById('messages')
                 if (parentContainer && childContainer) {
-                    console.log(childContainer.scrollHeight)
                     parentContainer.scrollTop = childContainer.scrollHeight
                 }
                 console.log('scrolled to bottom')
                 self.readMessages();
             }, 100)
+        },
+        appendMessage(message) {
+            this.messages.push(message);
+            this.scrollToBottom();
         },
 
         fetchMessages() {
@@ -148,14 +151,9 @@ export default {
                 this.loading = false;
             });
         },
-        appendMessage(message) {
-            this.messages.push(message);
-            this.scrollToBottom();
-        },
-
 
         updateUnreadMessageBadges(announcements, messages) {
-            if (announcements > 0) {
+            /*if (announcements > 0) {
                 let element = document.getElementById('unread-announcement-count');
                 element.innerHTML = "" + announcements;
                 element.classList.remove('invisible')
@@ -163,7 +161,7 @@ export default {
                 let element = document.getElementById('unread-announcement-count');
                 element.innerHTML = "";
                 element.classList.add('invisible')
-            }
+            }*/
 
             if (messages > 0) {
                 let element = document.getElementById('unread-message-count');
@@ -177,6 +175,9 @@ export default {
         }
     },
     created() {
+        this.fetchMessages();
+    },
+    mounted() {
         const self = this;
 
         var presenceChannel = window.Echo.join('chat')
@@ -196,26 +197,20 @@ export default {
                     this.usersCount = 0;
                 }*/
             })
-            .listen('MessageSent', (e) => {
+            .listen('ChatMessageSent', (e) => {
                 console.log('new message sent')
 
                 self.appendMessage(e.message)
 
-                //let showChat = localStorage.getItem("global-chat");
-                /*if (showChat == 'false') {
-                    console.log('show notification')
+                /*console.log('show notification')
                     console.log(e.message);
                     self.newMessage = e.message;
                     self.showNotification = true;
 
                     setTimeout(function () {
                         self.hideNotification();
-                    }, 5000)
-                }*/
+                    }, 5000)*/
             });
-    },
-    mounted() {
-        this.fetchMessages();
     },
 }
 </script>

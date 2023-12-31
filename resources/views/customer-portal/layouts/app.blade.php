@@ -63,6 +63,8 @@
                     @yield('content')
                 </div>
 				<!-- Container closed -->
+
+                <portal-unread-message-badge :user-id="{{ auth()->user()->id }}"></portal-unread-message-badge>
 			</div>
 			<!-- main-content closed -->
 

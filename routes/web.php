@@ -335,7 +335,7 @@ Route::prefix('portal')->group(function () {
         ]);
         Route::get('clients/questionnaire/{client_id}', [Controllers\CustomerPortal\ClientQuestionnaireController::class, 'index'])->name('portal.client.questionnaire');
         Route::get('announcements', [Controllers\AdminAnnouncementController::class, 'index']);
-        Route::get('messages', [Controllers\AdminMessageController::class, 'index']);
+        Route::get('messages', [Controllers\AdminChatController::class, 'index']);
     });
 
 });

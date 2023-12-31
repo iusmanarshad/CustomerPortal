@@ -44,13 +44,16 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/messages', [Controllers\AdminAnnouncementController::class, 'sendMessage']);
         });
 
-        Route::prefix('messages')->group(function () {
-            Route::get('/clients', [Controllers\AdminMessageController::class, 'getClients']);
-            Route::get('/groups', [Controllers\AdminMessageController::class, 'getGroups']);
-            Route::post('/groups', [Controllers\AdminMessageController::class, 'createGroup']);
-            Route::get('/messages', [Controllers\AdminMessageController::class, 'getGroupMessages']);
-            Route::post('/messages', [Controllers\AdminMessageController::class, 'sendMessage']);
+        Route::prefix('chat')->group(function () {
+            Route::get('/clients', [Controllers\AdminChatController::class, 'getClients']);
+            Route::get('/channels', [Controllers\AdminChatController::class, 'getChannels']);
+            Route::post('/channels', [Controllers\AdminChatController::class, 'createChannel']);
+            Route::get('/messages', [Controllers\AdminChatController::class, 'getChannelMessages']);
+            Route::put('/read-receipt', [Controllers\AdminChatController::class, 'readMessages']);
+            Route::post('/messages', [Controllers\AdminChatController::class, 'sendMessage']);
         });
+
+        Route::get('/messages/unread-count', [Controllers\AdminChatController::class, 'getUnreadMessagesCount']);
     });
 
 

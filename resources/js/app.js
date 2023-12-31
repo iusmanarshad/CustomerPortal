@@ -25,20 +25,20 @@ const app = createApp({
 
 import SuccessMessage from './components/SuccessMessage.vue';
 import ErrorMessage from './components/ErrorMessage.vue';
-import UnreadMessageBadge from "./components/client-app/unreadMessageBadge.vue";
 import Clients from './components/customer-portal/clients/index.vue';
 import CreateClient from './components/customer-portal/clients/create.vue';
 import PortalAnnouncements from "./components/customer-portal/chat/announcements.vue";
 import PortalMessages from "./components/customer-portal/chat/messages.vue";
+import PortalUnreadMessageBadge from "./components/customer-portal/chat/unreadMessageBadge.vue";
 import Questionnaire from './components/client-app/questionnaire.vue';
+import ClientQuestionnaie from "./components/customer-portal/clients/questionnaire.vue"
 import ClientAnnouncements from "./components/client-app/chat/announcements.vue";
 import ClientMessages from "./components/client-app/chat/messages.vue";
-import ClientQuestionnaie from "./components/customer-portal/clients/questionnaire.vue"
+import ClientUnreadMessageBadge from "./components/client-app/chat/unreadMessageBadge.vue";
 
 
 app.component('error-message', ErrorMessage);
 app.component('success-message', SuccessMessage);
-app.component('unread-message-badge', UnreadMessageBadge);
 
 // Customer portal
 app.component('clients', Clients);
@@ -46,11 +46,13 @@ app.component('create-client', CreateClient);
 app.component('client-questionnaie', ClientQuestionnaie);
 app.component('portal-announcements', PortalAnnouncements);
 app.component('portal-messages', PortalMessages);
+app.component('portal-unread-message-badge', PortalUnreadMessageBadge);
 
 // Client app
 app.component('questionnaire', Questionnaire);
 app.component('client-announcements', ClientAnnouncements);
 app.component('client-messages', ClientMessages);
+app.component('client-unread-message-badge', ClientUnreadMessageBadge);
 
 
 

@@ -10,13 +10,16 @@ use App\Http\Requests\SendChannelMessageRequest;
 use App\Http\Requests\UpdateChannelRequest;
 use App\Http\Resources\AdminChannelMessageResource;
 use App\Http\Resources\AdminChannelResource;
+use App\Http\Resources\AdminClientResource;
 use App\Models\ChatChannel;
 use App\Models\ChatChannelMember;
+use App\Models\ChatChannelMessage;
 use App\Models\User;
 use App\Services\ChatService;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class ClientChatController extends Controller
+class AdminChatController extends Controller
 {
     private $chatService;
 
@@ -27,33 +30,25 @@ class ClientChatController extends Controller
 
     public function index()
     {
-        return view('client-app.chat.messages');
+        return view('customer-portal.chat.messages');
     }
 
-    public function getChannelMessages()
+    public function getClients()
     {
-        $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
-        $clientUser = auth()->user();
+        $clients = User::where('role_id', '=', RoleEnum::CLIENTROLE)->get();
+        return response()->json(['clients' => AdminClientResource::collection($clients)]);
+    }
 
-        $slug = 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id;
-        $channel = $this->chatService->getChannel($slug);
+    public function getChannels()
+    {
+        $channels = ChatChannel::where('type', '=', ChannelTypeEnum::ONE_TO_ONE)->orderByDesc('last_activity')->get();
+        return response()->json(['channels' => AdminChannelResource::collection($channels)]);
+    }
 
-        if (!$channel) {
-            // create channel
-            $channelName = 'admin_' . $clientUser->first_name . '-' . $clientUser->last_name;
-            $channel = $this->chatService->createChannel($slug, $channelName, ChannelTypeEnum::ONE_TO_ONE);
-
-            // create channel members
-            $this->chatService->addChannelMember($channel->id, $adminUser->id);
-            $this->chatService->addChannelMember($channel->id, $clientUser->id);
-        }
-
-        $messages = $this->chatService->getChannelMessages($channel->id);
-
-        return response()->json([
-            'channel' => new AdminChannelResource($channel),
-            'messages' => count($messages) > 0 ? AdminChannelMessageResource::collection($messages) : []
-        ]);
+    public function getChannelMessages(UpdateChannelRequest $request)
+    {
+        $messages = ChatChannelMessage::where('channel_id', '=', $request->channel_id)->get();
+        return response()->json(['messages' => AdminChannelMessageResource::collection($messages)]);
     }
 
     public function getUnreadMessagesCount()
@@ -87,34 +82,63 @@ class ClientChatController extends Controller
         );
     }
 
+    public function createChannel(Request $request)
+    {
+        $adminUser = auth()->user();
+        $clientUser = User::find($request->client_id);
+        $channelData = [
+            'name' => 'admin_' . $clientUser->first_name,
+            'slug' => 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id,
+            'type' => ChannelTypeEnum::ONE_TO_ONE,
+            'is_active' => true,
+            'last_activity' => Carbon::now()
+        ];
+
+        if (!empty($description)) {
+            $channelData['description'] = $description;
+        }
+
+        ChatChannel::updateOrCreate(['slug' => $channelData['slug']], $channelData);
+        $channel = ChatChannel::where('slug', '=', $channelData['slug'])->first();
+
+        ChatChannelMember::updateOrCreate(
+            ['channel_id' => $channel->id, 'user_id' => $adminUser->id],
+            ['channel_id' => $channel->id, 'user_id' => $adminUser->id, 'is_active' => true]
+        );
+        ChatChannelMember::updateOrCreate(
+            ['channel_id' => $channel->id, 'user_id' => $clientUser->id],
+            ['channel_id' => $channel->id, 'user_id' => $clientUser->id, 'is_active' => true]
+        );
+
+        return response()->json([
+            'message' => 'Channel created successfully',
+            'channel' => new AdminChannelResource($channel)
+        ]);
+    }
+
     public function sendMessage(SendChannelMessageRequest $request)
     {
-        $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
-        $clientUser = auth()->user();
-
-        $slug = 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id;
-        $channel = $this->chatService->getChannel($slug);
-
         $messageData = [
             'type' => 'text',
             'message' => $request->message,
             'timestamp' => Carbon::now()
         ];
-        $message = $this->chatService->addChannelMessage($channel->id, $clientUser->id, $messageData);
+        $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
+        $channel = ChatChannel::where('id', '=', $request->channel_id)->first();
+        $message = $this->chatService->addChannelMessage($channel->id, $adminUser->id, $messageData);
         $newMessage = new AdminChannelMessageResource($message);
-
         $channel->last_activity = Carbon::now();
         $channel->save();
 
         // add unread message count
-        $this->addUnreadMessageCount($channel->id, $clientUser->id);
+        $this->addUnreadMessageCount($channel->id, $adminUser->id);
 
-        broadcast(new MessageSent($clientUser, $newMessage))->toOthers();
-        broadcast(new ChatMessageSent($clientUser, $newMessage))->toOthers();
-
+        broadcast(new MessageSent($adminUser, $newMessage))->toOthers();
+        broadcast(new ChatMessageSent($adminUser, $newMessage))->toOthers();
         return response()->json([
             'message' => 'message sent successfully',
             'new_message' => $newMessage,
+            'channel' => new AdminChannelResource($channel)
         ]);
     }
 
