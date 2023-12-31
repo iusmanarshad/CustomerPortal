@@ -84,8 +84,52 @@ export default {
         }
     },
     methods: {
-        fetchGroups() {
-            document.querySelector('.loader-container').style.display = 'flex';
+        scrollToBottom() {
+            const self = this;
+            setTimeout(function () {
+                let parentContainer = document.getElementById('ChatBody')
+                let childContainer = document.getElementById('messages')
+                if (parentContainer && childContainer) {
+                    parentContainer.scrollTop = childContainer.scrollHeight
+                }
+                console.log('scrolled to bottom')
+                self.readMessages();
+            }, 100)
+        },
+        readMessages() {
+            axios({
+                method: 'put',
+                url: 'api/client-app/chat/read-receipt',
+                baseURL: window.location.origin,
+                params: {
+                    user_id: this.userId,
+                    channel_id: this.selectedGroup.id,
+                }
+            }).then(response => {
+                console.log(response);
+                this.updateUnreadMessageBadges(response.data.announcements)
+                this.fetchGroups(false)
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
+            });
+        },
+        updateUnreadMessageBadges(announcements) {
+            if (announcements > 0) {
+                let element = document.getElementById('unread-announcement-count');
+                element.innerHTML = "" + announcements;
+                element.classList.remove('invisible')
+            } else {
+                let element = document.getElementById('unread-announcement-count');
+                element.innerHTML = "";
+                element.classList.add('invisible')
+            }
+        },
+
+        fetchGroups(loader) {
+            if (loader) {
+                document.querySelector('.loader-container').style.display = 'flex';
+            }
 
             axios({
                 method: 'get',
@@ -97,11 +141,15 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.groups = response.data.groups;
-                document.querySelector('.loader-container').style.display = 'none';
+                if (loader) {
+                    document.querySelector('.loader-container').style.display = 'none';
+                }
             }).catch((error) => {
                 console.log(error);
                 this.loading = false;
-                document.querySelector('.loader-container').style.display = 'none';
+                if (loader) {
+                    document.querySelector('.loader-container').style.display = 'none';
+                }
             });
         },
         openGroupChat(group) {
@@ -124,6 +172,8 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.messages = response.data.messages;
+                this.scrollToBottom();
+                this.fetchGroups(false)
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
@@ -133,7 +183,7 @@ export default {
         },
     },
     mounted() {
-        this.fetchGroups();
+        this.fetchGroups(true);
     },
     watch: {
 

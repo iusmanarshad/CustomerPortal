@@ -127,7 +127,7 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
-                this.updateUnreadMessageBadges(response.data.announcements, response.data.messages)
+                this.updateUnreadMessageBadges(response.data.messages)
             }).catch((error) => {
                 console.log(error);
                 this.loading = false;
@@ -152,17 +152,7 @@ export default {
             });
         },
 
-        updateUnreadMessageBadges(announcements, messages) {
-            /*if (announcements > 0) {
-                let element = document.getElementById('unread-announcement-count');
-                element.innerHTML = "" + announcements;
-                element.classList.remove('invisible')
-            } else {
-                let element = document.getElementById('unread-announcement-count');
-                element.innerHTML = "";
-                element.classList.add('invisible')
-            }*/
-
+        updateUnreadMessageBadges(messages) {
             if (messages > 0) {
                 let element = document.getElementById('unread-message-count');
                 element.innerHTML = "" + messages;

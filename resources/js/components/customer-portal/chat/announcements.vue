@@ -220,6 +220,18 @@ export default {
         }
     },
     methods: {
+        scrollToBottom() {
+            const self = this;
+            setTimeout(function () {
+                let parentContainer = document.getElementById('ChatBody')
+                let childContainer = document.getElementById('messages')
+                if (parentContainer && childContainer) {
+                    parentContainer.scrollTop = childContainer.scrollHeight
+                }
+                console.log('scrolled to bottom')
+            }, 100)
+        },
+
         fetchClients() {
             document.querySelector('.loader-container').style.display = 'flex';
 
@@ -311,6 +323,7 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.messages = response.data.messages;
+                this.scrollToBottom();
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
@@ -339,6 +352,7 @@ export default {
                 this.groups.splice(index, 1);
                 this.selectedGroup = response.data.group;
                 this.groups.unshift(this.selectedGroup)
+                this.scrollToBottom();
                 //document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);

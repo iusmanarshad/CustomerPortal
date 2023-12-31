@@ -21,6 +21,10 @@ Broadcast::channel('message', function ($user) {
     return \Illuminate\Support\Facades\Auth::check();
 });
 
+Broadcast::channel('announcement', function ($user) {
+    return \Illuminate\Support\Facades\Auth::check();
+});
+
 Broadcast::channel('chat', function ($user) {
     return \Illuminate\Support\Facades\Auth::check();
 });
