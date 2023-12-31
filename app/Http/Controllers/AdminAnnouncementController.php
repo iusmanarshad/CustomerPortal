@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\ChannelTypeEnum;
 use App\Enums\RoleEnum;
+use App\Events\AnnouncementMessageSent;
+use App\Events\ChatMessageSent;
+use App\Events\MessageSent;
 use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
 use App\Http\Requests\SendAnnouncementMessageRequest;
@@ -77,7 +80,7 @@ class AdminAnnouncementController extends Controller
     public function updateGroupMembers(Request $request)
     {
         $group = ChatChannel::where('id', '=', $request->group_id)->first();
-        ChatChannelMember::where('channel_id', '=', $group->id)->delete();
+        ChatChannelMember::where('channel_id', '=', $group->id)->where('user_id', '!=', 1)->delete();
         if (!empty($request->members)) {
             $members = explode(',', $request->members);
             foreach ($members as $member) {
@@ -104,12 +107,14 @@ class AdminAnnouncementController extends Controller
         $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
         $group = ChatChannel::where('id', '=', $request->group_id)->first();
         $message = $this->chatService->addChannelMessage($group->id, $adminUser->id, $messageData);
+        $newMessage = new AdminChannelMessageResource($message);
         $group->last_activity = Carbon::now();
         $group->save();
 
         // add unread message count
         $this->addUnreadMessageCount($group->id, $adminUser->id);
-
+        broadcast(new MessageSent($adminUser, $newMessage))->toOthers();
+        broadcast(new AnnouncementMessageSent($adminUser, $newMessage))->toOthers();
         return response()->json([
             'message' => 'message sent successfully',
             'new_message' => new AdminChannelMessageResource($message),

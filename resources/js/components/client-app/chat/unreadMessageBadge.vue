@@ -20,7 +20,7 @@ export default {
             });
         },
         manageUnreadBadges(announcements, messages) {
-            /*if (announcements > 0) {
+            if (announcements > 0) {
                 let element = document.getElementById('unread-announcement-count');
                 element.innerHTML = "" + announcements;
                 element.classList.remove('invisible')
@@ -28,7 +28,7 @@ export default {
                 let element = document.getElementById('unread-announcement-count');
                 element.innerHTML = "";
                 element.classList.add('invisible')
-            }*/
+            }
 
             if (messages > 0) {
                 let element = document.getElementById('unread-message-count');
