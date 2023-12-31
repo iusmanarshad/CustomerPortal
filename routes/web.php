@@ -285,9 +285,9 @@ Route::get('', function () {
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
         if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
-            return redirect('/portal/dashboard');
+            return redirect()->route('portal.dashboard');
         } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
-            return redirect('/questionnaire');
+            return redirect()->route('dashboard');
         } else {
             return redirect('/announcements');
         }
@@ -298,7 +298,7 @@ Route::get('', function () {
 })->name('home');
 
 Route::get('/portal', function () {
-    return redirect('/portal/dashboard');
+    return redirect()->route('portal.dashboard');
 })->name('portal');
 
 
