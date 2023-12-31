@@ -179,8 +179,10 @@ export default {
                 document.querySelector('.loader-container').style.display = 'none';
             });
         },
-        fetchGroups() {
-            document.querySelector('.loader-container').style.display = 'flex';
+        fetchGroups(loader) {
+            if (loader) {
+                document.querySelector('.loader-container').style.display = 'flex';
+            }
 
             axios({
                 method: 'get',
@@ -192,11 +194,15 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.groups = response.data.channels;
-                document.querySelector('.loader-container').style.display = 'none';
+                if (loader) {
+                    document.querySelector('.loader-container').style.display = 'none';
+                }
             }).catch((error) => {
                 console.log(error);
                 this.loading = false;
-                document.querySelector('.loader-container').style.display = 'none';
+                if (loader) {
+                    document.querySelector('.loader-container').style.display = 'none';
+                }
             });
         },
         createGroup() {
@@ -261,6 +267,7 @@ export default {
             }).then(response => {
                 console.log(response);
                 this.updateUnreadMessageBadges(response.data.announcements, response.data.messages)
+                this.fetchGroups(false)
             }).catch((error) => {
                 console.log(error);
                 this.loading = false;
@@ -315,7 +322,7 @@ export default {
     },
     created() {
         this.fetchClients();
-        this.fetchGroups();
+        this.fetchGroups(true);
     },
     mounted() {
         const self = this;
@@ -341,7 +348,7 @@ export default {
                 console.log('new message sent')
 
                 self.appendMessage(e.message)
-
+                self.fetchGroups(false);
                 /*console.log('show notification')
                     console.log(e.message);
                     self.newMessage = e.message;

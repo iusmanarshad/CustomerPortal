@@ -27,7 +27,8 @@ class AdminChannelResource extends JsonResource
             'description' => $this->description,
             'last_activity' => $this->lastActivity(),
             'last_message' => $this->latestMessage(),
-            'members' => $this->members()
+            'members' => $this->members(),
+            'unread_messages' => $this->unreadMessages()
         ];
     }
 
@@ -56,6 +57,16 @@ class AdminChannelResource extends JsonResource
     {
         $members = $this->nonAdminMembers();
         return AdminClientResource::collection($members);
+    }
+
+    private function unreadMessages()
+    {
+        $membership = ChatChannelMember::query()
+            ->where('channel_id', '=', $this->id)
+            ->where('user_id', '=', auth()->user()->id)
+            ->first();
+
+        return $membership->unread_message_count;
     }
 
     private function nonAdminMembers()
