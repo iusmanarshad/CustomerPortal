@@ -34,10 +34,10 @@ window.Echo = new Echo({
 
     broadcaster: 'pusher',
     key: 'customer_portal_pusher_key',
-    wsHost: 'websocket.myportal.drummlaw.com',
-    wsPort: 80,
-    wssPort: 443,
+    wsHost: window.location.hostname,
+    wsPort: 6001,
     disableStats: true,
+    forceTLS: true,
     cluster: 'customer_portal_pusher_cluster',
     enabledTransports: ['ws', 'wss'],
 });
