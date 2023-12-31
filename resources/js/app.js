@@ -30,6 +30,7 @@ import CreateClient from './components/customer-portal/clients/create.vue';
 import PortalAnnouncements from "./components/customer-portal/chat/announcements.vue";
 import PortalMessages from "./components/customer-portal/chat/messages.vue";
 import PortalUnreadMessageBadge from "./components/customer-portal/chat/unreadMessageBadge.vue";
+import PortalDashboard from "././components/customer-portal/dashboard.vue"
 import Questionnaire from './components/client-app/questionnaire.vue';
 import ClientQuestionnaie from "./components/customer-portal/clients/questionnaire.vue"
 import ClientAnnouncements from "./components/client-app/chat/announcements.vue";
@@ -47,6 +48,7 @@ app.component('client-questionnaie', ClientQuestionnaie);
 app.component('portal-announcements', PortalAnnouncements);
 app.component('portal-messages', PortalMessages);
 app.component('portal-unread-message-badge', PortalUnreadMessageBadge);
+app.component('portal-dashboard', PortalDashboard);
 
 // Client app
 app.component('questionnaire', Questionnaire);

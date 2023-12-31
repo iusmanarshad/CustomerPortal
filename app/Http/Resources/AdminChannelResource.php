@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\ChannelTypeEnum;
 use App\Enums\RoleEnum;
 use App\Models\ChatChannelMember;
 use App\Models\ChatChannelMessage;
@@ -35,7 +36,7 @@ class AdminChannelResource extends JsonResource
     private function name()
     {
         $channelName = $this->name;
-        if ($this->type === 'one-to-one') {
+        if ($this->type === ChannelTypeEnum::ONE_TO_ONE) {
             $members = $this->nonAdminMembers();
             $channelName = $members[0]->first_name . ' ' . $members[0]->last_name;
         }

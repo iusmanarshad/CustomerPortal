@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ChannelTypeEnum;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
 use App\Http\Resources\AdminChannelMessageResource;
 use App\Http\Resources\AdminChannelResource;
@@ -26,7 +27,7 @@ class ClientAnnouncementController extends Controller
 
     public function getGroups()
     {
-        $groups = ChatChannel::where('type', '=', 'announcement')->orderByDesc('last_activity')->get();
+        $groups = ChatChannel::where('type', '=', ChannelTypeEnum::ANNOUNCEMENT)->orderByDesc('last_activity')->get();
         return response()->json(['groups' => AdminChannelResource::collection($groups)]);
     }
 

@@ -20,7 +20,7 @@ class AuthenticationController extends Controller
         if (Auth::check()) {
             // User is authenticated, redirect to dashboard
             if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
-                return redirect('/portal/clients');
+                return redirect('/portal/dashboard');
             } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
                 return redirect('/questionnaire');
             } else {
@@ -60,7 +60,7 @@ class AuthenticationController extends Controller
             if (auth()->user()->role_id == RoleEnum::CLIENTROLE) {
                 return redirect('/questionnaire');
             } elseif (auth()->user()->role_id == RoleEnum::ADMINROLE) {
-                return redirect('/portal/clients');
+                return redirect('/portal/dashboard');
             } else {
                 return redirect('/announcements');
             }

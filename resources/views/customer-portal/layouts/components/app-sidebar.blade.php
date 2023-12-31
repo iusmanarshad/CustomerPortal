@@ -17,7 +17,7 @@
 								</svg></div>
 							<ul class="side-menu">
 								<li class="slide">
-									<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+									<a class="side-menu__item {{ request()->is('portal/dashboard*') ? 'active' : '' }}" data-bs-toggle="slide" href="/portal/dashboard">
                                         <svg class="ionicon side-menu__icon"
 												viewBox="0 0 512 512">
 												<title>Dashboard</title>

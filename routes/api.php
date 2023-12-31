@@ -34,6 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
             'create', 'store', 'update', 'edit'
         ]);
 
+        Route::prefix('dashboard')->group(function () {
+            Route::get('/stats', [Controllers\AdminController::class, 'getStatistics']);
+        });
+
         Route::prefix('announcements')->group(function () {
             Route::get('/clients', [Controllers\AdminAnnouncementController::class, 'getClients']);
             Route::get('/groups', [Controllers\AdminAnnouncementController::class, 'getGroups']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ChannelTypeEnum;
 use App\Enums\RoleEnum;
 use App\Http\Requests\CustomerPortal\CreateAnnouncementGroupRequest;
 use App\Http\Requests\GetAnnouncementMessagesRequest;
@@ -40,7 +41,7 @@ class AdminAnnouncementController extends Controller
 
     public function getGroups()
     {
-        $groups = ChatChannel::where('type', '=', 'announcement')->orderByDesc('last_activity')->get();
+        $groups = ChatChannel::where('type', '=', ChannelTypeEnum::ANNOUNCEMENT)->orderByDesc('last_activity')->get();
         return response()->json(['groups' => AdminChannelResource::collection($groups)]);
     }
 
@@ -54,7 +55,7 @@ class AdminAnnouncementController extends Controller
     {
         $groupName = $request->name;
         $groupSlug = str_replace(' ', '-', $groupName);
-        $group = $this->chatService->createChannel($groupSlug, $groupName, 'announcement', $request->description);
+        $group = $this->chatService->createChannel($groupSlug, $groupName, ChannelTypeEnum::ANNOUNCEMENT, $request->description);
         $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
         $this->chatService->addChannelMember($group->id, $adminUser->id);
         return response()->json([
