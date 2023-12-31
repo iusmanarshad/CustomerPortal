@@ -16,7 +16,7 @@
 								<a class="close-toggle" href="javascript:void(0)"><i class="header-icon fe fe-x"></i></a>
 							</div>
 							<div class="logo-horizontal">
-								<a href="/questionnaire" class="header-logo">
+                                <a href="{{url('index')}}" class="header-logo">
 									<img src="{{asset('build/assets/img/brand/logo-white.png')}}" class="mobile-logo dark-logo-1" alt="logo">
 									<img src="{{asset('build/assets/img/brand/logo-white-1.png')}}" class="mobile-logo-1 dark-logo-1" alt="logo">
 								</a>

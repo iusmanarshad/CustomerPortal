@@ -2,10 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\ChannelTypeEnum;
 use App\Enums\RoleEnum;
 use App\Models\ChatChannelMember;
 use App\Models\ChatChannelMessage;
 use App\Models\User;
+use App\Services\ChatService;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,16 +28,16 @@ class AdminChannelResource extends JsonResource
             'description' => $this->description,
             'last_activity' => $this->lastActivity(),
             'last_message' => $this->latestMessage(),
-            'members' => $this->members()
+            'members' => $this->members(),
+            'unread_messages' => $this->unreadMessages()
         ];
     }
 
     private function name()
     {
         $channelName = $this->name;
-        if ($this->type === 'one-to-one') {
-            $groupMembers = ChatChannelMember::where('channel_id', '=', $this->id)->get();
-            $members = User::where('role_id', '=', RoleEnum::CLIENTROLE)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
+        if ($this->type === ChannelTypeEnum::ONE_TO_ONE) {
+            $members = $this->nonAdminMembers();
             $channelName = $members[0]->first_name . ' ' . $members[0]->last_name;
         }
         return $channelName;
@@ -54,8 +56,26 @@ class AdminChannelResource extends JsonResource
 
     private function members()
     {
-        $groupMembers = ChatChannelMember::where('channel_id', '=', $this->id)->get();
-        $members = User::where('role_id', '=', RoleEnum::CLIENTROLE)->whereIn('id', $groupMembers->pluck('user_id')->toArray())->get();
+        $members = $this->nonAdminMembers();
         return AdminClientResource::collection($members);
+    }
+
+    private function unreadMessages()
+    {
+        $membership = ChatChannelMember::query()
+            ->where('channel_id', '=', $this->id)
+            ->where('user_id', '=', auth()->user()->id)
+            ->first();
+
+        return $membership->unread_message_count;
+    }
+
+    private function nonAdminMembers()
+    {
+        $groupMembers = (new ChatService())->getChannelMembers($this->id);
+        return User::query()
+            ->where('role_id', '=', RoleEnum::CLIENTROLE)
+            ->whereIn('id', $groupMembers->pluck('user_id')->toArray())
+            ->get();
     }
 }

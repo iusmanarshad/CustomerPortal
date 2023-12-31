@@ -285,9 +285,9 @@ Route::get('', function () {
     if (Auth::check()) {
         // User is authenticated, redirect to dashboard
         if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
-            return redirect('/portal/clients');
+            return redirect()->route('portal.dashboard');
         } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
-            return redirect('/questionnaire');
+            return redirect()->route('dashboard');
         } else {
             return redirect('/announcements');
         }
@@ -298,7 +298,7 @@ Route::get('', function () {
 })->name('home');
 
 Route::get('/portal', function () {
-    return redirect('/portal/clients');
+    return redirect()->route('portal.dashboard');
 })->name('portal');
 
 
@@ -316,11 +316,12 @@ Route::prefix('/')->group(function () {
     Route::post('logout', [CustomerPortal\AuthenticationController::class, 'logout'])->name('postLogout');
 
     Route::middleware(['userHasRole:client', 'web'])->group(function () {
+        Route::get('dashboard', [ClientController::class, 'dashboard'])->name('dashboard');
         Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
     });
     Route::middleware(['userHasRole:client,associate', 'web'])->group(function () {
         Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
-        Route::get('messages', [Controllers\ClientMessageController::class, 'index']);
+        Route::get('messages', [Controllers\ClientChatController::class, 'index']);
     });
 
 });
@@ -329,13 +330,13 @@ Route::prefix('/')->group(function () {
 Route::prefix('portal')->group(function () {
 
     Route::middleware(['userHasRole:admin', 'web'])->group(function () {
-        //Route::get('dashboard', [PortalController::class, 'dashboard'])->name('portal.dashboard');
+        Route::get('dashboard', [PortalController::class, 'dashboard'])->name('portal.dashboard');
         Route::resource('clients', ClientController::class)->only([
             'index', 'show', 'create', 'edit'
         ]);
         Route::get('clients/questionnaire/{client_id}', [Controllers\CustomerPortal\ClientQuestionnaireController::class, 'index'])->name('portal.client.questionnaire');
         Route::get('announcements', [Controllers\AdminAnnouncementController::class, 'index']);
-        Route::get('messages', [Controllers\AdminMessageController::class, 'index']);
+        Route::get('messages', [Controllers\AdminChatController::class, 'index']);
     });
 
 });

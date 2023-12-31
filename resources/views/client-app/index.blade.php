@@ -1,4 +1,4 @@
-@extends('customer-portal.layouts.app')
+@extends('client-app.layouts.app')
 
 @section('styles')
 @endsection
@@ -7,13 +7,12 @@
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
-            <span class="main-content-title mg-b-0 mg-b-lg-1">DASHBOARD</span>
+            <span class="main-content-title mg-b-0 mg-b-lg-1">Home</span>
         </div>
     </div>
     <!-- /breadcrumb -->
 
-    <portal-dashboard :user-id="{{ auth()->user()->id }}"></portal-dashboard>
-
+    <client-dashboard :user-id="{{ auth()->user()->id }}"></client-dashboard>
 @endsection
 
 @section('scripts')

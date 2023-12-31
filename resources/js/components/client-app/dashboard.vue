@@ -48,25 +48,17 @@ export default {
                 <div class="card-body">
                     <div class="d-flex flex-column mb-0">
                         <div class="mb-3">
-<!--                            <a href="javascript:void(0)" class="tx-inverse float-end" data-bs-toggle="dropdown"
-                               aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0)" class="dropdown-item">Action</a></li>
-                                <li><a href="javascript:void(0)" class="dropdown-item">Another Action</a></li>
-                                <li><a href="javascript:void(0)" class="dropdown-item">Something Else Here</a></li>
-                            </ul>-->
-                            <a href="/portal/clients" class="btn btn-primary tx-inverse float-end">View</a>
+                            <a href="/questionnaire" class="btn btn-primary tx-inverse float-end">View</a>
                             <div class="avatar radius-4 bg-primary-transparent">
-                                <i class="fa fa-users tx-primary"></i>
+                                <i class="fa fa-file-text tx-primary"></i>
                             </div>
                         </div>
                         <div class="flex-1">
                             <div class="mb-1">
-                                <h4 class="tx-20 mb-0 numberfont">{{ clients }}</h4>
+                                <h4 class="tx-20 mb-0 numberfont">Questionnaire</h4>
                             </div>
                             <div class="flex-between">
-                                <p class="mb-0">Total Clients</p>
-                                <span class="badge badge-success-transparent badge-sm rounded-pill">+100%</span>
+                                <p class="mb-0">Questionnaire collects the required details from you that we need to communicate with you and process your case.</p>
                             </div>
                         </div>
                     </div>
@@ -78,18 +70,17 @@ export default {
                 <div class="card-body">
                     <div class="d-flex flex-column mb-0">
                         <div class="mb-3">
-                            <a href="/portal/announcements" class="btn btn-primary tx-inverse float-end">View</a>
+                            <a href="/announcements" class="btn btn-primary tx-inverse float-end">View</a>
                             <div class="avatar radius-4 bg-primary-transparent">
                                 <i class="fa fa-bullhorn tx-primary"></i>
                             </div>
                         </div>
                         <div class="flex-1">
                             <div class="mb-1">
-                                <h4 class="tx-20 mb-0 numberfont">{{ announcements }}</h4>
+                                <h4 class="tx-20 mb-0 numberfont">Announcements</h4>
                             </div>
                             <div class="flex-between">
-                                <p class="mb-0">Announcement Groups</p>
-                                <span class="badge badge-success-transparent badge-sm rounded-pill">+100%</span>
+                                <p class="mb-0">Announcements groups are used to keep you updated with our latest news, promotions, policies and any kind of updates from us.</p>
                             </div>
                         </div>
                     </div>
@@ -101,41 +92,17 @@ export default {
                 <div class="card-body">
                     <div class="d-flex flex-column mb-0">
                         <div class="mb-3">
-                            <a href="/portal/messages" class="btn btn-primary tx-inverse float-end">View</a>
+                            <a href="/messages" class="btn btn-primary tx-inverse float-end">View</a>
                             <div class="avatar radius-4 bg-primary-transparent">
                                 <i class="fa fa-comments tx-primary"></i>
                             </div>
                         </div>
                         <div class="flex-1">
                             <div class="mb-1">
-                                <h4 class="tx-20 mb-0 numberfont">{{ chats }}</h4>
+                                <h4 class="tx-20 mb-0 numberfont">Messages</h4>
                             </div>
                             <div class="flex-between">
-                                <p class="mb-0">Active chats</p>
-                                <span class="badge badge-success-transparent badge-sm rounded-pill">+100%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-column mb-0">
-                        <div class="mb-3">
-                            <a href="/portal/messages" class="btn btn-primary tx-inverse float-end">View</a>
-                            <div class="avatar radius-4 bg-primary-transparent">
-                                <i class="fa fa-comment tx-primary"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="mb-1">
-                                <h4 class="tx-20 mb-0 numberfont">{{ unreadMessages }}</h4>
-                            </div>
-                            <div class="flex-between">
-                                <p class="mb-0">New Messages</p>
-                                <span class="badge badge-success-transparent badge-sm rounded-pill">+100%</span>
+                                <p class="mb-0">You can contact us through messages, if you have any kind of questions or queries, and we will respond you back as soon as possible.</p>
                             </div>
                         </div>
                     </div>

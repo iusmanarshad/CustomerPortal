@@ -14,10 +14,16 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dashboard()
+    {
+        return view('client-app.index');
+    }
+
     public function index()
     {
         return view('customer-portal.clients.index');
     }
+
 
     /**
      * Show the form for creating a new resource.

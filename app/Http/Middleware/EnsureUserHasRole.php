@@ -26,9 +26,9 @@ class EnsureUserHasRole
 
         if (auth()->user()) {
             if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
-                return redirect('/portal/clients');
+                return redirect()->route('portal.dashboard');
             } elseif (auth()->user()->role_id == RoleEnum::CLIENTROLE) {
-                return redirect('/questionnaire');
+                return redirect()->route('dashboard');
             }
         }
 

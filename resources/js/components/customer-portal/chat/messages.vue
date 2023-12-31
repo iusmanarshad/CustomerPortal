@@ -134,12 +134,36 @@ export default {
         }
     },
     methods: {
+        openGroupChat(group) {
+            this.selectedGroup = group;
+            this.fetchMessages();
+        },
+        scrollToBottom() {
+            const self = this;
+            setTimeout(function () {
+                let parentContainer = document.getElementById('ChatBody')
+                let childContainer = document.getElementById('messages')
+                if (parentContainer && childContainer) {
+                    parentContainer.scrollTop = childContainer.scrollHeight
+                }
+                console.log('scrolled to bottom')
+                self.readMessages();
+            }, 100)
+        },
+        selectMember(id) {
+            this.selectedMembers = [id];
+        },
+        appendMessage(message) {
+            this.messages.push(message);
+            this.scrollToBottom();
+        },
+
         fetchClients() {
             document.querySelector('.loader-container').style.display = 'flex';
 
             axios({
                 method: 'get',
-                url: 'api/customer-portal/messages/clients',
+                url: 'api/customer-portal/chat/clients',
                 baseURL: window.location.origin,
                 params: {
                     user_id: this.userId,
@@ -155,24 +179,30 @@ export default {
                 document.querySelector('.loader-container').style.display = 'none';
             });
         },
-        fetchGroups() {
-            document.querySelector('.loader-container').style.display = 'flex';
+        fetchGroups(loader) {
+            if (loader) {
+                document.querySelector('.loader-container').style.display = 'flex';
+            }
 
             axios({
                 method: 'get',
-                url: 'api/customer-portal/messages/groups',
+                url: 'api/customer-portal/chat/channels',
                 baseURL: window.location.origin,
                 params: {
                     user_id: this.userId,
                 }
             }).then(response => {
                 console.log(response);
-                this.groups = response.data.groups;
-                document.querySelector('.loader-container').style.display = 'none';
+                this.groups = response.data.channels;
+                if (loader) {
+                    document.querySelector('.loader-container').style.display = 'none';
+                }
             }).catch((error) => {
                 console.log(error);
                 this.loading = false;
-                document.querySelector('.loader-container').style.display = 'none';
+                if (loader) {
+                    document.querySelector('.loader-container').style.display = 'none';
+                }
             });
         },
         createGroup() {
@@ -180,7 +210,7 @@ export default {
 
             axios({
                 method: 'post',
-                url: 'api/customer-portal/messages/groups',
+                url: 'api/customer-portal/chat/channels',
                 baseURL: window.location.origin,
                 data: {
                     user_id: this.userId,
@@ -188,12 +218,13 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
-                let newGroup = response.data.group;
+                let newGroup = response.data.channel;
                 let index = this.groups.findIndex(group => group.id === newGroup.id);
                 if (index >= 0) {
                     this.groups.splice(index, 1);
                 }
                 this.groups.unshift(newGroup);
+                //this.selectedGroup = newGroup;
                 this.selectedMembers = [];
                 document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
@@ -202,20 +233,16 @@ export default {
                 document.querySelector('.loader-container').style.display = 'none';
             });
         },
-        openGroupChat(group) {
-            this.selectedGroup = group;
-            this.fetchMessages();
-        },
         fetchMessages() {
             document.querySelector('.loader-container').style.display = 'flex';
 
             axios({
                 method: 'get',
-                url: 'api/customer-portal/messages/messages',
+                url: 'api/customer-portal/chat/messages',
                 baseURL: window.location.origin,
                 params: {
-                    //user_id: this.userId,
-                    group_id: this.selectedGroup.id
+                    user_id: this.userId,
+                    channel_id: this.selectedGroup.id
                 }
             }).then(response => {
                 console.log(response);
@@ -228,16 +255,32 @@ export default {
                 document.querySelector('.loader-container').style.display = 'none';
             });
         },
+        readMessages() {
+            axios({
+                method: 'put',
+                url: 'api/customer-portal/chat/read-receipt',
+                baseURL: window.location.origin,
+                params: {
+                    user_id: this.userId,
+                    channel_id: this.selectedGroup.id,
+                }
+            }).then(response => {
+                console.log(response);
+                this.updateUnreadMessageBadges(response.data.announcements, response.data.messages)
+                this.fetchGroups(false)
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
+            });
+        },
         sendMessage() {
-            //document.querySelector('.loader-container').style.display = 'flex';
-
             axios({
                 method: 'post',
-                url: 'api/customer-portal/messages/messages',
+                url: 'api/customer-portal/chat/messages',
                 baseURL: window.location.origin,
                 data: {
-                    //user_id: this.userId,
-                    group_id: this.selectedGroup.id,
+                    user_id: this.userId,
+                    channel_id: this.selectedGroup.id,
                     message: this.newMessage,
                 }
             }).then(response => {
@@ -246,35 +289,42 @@ export default {
                 this.appendMessage(response.data.new_message)
                 let index = this.groups.findIndex(group => group.id === this.selectedGroup.id);
                 this.groups.splice(index, 1);
-                this.selectedGroup = response.data.group;
+                this.selectedGroup = response.data.channel;
                 this.groups.unshift(this.selectedGroup)
-                //document.querySelector('.loader-container').style.display = 'none';
             }).catch((error) => {
                 console.log(error);
                 this.loading = false;
-                //document.querySelector('.loader-container').style.display = 'none';
             });
         },
-        appendMessage(message) {
-            this.messages.push(message);
-            this.scrollToBottom();
-        },
 
-        scrollToBottom() {
-            setTimeout(function () {
-                let parentContainer = document.getElementById('ChatBody')
-                let childContainer = document.getElementById('messages')
-                if (parentContainer && childContainer) {
-                    console.log(childContainer.scrollHeight)
-                    parentContainer.scrollTop = childContainer.scrollHeight
-                }
-            }, 100)
-        },
-        selectMember(id) {
-            this.selectedMembers = [id];
+        updateUnreadMessageBadges(announcements, messages) {
+            /*if (announcements > 0) {
+                let element = document.getElementById('unread-announcement-count');
+                element.innerHTML = "" + announcements;
+                element.classList.remove('invisible')
+            } else {
+                let element = document.getElementById('unread-announcement-count');
+                element.innerHTML = "";
+                element.classList.add('invisible')
+            }*/
+
+            if (messages > 0) {
+                let element = document.getElementById('unread-message-count');
+                element.innerHTML = "" + messages;
+                element.classList.remove('invisible')
+            } else {
+                let element = document.getElementById('unread-message-count');
+                element.innerHTML = "";
+                element.classList.add('invisible')
+            }
         }
+
     },
     created() {
+        this.fetchClients();
+        this.fetchGroups(true);
+    },
+    mounted() {
         const self = this;
 
         var presenceChannel = window.Echo.join('chat')
@@ -294,27 +344,20 @@ export default {
                     this.usersCount = 0;
                 }
             })
-            .listen('MessageSent', (e) => {
+            .listen('ChatMessageSent', (e) => {
                 console.log('new message sent')
 
                 self.appendMessage(e.message)
-
-                //let showChat = localStorage.getItem("global-chat");
-                /*if (showChat == 'false') {
-                    console.log('show notification')
+                self.fetchGroups(false);
+                /*console.log('show notification')
                     console.log(e.message);
                     self.newMessage = e.message;
                     self.showNotification = true;
 
                     setTimeout(function () {
                         self.hideNotification();
-                    }, 5000)
-                }*/
+                    }, 5000)*/
             });
-    },
-    mounted() {
-        this.fetchClients();
-        this.fetchGroups();
     },
     watch: {
         search: function (value) {
