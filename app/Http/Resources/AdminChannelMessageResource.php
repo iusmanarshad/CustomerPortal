@@ -31,7 +31,7 @@ class AdminChannelMessageResource extends JsonResource
         $isSentByMe = $user->id === $this->user_id;
         if ($user->role_id == 3) {
             $clientUser = User::where('id', '=', $user->associate_id)->first();
-            if ($clientUser && $clientUser === $this->user_id) {
+            if ($clientUser && $clientUser->id === $this->user_id) {
                 $isSentByMe = true;
             }
         }
