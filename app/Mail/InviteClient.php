@@ -33,7 +33,7 @@ class InviteClient extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Invite Client',
+            subject: 'You have been invited to join Drummlaw',
         );
     }
 

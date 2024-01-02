@@ -241,7 +241,7 @@ class ClientQuestionnaireAPIController extends Controller
             }
 
 
-            return response()->json(['message' => 'Successfully saved the data!']);
+            return response()->json(['message' => 'Data updated successfully!']);
         } catch (\Throwable $th) {
             return response()->json(['errors' => [
                 'message' => 'Something went wrong'

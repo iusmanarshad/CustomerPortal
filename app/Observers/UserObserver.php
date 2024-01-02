@@ -3,9 +3,11 @@
 namespace App\Observers;
 
 use App\Enums\RoleEnum;
+use App\Mail\InviteClient;
 use App\Models\ClientQuestionnaire;
 use App\Models\Question;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserObserver
 {
@@ -37,6 +39,9 @@ class UserObserver
                 'question_id' => $emailQuestion->id,
                 'answer' => $user->email,
             ]);
+
+            // send the invitation email
+            Mail::to($user->email)->send(new InviteClient($user));
         }
 
     }

@@ -66,7 +66,7 @@ class ClientAPIController extends Controller
 
         User::create($clientData);
 
-        return response()->json(['message' => 'Success!']);
+        return response()->json(['message' => 'Client created successfully!']);
     }
 
     /**
@@ -178,7 +178,7 @@ class ClientAPIController extends Controller
     public function inviteClientByEmail(Request $request)
     {
         $client = User::where('id', $request->id)->first();
-        // send the email
+        // send the invitation email
         Mail::to($client->email)->send(new InviteClient($client));
         return response()->json(['message' => 'Invitation sent successfully!']);
     }
