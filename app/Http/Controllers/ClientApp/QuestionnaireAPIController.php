@@ -78,7 +78,8 @@ class QuestionnaireAPIController extends Controller
                             'is_required' => 1,
                             'is_read_only' => 1,
                             'key' => 'associate_email',
-                            'value' => $associate->email
+                            'value' => $associate->email,
+                            'isEmailValid' => 1,
                         ],
                     ],
                     'is_removable' => 0,
@@ -94,7 +95,7 @@ class QuestionnaireAPIController extends Controller
                             'is_required' => 1,
                             'is_read_only' => 0,
                             'key' => 'associate_first_name',
-                            'value' => ''
+                            'value' => '',
                         ],
                         [
                             'type' => 'string',
@@ -102,7 +103,7 @@ class QuestionnaireAPIController extends Controller
                             'is_required' => 1,
                             'is_read_only' => 0,
                             'key' => 'associate_last_name',
-                            'value' => ''
+                            'value' => '',
                         ],
                         [
                             'type' => 'email',
@@ -110,7 +111,8 @@ class QuestionnaireAPIController extends Controller
                             'is_required' => 1,
                             'is_read_only' => 0,
                             'key' => 'associate_email',
-                            'value' => ''
+                            'value' => '',
+                            'isEmailValid' => 1,
                         ],
                     ],
                     'is_removable' => 1,
@@ -130,113 +132,132 @@ class QuestionnaireAPIController extends Controller
      */
     public function store(Request $request)
     {
-        $handleAssociates = false;
-        $questions = $request->questions;
-        foreach ($questions as $sectionKey => $section) {
-            foreach ($section as $questionBlockKey => $questionBlock) {
-                $verifyFurtherQuestions = (
-                        $questionBlockKey == 'is_there_an_opposing_party' &&
-                        $questionBlock['question']['value'] == 1
-                    ) ||
-                    (
-                        $questionBlockKey == 'billing_details_same_as_contact_details' &&
-                        $questionBlock['question']['value'] == 0
-                    ) ||
-                    (
-                        $questionBlockKey == 'trademark_details_same_as_contact_details' &&
-                        $questionBlock['question']['value'] == 0
-                    );
-                foreach ($questionBlock as $questionKey => $question) {
-                    if ($questionKey == 'question') {
-                        $value = $question['value'];
-                        if ($question['type'] == 'boolean') {
-                            $value = $value == '1' ? 1 : 0;
-                        }
+        try {
+            $handleAssociates = false;
+            $questions = $request->questions;
+            foreach ($questions as $sectionKey => $section) {
+                foreach ($section as $questionBlockKey => $questionBlock) {
+                    $verifyFurtherQuestions = (
+                            $questionBlockKey == 'is_there_an_opposing_party' &&
+                            $questionBlock['question']['value'] == 1
+                        ) ||
+                        (
+                            $questionBlockKey == 'billing_details_same_as_contact_details' &&
+                            $questionBlock['question']['value'] == 0
+                        ) ||
+                        (
+                            $questionBlockKey == 'trademark_details_same_as_contact_details' &&
+                            $questionBlock['question']['value'] == 0
+                        );
+                    foreach ($questionBlock as $questionKey => $question) {
+                        if ($questionKey == 'question') {
+                            $value = $question['value'];
+                            if ($question['type'] == 'boolean') {
+                                $value = $value == '1' ? 1 : 0;
+                            }
 
-                        if ($question['key'] == 'is_there_any_associate' && $value == 1) {
-                            $handleAssociates = true;
-                        }
-                        ClientQuestionnaire::updateOrCreate([
-                            'client_id' => auth()->user()->id,
-                            'question_id' => $question['id'],
-                        ], [
-                            'client_id' => auth()->user()->id,
-                            'question_id' => $question['id'],
-                            'answer' => $value
-                        ]);
-                    } else {
-                        if ($verifyFurtherQuestions) {
-                            foreach ($question as $furtherQuestionkey => $furtherQuestion) {
-                                $value = $furtherQuestion['value'];
-                                if ($furtherQuestion['type'] == 'boolean') {
-                                    $value = $value == '1' ? 1 : 0;
+                            if ($question['key'] == 'is_there_any_associate' && $value == 1) {
+                                $handleAssociates = true;
+                            }
+                            ClientQuestionnaire::updateOrCreate([
+                                'client_id' => auth()->user()->id,
+                                'question_id' => $question['id'],
+                            ], [
+                                'client_id' => auth()->user()->id,
+                                'question_id' => $question['id'],
+                                'answer' => $value
+                            ]);
+                        } else {
+                            if ($verifyFurtherQuestions) {
+                                foreach ($question as $furtherQuestionkey => $furtherQuestion) {
+                                    $value = $furtherQuestion['value'];
+                                    if ($furtherQuestion['type'] == 'boolean') {
+                                        $value = $value == '1' ? 1 : 0;
+                                    }
+                                    ClientQuestionnaire::updateOrCreate([
+                                        'client_id' => auth()->user()->id,
+                                        'question_id' => $furtherQuestion['id'],
+                                    ], [
+                                        'client_id' => auth()->user()->id,
+                                        'question_id' => $furtherQuestion['id'],
+                                        'answer' => $value
+                                    ]);
                                 }
-                                ClientQuestionnaire::updateOrCreate([
-                                    'client_id' => auth()->user()->id,
-                                    'question_id' => $furtherQuestion['id'],
-                                ], [
-                                    'client_id' => auth()->user()->id,
-                                    'question_id' => $furtherQuestion['id'],
-                                    'answer' => $value
-                                ]);
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+
+            if ($handleAssociates) {
+                $associates = $request->associates;
+                $associateIds = [];
+                if ($associates) {
+                    foreach ($associates as $key => $associate) {
+                        $questions = $associate['questions'];
+                        $associateData = [
+                            'associate_id' => auth()->user()->id,
+                            'first_name' => '',
+                            'last_name' => '',
+                            'email' => ''
+                        ];
+                        if ($questions) {
+                            foreach ($questions as $key => $question) {
+                                if ($question['key'] == 'associate_first_name') {
+                                    $associateData['first_name'] = $question['value'];
+                                } elseif($question['key'] == 'associate_last_name') {
+                                    $associateData['last_name'] = $question['value'];
+                                } elseif($question['key'] == 'associate_email') {
+                                    $associateData['email'] = $question['value'];
+                                }
                             }
                         }
 
+                        if (isset($associate['id'])) {
+                            array_push($associateIds, $associate['id']);
+                            $existingAssociate = Associate::where('email', $associateData['email'])->first() ?? null;
+                            if ($existingAssociate && $existingAssociate->id != $associate['id']) {
+                                return response()->json(['errors' => [
+                                    'email' => 'This email already exists. Please chosse a different email'
+                                ]], 422);
+                            }
+                            Associate::updateOrCreate([
+                                'id' => $associate['id']
+                            ], $associateData);
+
+                            (new InvitationService())->process($associateData['email'], auth()->user()->email);
+
+                        } else {
+                            $existingAssociate = Associate::where('email', $associateData['email'])->first() ?? null;
+                            if ($existingAssociate) {
+                                return response()->json(['errors' => [
+                                    'email' => 'This email already exists. Please chosse a different email'
+                                ]], 422);
+                            }
+                            Associate::create($associateData);
+                            (new InvitationService())->process($associateData['email'], auth()->user()->email);
+                        }
+
+                        // Handle deletion of associates
+                        // if (count($associateIds) > 0) {
+                        //     Associate::whereNotIn('id', $associateIds)->delete();
+                        // }
                     }
                 }
 
             }
 
+
+            return response()->json(['message' => 'Successfully saved the data!']);
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => [
+                'message' => 'Something went wrong'
+            ]], 422);
         }
 
-        if ($handleAssociates) {
-            $associates = $request->associates;
-            $associateIds = [];
-            if ($associates) {
-                foreach ($associates as $key => $associate) {
-                    $questions = $associate['questions'];
-                    $associateData = [
-                        'associate_id' => auth()->user()->id,
-                        'first_name' => '',
-                        'last_name' => '',
-                        'email' => ''
-                    ];
-                    if ($questions) {
-                        foreach ($questions as $key => $question) {
-                            if ($question['key'] == 'associate_first_name') {
-                                $associateData['first_name'] = $question['value'];
-                            } elseif($question['key'] == 'associate_last_name') {
-                                $associateData['last_name'] = $question['value'];
-                            } elseif($question['key'] == 'associate_email') {
-                                $associateData['email'] = $question['value'];
-                            }
-                        }
-                    }
-
-                    if (isset($associate['id'])) {
-                        array_push($associateIds, $associate['id']);
-                        Associate::updateOrCreate([
-                            'id' => $associate['id']
-                        ], $associateData);
-
-                        (new InvitationService())->process($associateData['email'], auth()->user()->email);
-
-                    } else {
-                        Associate::create($associateData);
-                        (new InvitationService())->process($associateData['email'], auth()->user()->email);
-                    }
-
-                    // Handle deletion of associates
-                    // if (count($associateIds) > 0) {
-                    //     Associate::whereNotIn('id', $associateIds)->delete();
-                    // }
-                }
-            }
-
-        }
-
-
-        return response()->json(['message' => 'Successfully saved the data!']);
     }
 
     /**

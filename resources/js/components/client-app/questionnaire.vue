@@ -82,7 +82,7 @@
                                                 <div class="col-md-5 col-lg-6">
                                                     <label :for="question.key + associateIndex" class="form-label">{{ question.question }}: <span class="tx-danger" v-if="question.is_required == 1">*</span></label>
                                                     <input :type="getInputType(question.type)" :id="question.key + associateIndex" class="form-control" :readonly="question.is_read_only == 1"
-                                                            :class="{ 'is-invalid': question.is_required == 1 && (question.error || question.value == '' || question.value == null) }" :name="question.key + associateIndex"
+                                                            :class="{ 'is-invalid': question.is_required == 1 && (question.error || question.value == '' || question.value == null || (question.key == 'associate_email' && question.isEmailValid == 0)) }" :name="question.key + associateIndex"
                                                             v-model="question.value">
                                                 </div>
 
@@ -156,6 +156,7 @@ export default {
             errors: null,
             successMessage: '',
             associates: null,
+            emailError: false,
         }
     },
     methods: {
@@ -267,13 +268,24 @@ export default {
                     Object.keys(this.associates).forEach((associateKey) => {
                         let associate = this.associates[associateKey];
                         let questions = associate.questions;
+                        this.associates[associateKey].questions[2].isEmailValid = 1;
                         Object.keys(questions).forEach((questionKey) => {
                             let question = questions[questionKey];
                             if (question.is_required == 1 && (question.value == null || question.value == '')) {
                                 allowSwitchTab = false;
                                 return;
                             }
+                            // Regular expression for a simple email validation
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            console.log("Before email check: " + questionKey)
+                            if (question.is_required == 1 && questionKey == 2 && !emailRegex.test(question.value)) {
+                                allowSwitchTab = false;
+                                this.associates[associateKey].questions[questionKey].isEmailValid = 0;
+                                return;
+                            }
                         });
+
+
 
                     });
                 }
