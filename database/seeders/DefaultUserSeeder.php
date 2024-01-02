@@ -25,6 +25,7 @@ class DefaultUserSeeder extends Seeder
                 'first_name' => 'Admin',
                 'email' => 'admin@drummlaw.com',
                 'password' => bcrypt('6rumml@w'),
+                'status' => 'active',
                 'email_verified_at' => Carbon::now()->toDateTimeString()
             ]);
         }

@@ -10,20 +10,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InviteCreated extends Mailable
+class InviteAssociate extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $invite;
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Invite $invite)
+    public function __construct($data)
     {
-        $this->invite = $invite;
+        $this->data = $data;
     }
 
     /**
@@ -34,7 +34,7 @@ class InviteCreated extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Invite Created',
+            subject: 'You have been invited to be an associate at Drummlaw',
         );
     }
 
@@ -46,7 +46,7 @@ class InviteCreated extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.invite',
+            view: 'emails.associate-invite',
         );
     }
 
