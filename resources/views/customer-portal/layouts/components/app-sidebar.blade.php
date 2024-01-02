@@ -50,9 +50,10 @@
                                         </svg>
                                         <span class="side-menu__label flex-grow-0 overflow-visible position-relative mx-2">
                                             Announcements
-                                            <span class="badge badge-top rounded-pill bg-danger invisible" style="left: 127px" id="unread-announcement-count">
 
-											</span>
+                                        </span>
+                                        <span class="badge badge-top rounded-pill bg-danger invisible" style="position: initial !important; right: 10px" id="unread-announcement-count">
+
                                         </span>
                                     </a>
                                 </li>
@@ -64,9 +65,9 @@
                                         </svg>
                                         <span class="side-menu__label flex-grow-0 overflow-visible position-relative mx-2">
                                             Messages
-                                            <span class="badge badge-top rounded-pill bg-danger invisible" style="left: 85px" id="unread-message-count">
+                                        </span>
+                                        <span class="badge badge-top rounded-pill bg-danger invisible" style="position: initial !important; right: 10px" id="unread-message-count">
 
-											</span>
                                         </span>
                                     </a>
                                 </li>

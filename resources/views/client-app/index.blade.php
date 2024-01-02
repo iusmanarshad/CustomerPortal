@@ -12,7 +12,7 @@
     </div>
     <!-- /breadcrumb -->
 
-    <client-dashboard :user-id="{{ auth()->user()->id }}"></client-dashboard>
+    <client-dashboard :user-id="{{ auth()->user()->id }}" :role-id="{{ auth()->user()->role_id }}"></client-dashboard>
 @endsection
 
 @section('scripts')

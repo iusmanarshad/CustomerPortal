@@ -33,7 +33,12 @@ class ClientChatController extends Controller
     public function getChannelMessages()
     {
         $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
-        $clientUser = auth()->user();
+        $user = auth()->user();
+        if ($user->role_id == 3) {
+            $clientUser = User::where('id', '=', $user->associate_id)->first();
+        } else {
+            $clientUser = $user;
+        }
 
         $slug = 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id;
         $channel = $this->chatService->getChannel($slug);
@@ -59,7 +64,12 @@ class ClientChatController extends Controller
     public function getUnreadMessagesCount()
     {
         $user = auth()->user();
-        $unreadMessagesCount = $this->unnreadMessageCount($user);
+        if ($user->role_id == 3) {
+            $clientUser = User::where('id', '=', $user->associate_id)->first();
+        } else {
+            $clientUser = $user;
+        }
+        $unreadMessagesCount = $this->unnreadMessageCount($clientUser);
 
         return response()->json([
             'announcements' => $unreadMessagesCount['announcement'],
@@ -70,15 +80,20 @@ class ClientChatController extends Controller
     public function readMessages(UpdateChannelRequest $request)
     {
         $user = auth()->user();
+        if ($user->role_id == 3) {
+            $clientUser = User::where('id', '=', $user->associate_id)->first();
+        } else {
+            $clientUser = $user;
+        }
         $channel = ChatChannel::find($request->channel_id);
         $channelMember = ChatChannelMember::query()
             ->where('channel_id', '=', $channel->id)
-            ->where('user_id', '=', $user->id)
+            ->where('user_id', '=', $clientUser->id)
             ->first();
         $channelMember->unread_message_count = 0;
         $channelMember->save();
 
-        $unreadMessagesCount = $this->unnreadMessageCount($user);
+        $unreadMessagesCount = $this->unnreadMessageCount($clientUser);
 
         return response()->json([
                 'message' => 'Read receipt updated successfully',
@@ -90,7 +105,12 @@ class ClientChatController extends Controller
     public function sendMessage(SendChannelMessageRequest $request)
     {
         $adminUser = User::where('role_id', '=', RoleEnum::ADMINROLE)->first();
-        $clientUser = auth()->user();
+        $user = auth()->user();
+        if ($user->role_id == 3) {
+            $clientUser = User::where('id', '=', $user->associate_id)->first();
+        } else {
+            $clientUser = $user;
+        }
 
         $slug = 'ch_one-to-one_' . $adminUser->id . '_' . $clientUser->id;
         $channel = $this->chatService->getChannel($slug);

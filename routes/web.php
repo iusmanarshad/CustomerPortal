@@ -286,10 +286,8 @@ Route::get('', function () {
         // User is authenticated, redirect to dashboard
         if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
             return redirect()->route('portal.dashboard');
-        } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
-            return redirect()->route('dashboard');
         } else {
-            return redirect('/announcements');
+            return redirect()->route('dashboard');
         }
     } else {
         // User is not authenticated, redirect to login
@@ -320,6 +318,7 @@ Route::prefix('/')->group(function () {
         Route::get('questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
     });
     Route::middleware(['userHasRole:client,associate', 'web'])->group(function () {
+        Route::get('dashboard', [ClientController::class, 'dashboard'])->name('dashboard');
         Route::get('announcements', [Controllers\ClientAnnouncementController::class, 'index']);
         Route::get('messages', [Controllers\ClientChatController::class, 'index']);
     });
