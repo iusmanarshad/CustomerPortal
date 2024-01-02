@@ -62,9 +62,15 @@ class AdminChannelResource extends JsonResource
 
     private function unreadMessages()
     {
+        $user = auth()->user();
+        if ($user->role_id == 3) {
+            $clientUser = User::where('id', '=', $user->associate_id)->first();
+        } else {
+            $clientUser = $user;
+        }
         $membership = ChatChannelMember::query()
             ->where('channel_id', '=', $this->id)
-            ->where('user_id', '=', auth()->user()->id)
+            ->where('user_id', '=', $clientUser->id)
             ->first();
 
         return $membership->unread_message_count;
