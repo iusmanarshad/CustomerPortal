@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\RoleEnum;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,11 +21,11 @@ class DefaultUserSeeder extends Seeder
 
         if (!$user) {
             User::create([
-                'first_name' => 'Admin',
-                'last_name' => 'User',
-                'email' => 'admin@admin.com',
-                'password' => bcrypt('password'),
                 'role_id' => RoleEnum::ADMINROLE,
+                'first_name' => 'Admin',
+                'email' => 'admin@drummlaw.com',
+                'password' => bcrypt('6rumml@w'),
+                'email_verified_at' => Carbon::now()->toDateTimeString()
             ]);
         }
     }

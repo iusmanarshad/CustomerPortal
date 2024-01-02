@@ -32,53 +32,60 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(client, index) in clients" :key="index">
-                                    <td>{{ client.owner_name }}</td>
-                                    <td>{{ client.email }}</td>
-                                    <td>{{ client.phone != '' ? client.phone : '-' }}</td>
-                                    <td>
-                                        <template v-if="client.is_active">
-                                            <span v-if="client.status == 'invited'" class="tag rounded-pill tag-outline-info me-1">Invited</span>
-                                            <span v-else-if="client.status == 'active'" class="tag rounded-pill tag-outline-success me-1">Active</span>
-                                        </template>
-                                        <template v-else>
-                                            <span class="tag rounded-pill tag-outline-danger me-1">Blocked</span>
-                                        </template>
+                                <template v-if="clients && clients.length > 0">
+                                    <tr v-for="(client, index) in clients" :key="index">
+                                        <td>{{ client.owner_name }}</td>
+                                        <td>{{ client.email }}</td>
+                                        <td>{{ client.phone != '' ? client.phone : '-' }}</td>
+                                        <td>
+                                            <template v-if="client.is_active">
+                                                <span v-if="client.status == 'invited'" class="tag rounded-pill tag-outline-info me-1">Invited</span>
+                                                <span v-else-if="client.status == 'active'" class="tag rounded-pill tag-outline-success me-1">Active</span>
+                                            </template>
+                                            <template v-else>
+                                                <span class="tag rounded-pill tag-outline-danger me-1">Blocked</span>
+                                            </template>
 
 
-                                    </td>
-                                    <td>
-                                        <div data-bs-placement="top" data-bs-toggle="tooltip" title="View all notes"
-                                            class="btn">
-                                            <i class="ti-receipt"></i>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a type="button" :href="'/portal/clients/questionnaire/' + client.id" class="btn btn-primary btn-w-xs m-1">Open</a>
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
+                                            <div data-bs-placement="top" data-bs-toggle="tooltip" title="View all notes"
+                                                 class="btn">
+                                                <i class="ti-receipt"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a type="button" :href="'/portal/clients/questionnaire/' + client.id" class="btn btn-primary btn-w-xs m-1">Open</a>
+                                        </td>
+                                        <td>
 
-                                        <div aria-label="Basic example" class="btn-group mb-1" role="group">
-                                            <button v-if="client.status == 'invited'" class="btn btn-primary btn-icon" type="button" data-bs-placement="top" @click="clientId=client.id"
-                                                data-bs-toggle="tooltip" title="Invite client by email">
-                                                <i class="ti-email text-white" data-bs-toggle="modal" data-bs-target="#inviteClientModal"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-icon" type="button" data-bs-placement="top" @click="openViewClientModal(client)"
-                                                data-bs-toggle="tooltip" title="View">
-                                                <i class="ti-eye text-white" data-bs-toggle="modal" data-bs-target="#viewClientModal"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-icon" type="button" data-bs-placement="top"
-                                                data-bs-toggle="tooltip" title="Edit">
-                                                <i class="ti-pencil-alt text-white" data-bs-toggle="modal" data-bs-target="#editClientModal" @click="openEditClientModal(client)"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-icon" data-bs-placement="top"
-                                                data-bs-toggle="tooltip" title="Delete" type="button">
-                                                <i class="ti-trash text-white" data-bs-toggle="modal" @click="clientId=client.id"
-                                                    data-bs-target="#deleteConfirmationModal"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            <div aria-label="Basic example" class="btn-group mb-1" role="group">
+                                                <button v-if="client.status == 'invited'" class="btn btn-primary btn-icon" type="button" data-bs-placement="top" @click="clientId=client.id"
+                                                        data-bs-toggle="tooltip" title="Invite client by email">
+                                                    <i class="ti-email text-white" data-bs-toggle="modal" data-bs-target="#inviteClientModal"></i>
+                                                </button>
+                                                <button class="btn btn-primary btn-icon" type="button" data-bs-placement="top" @click="openViewClientModal(client)"
+                                                        data-bs-toggle="tooltip" title="View">
+                                                    <i class="ti-eye text-white" data-bs-toggle="modal" data-bs-target="#viewClientModal"></i>
+                                                </button>
+                                                <button class="btn btn-primary btn-icon" type="button" data-bs-placement="top"
+                                                        data-bs-toggle="tooltip" title="Edit">
+                                                    <i class="ti-pencil-alt text-white" data-bs-toggle="modal" data-bs-target="#editClientModal" @click="openEditClientModal(client)"></i>
+                                                </button>
+                                                <button class="btn btn-primary btn-icon" data-bs-placement="top"
+                                                        data-bs-toggle="tooltip" title="Delete" type="button">
+                                                    <i class="ti-trash text-white" data-bs-toggle="modal" @click="clientId=client.id"
+                                                       data-bs-target="#deleteConfirmationModal"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template v-else>
+                                    <tr>
+                                        <td colspan="7" class="text-center">No data available</td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
 

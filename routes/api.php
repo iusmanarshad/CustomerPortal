@@ -82,14 +82,19 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('schema')->group(function () {
-    Route::get('/chat/truncate', function () {
-        \App\Models\ChatChannel::truncate();
-        \App\Models\ChatChannelMember::truncate();
+    Route::get('/clear', function () {
         \App\Models\ChatChannelMessage::truncate();
+        \App\Models\ChatChannelMember::truncate();
+        \App\Models\ChatChannel::truncate();
+        \App\Models\Associate::truncate();
+        \App\Models\ClientQuestionnaire::truncate();
+        \App\Models\ClientInvite::truncate();
+        \App\Models\Invite::truncate();
+        \App\Models\User::truncate();
+        \Illuminate\Support\Facades\DB::table('jobs')->truncate();
+        \Illuminate\Support\Facades\DB::table('failed_jobs')->truncate();
+        \Illuminate\Support\Facades\DB::table('websockets_statistics_entries')->truncate();
         return response()->json(['message' => 'completed successfully']);
-    });
-    Route::get('/websockets/drop', function () {
-        \Illuminate\Support\Facades\Schema::dropIfExists('websockets_statistics_entries');
     });
 });
 
