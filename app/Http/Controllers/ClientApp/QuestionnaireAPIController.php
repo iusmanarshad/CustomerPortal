@@ -221,7 +221,7 @@ class QuestionnaireAPIController extends Controller
                             $existingAssociate = Associate::where('email', $associateData['email'])->first() ?? null;
                             if ($existingAssociate && $existingAssociate->id != $associate['id']) {
                                 return response()->json(['errors' => [
-                                    'email' => 'This email already exists. Please chosse a different email'
+                                    'email' => 'This associate email already exists. Please chosse a different email'
                                 ]], 422);
                             }
                             Associate::updateOrCreate([
@@ -234,7 +234,7 @@ class QuestionnaireAPIController extends Controller
                             $existingAssociate = Associate::where('email', $associateData['email'])->first() ?? null;
                             if ($existingAssociate) {
                                 return response()->json(['errors' => [
-                                    'email' => 'This email already exists. Please chosse a different email'
+                                    'email' => 'This associate email already exists. Please chosse a different email'
                                 ]], 422);
                             }
                             Associate::create($associateData);
