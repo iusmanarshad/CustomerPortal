@@ -79,7 +79,7 @@ class InviteController extends Controller
             // delete the invite so it can't be used again
             $invite->delete();
 
-            return redirect('/announcements');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([

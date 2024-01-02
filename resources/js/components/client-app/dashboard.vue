@@ -2,6 +2,7 @@
 
 export default {
     name: "dashboard",
+    props: ['userId', 'roleId'],
     data () {
         return {
             clients: 0,
@@ -43,7 +44,7 @@ export default {
 
 <template>
     <div class="row">
-        <div class="col-xl-4 col-lg-6">
+        <div class="col-xl-4 col-lg-6" v-if="roleId != 3">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column mb-0">

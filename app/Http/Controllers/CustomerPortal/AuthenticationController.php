@@ -21,10 +21,8 @@ class AuthenticationController extends Controller
             // User is authenticated, redirect to dashboard
             if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
                 return redirect()->route('portal.dashboard');
-            } elseif(auth()->user()->role_id == RoleEnum::CLIENTROLE) {
-                return redirect()->route('dashboard');
             } else {
-                return redirect('/announcements');
+                return redirect()->route('dashboard');
             }
         }
         return view('customer-portal.login');
@@ -57,12 +55,10 @@ class AuthenticationController extends Controller
                 $user->status = ClientStatusEnum::ACTIVE;
                 $user->save();
             }
-            if (auth()->user()->role_id == RoleEnum::CLIENTROLE) {
-                return redirect()->route('dashboard');
-            } elseif (auth()->user()->role_id == RoleEnum::ADMINROLE) {
+            if (auth()->user()->role_id == RoleEnum::ADMINROLE) {
                 return redirect()->route('portal.dashboard');
             } else {
-                return redirect('/announcements');
+                return redirect()->route('dashboard');
             }
         }
 
