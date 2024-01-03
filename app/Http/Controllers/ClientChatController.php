@@ -56,6 +56,7 @@ class ClientChatController extends Controller
         $messages = $this->chatService->getChannelMessages($channel->id);
 
         return response()->json([
+            'owner_name' => $clientUser->owner_name,
             'channel' => new AdminChannelResource($channel),
             'messages' => count($messages) > 0 ? AdminChannelMessageResource::collection($messages) : []
         ]);

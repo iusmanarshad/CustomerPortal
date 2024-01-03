@@ -364,6 +364,9 @@ export default {
                     var toastLiveExample = document.getElementById('liveToast')
                     var toast = new bootstrap.Toast(toastLiveExample)
                     toast.show()
+                    setTimeout(function () {
+                        window.location.href = '/dashboard';
+                    }, 3000)
                 }).catch((error) => {
                     // Handle error response
                     if (error.response && error.response.status === 422) {
