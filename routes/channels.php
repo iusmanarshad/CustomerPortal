@@ -26,6 +26,5 @@ Broadcast::channel('announcement', function ($user) {
 });
 
 Broadcast::channel('chat', function ($user) {
-    print_r('broadcasting on chat channel');
     return \Illuminate\Support\Facades\Auth::check();
 });
