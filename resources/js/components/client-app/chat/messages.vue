@@ -19,7 +19,9 @@
                                     <div class="flex-1">
                                         <div class="flex-between d-block d-sm-flex">
                                             <div>
-                                                <h5 class="mb-0">Customer Support</h5>
+                                                <h5 class="mb-0">
+                                                    {{ ownerName && ownerName !== '' ? ownerName : 'Drummlaw'  }}
+                                                </h5>
 <!--                                                <span class="tx-muted tx-12">2 online</span>-->
                                             </div>
                                         </div>
@@ -67,6 +69,7 @@ export default {
         return {
             loading: true,
             errors: null,
+            ownerName: '',
             selectedGroup: null,
             messages: [],
             newMessage: '',
@@ -106,6 +109,8 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
+                this.ownerName = response.data.owner_name;
+                console.log(this.ownerName)
                 this.selectedGroup = response.data.channel;
                 this.messages = response.data.messages;
                 this.scrollToBottom();
