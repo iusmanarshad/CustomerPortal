@@ -1,12 +1,7 @@
 <script>
 export default {
     name: "group-messages",
-    props: ["userId", "associateId", "messages"],
-    methods: {
-        isSentByMe(message) {
-            return [this.userId, this.associateId].includes(message.user_id)
-        }
-    }
+    props: ["userId", "messages"]
 }
 </script>
 
@@ -14,7 +9,7 @@ export default {
     <div class="main-chat-body overflow-auto" id="ChatBody">
         <div class="content-inner chat" id="messages">
             <template v-for="message in messages">
-                <div class="d-flex justify-content-end chat_block" v-if="isSentByMe(message)">
+                <div class="d-flex justify-content-end chat_block" v-if="message.is_sent_by_me">
                     <div class="msg_block_send">
                         <div class="msg_container_send">
                             <div class="msg_cotainer_send-main">

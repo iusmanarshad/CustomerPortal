@@ -20,7 +20,7 @@ class AdminChannelMessageResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'message' => $this->message,
-            //'is_sent_by_me' => $this->isSentByMe(),
+            'is_sent_by_me' => $this->isSentByMe(),
             'timestamp' => Carbon::parse($this->timestamp)->diffForHumans()
         ];
     }

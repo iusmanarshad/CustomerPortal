@@ -54,7 +54,7 @@
 
 
                                 <!-- chat messages -->
-                                <group-messages :user-id="userId" :associate-id="associateId" :messages="messages"></group-messages>
+                                <group-messages :user-id="userId" :messages="messages"></group-messages>
 
                                 <div class="main-chat-footer br-bs-10 br-be-10">
                                     <input class="form-control radius-7" v-on:keyup.enter="sendMessage" v-model="newMessage" placeholder="Type your message here..." type="text">
@@ -117,7 +117,7 @@ import DeleteConfirmationModal from "../../common/delete-confirmation-modal.vue"
 
 export default {
     components: {GroupList, GroupMembers, GroupMessages, DeleteConfirmationModal},
-    props: ["userId", "associateId"],
+    props: ["userId"],
     data() {
         return {
             loading: true,
