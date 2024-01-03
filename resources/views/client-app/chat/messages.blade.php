@@ -12,7 +12,7 @@
         </div>
     </div>
     <!-- /breadcrumb -->
-    <client-messages :user-id="{{ auth()->user()->id }}"></client-messages>
+    <client-messages :user-id="{{ auth()->user()->id }} :associate-id="{{ auth()->user()->associate_id }}"></client-messages>
 
 @endsection
 
