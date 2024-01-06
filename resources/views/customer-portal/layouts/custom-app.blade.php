@@ -66,7 +66,7 @@
 		@vite('resources/js/app.js')
         <!-- END SCRIPTS -->
         <script>
-            Echo.channel('chat').listen('ChatMessageSent', (e) => {
+            Echo.channel('presence-chat').listen('ChatMessageSent', (e) => {
                 console.log(e.msg);
             })
         </script>
