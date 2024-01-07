@@ -38,8 +38,8 @@ window.Echo = new Echo({
     wsHost: window.location.hostname,
     wsPort: 6002,
     wssPort: 6002,
-    //encrypted: true,
     forceTLS: false,
     disableStats: true,
-    //enabledTransports: ['ws', 'wss'],
+    enabledTransports: ['ws', 'wss'],
+    //authEndpoint: '/custom/broadcasting/auth'
 });

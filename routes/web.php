@@ -11,6 +11,7 @@ use App\Http\Controllers\CustomerPortal\ClientController;
 use App\Http\Controllers\CustomerPortal\PortalController;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\AboutUs;
@@ -338,5 +339,9 @@ Route::prefix('portal')->group(function () {
         Route::get('messages', [Controllers\AdminChatController::class, 'index']);
     });
 
+});
+
+Route::post('/custom/broadcasting/auth', function (\Illuminate\Http\Request $request) {
+    return true;
 });
 
