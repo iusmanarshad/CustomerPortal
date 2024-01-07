@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('presence-chat', function ($user) {
-    return $user;
+Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+    return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('message', function ($user) {
+    return \Illuminate\Support\Facades\Auth::check();
+});
+
+Broadcast::channel('announcement', function ($user) {
+    return \Illuminate\Support\Facades\Auth::check();
+});
+
+Broadcast::channel('chat', function ($user) {
+    return \Illuminate\Support\Facades\Auth::check();
 });
