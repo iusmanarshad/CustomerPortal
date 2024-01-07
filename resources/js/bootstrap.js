@@ -36,10 +36,10 @@ window.Echo = new Echo({
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
     encrypted: true,
-    wsHost: window.location.hostname,
+    //wsHost: window.location.hostname,
     wsPort: 6002,
     wssPort: 6002,
-    forceTLS: true,
+    forceTLS: false,
     disableStats: true,
     authEndpoint: '/custom/broadcasting/auth'
 });
