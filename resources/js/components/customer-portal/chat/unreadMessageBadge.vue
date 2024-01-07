@@ -67,7 +67,7 @@ export default {
             .listen('MessageSent', (e) => {
                 console.log('new message sent')
 
-                if (window.location.pathname !== '/messages') {
+                if (window.location.pathname !== '/portal/messages') {
                     this.fetchUnreadMessages();
                 }
 

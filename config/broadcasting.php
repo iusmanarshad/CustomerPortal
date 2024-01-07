@@ -40,15 +40,16 @@ return [
                 'host' => env('APP_URL'),
                 'port' => env('LARAVEL_WEBSOCKETS_PORT'),
                 'scheme' => env('PUSHER_SCHEME'),
-                'useTLS' => true,
-                'encrypted' => true,
-                'curl_options' => [
+                'useTLS' => false,
+                //'encrypted' => true,
+                /*'curl_options' => [
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,
-                ],
+                ],*/
             ],
             'client_options' => [
-                'verify' => false
+                // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
+                //'verify' => false
             ],
         ],
 
