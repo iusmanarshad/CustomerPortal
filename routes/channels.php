@@ -13,23 +13,6 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    if ($user->id == $id)
-        return ['id' => $user->id, 'first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->email];
-//    return (int) $user->id === (int) $id;
-});
-
-Broadcast::channel('message.{id}', function ($user) {
-    if ($user->id == $id)
-        return ['id' => $user->id, 'first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->email];
-});
-
-Broadcast::channel('announcement.{id}', function ($user) {
-    if ($user->id == $id)
-        return ['id' => $user->id, 'first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->email];
-});
-
-Broadcast::channel('chat.{id}', function ($user) {
-    if ($user->id == $id)
-        return ['id' => $user->id, 'first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->email];
+Broadcast::channel('chatroom', function ($user) {
+    return $user;
 });
