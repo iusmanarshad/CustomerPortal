@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('chatroom', function ($user) {
+Broadcast::channel('presence-chat', function ($user) {
     return $user;
 });
