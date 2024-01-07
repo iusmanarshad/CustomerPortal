@@ -331,6 +331,38 @@ export default {
             .here((users) => {
                 console.log('webhooks connected')
                 console.log(users.length)
+                //this.usersCount = users.length;
+            })
+            .joining((user) => {
+                //
+            })
+            .leaving((user) => {
+                //
+            })
+            .listen('ChatMessageSent', (e) => {
+                console.log('new message sent')
+            });
+
+        var presenceChannel2 = window.Echo.join('presence-chat')
+            .here((users) => {
+                console.log('webhooks connected')
+                console.log(users.length)
+                //this.usersCount = users.length;
+            })
+            .joining((user) => {
+                //
+            })
+            .leaving((user) => {
+                //
+            })
+            .listen('ChatMessageSent', (e) => {
+                console.log('new message sent')
+            });
+
+        /*var presenceChannel = window.Echo.join('chat')
+            .here((users) => {
+                console.log('webhooks connected')
+                console.log(users.length)
                 this.usersCount = users.length;
             })
             .joining((user) => {
@@ -349,15 +381,15 @@ export default {
 
                 self.appendMessage(e.message)
                 self.fetchGroups(false);
-                /*console.log('show notification')
+                /!*console.log('show notification')
                     console.log(e.message);
                     self.newMessage = e.message;
                     self.showNotification = true;
 
                     setTimeout(function () {
                         self.hideNotification();
-                    }, 5000)*/
-            });
+                    }, 5000)*!/
+            });*/
     },
     watch: {
         search: function (value) {

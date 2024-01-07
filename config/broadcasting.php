@@ -39,13 +39,17 @@ return [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
                 'host' => '127.0.0.1',
-                'port' => 6001,
+                'port' => env('LARAVEL_WEBSOCKETS_PORT'),
                 'scheme' => 'http',
-                //'useTLS' => false,
-
+                //'scheme' => 'https',
+                //'useTLS' => true,
+                /*'curl_options' => [
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
+                ],*/
             ],
             'client_options' => [
-                // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
+                //'verify' => false
             ],
         ],
 
