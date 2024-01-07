@@ -340,3 +340,7 @@ Route::prefix('portal')->group(function () {
 
 });
 
+Route::get('/custom/broadcasting/auth', function () {
+   return true;
+});
+

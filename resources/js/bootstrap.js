@@ -41,6 +41,5 @@ window.Echo = new Echo({
     wssPort: 6002,
     forceTLS: true,
     disableStats: true,
-
-
+    authEndpoint: '/custom/broadcasting/auth'
 });
