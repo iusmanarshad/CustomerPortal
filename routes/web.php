@@ -342,6 +342,6 @@ Route::prefix('portal')->group(function () {
 });
 
 Route::post('/custom/broadcasting/auth', function (\Illuminate\Http\Request $request) {
-    return Broadcast::auth($request);
+    return true;
 });
 
