@@ -38,7 +38,7 @@ window.Echo = new Echo({
     wsHost: window.location.hostname,
     wsPort: 6002,
     wssPort: 6002,
-    forceTLS: false,
+    forceTLS: true,
     disableStats: true,
     enabledTransports: ['ws', 'wss'],
     //authEndpoint: '/custom/broadcasting/auth'
