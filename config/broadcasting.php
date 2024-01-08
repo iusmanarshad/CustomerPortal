@@ -41,7 +41,7 @@ return [
                 'port' => env('LARAVEL_WEBSOCKETS_PORT'),
                 'scheme' => env('PUSHER_SCHEME'),
                 'useTLS' => env('PUSHER_USE_TLS'),
-                //'encrypted' => true,
+                'encrypted' => true,
                 'curl_options' => [
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,
