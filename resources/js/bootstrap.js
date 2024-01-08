@@ -36,7 +36,6 @@ window.Echo = new Echo({
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
     wsHost: window.location.hostname,
-    wsPath: '/pusher',
     wsPort: 6002,
     wssPort: 6002,
     forceTLS: false,
