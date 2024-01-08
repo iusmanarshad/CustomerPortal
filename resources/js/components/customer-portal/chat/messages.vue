@@ -4,7 +4,7 @@
 
         <div class="col-lg-12">
             <div class="row">
-                <div class="col-lg-12 col-xxl-4">
+                <div class="col-lg-12 col-xxl-4 col-xl-4">
                     <div class="card">
                         <div class="main-content-app">
                             <div class="main-content-left main-content-left-chat overflow-hidden">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-xxl-8" >
+                <div class="col-lg-12 col-xxl-8 col-xl-8" >
                     <div class="card" v-if="selectedGroup">
                         <div class="main-content-app">
                             <div class="main-content-body main-content-body-chat">
