@@ -41,6 +41,6 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
     encrypted: true,
-    enabledTransports: ['ws', 'wss'],
+    enabledTransports: ['ws'],
     //authEndpoint: '/custom/broadcasting/auth'
 });
