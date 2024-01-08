@@ -1,0 +1,48 @@
+ARG VERSION_PHP="8.1-fpm-alpine"
+
+FROM php:${VERSION_PHP}
+
+# Installing Composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+## Install Dependencies & extensions
+## www-data UID is 33 in Ubuntu/Debian & 82 in Alpine. UID 33 is xfs in Alpine
+RUN apk update \
+    && apk add --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main/ \
+    && apk add --no-cache -U \
+    build-base \
+    shadow \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    libpq-dev \
+    freetype-dev \
+    oniguruma-dev \
+    openssl-dev \
+    autoconf \
+    curl \
+    zip \
+    unzip \
+    bash \
+    nano \
+    nodejs \
+    npm \
+    py3-pip \
+    sqlite \
+    gnupg \
+    git \
+    libstdc++ \
+    gcompat \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install gd bcmath opcache pdo pdo_mysql pdo_pgsql pgsql zip exif pcntl \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb \
+    && apk update \
+    && usermod -u 1000 www-data \
+    && addgroup www-data xfs \
+    && chown -R www-data:www-data /var/www
+
+USER www-data
+
+CMD ["php-fpm"]

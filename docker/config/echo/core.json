@@ -1,0 +1,36 @@
+{
+    authHost: "https://drummlaw_proxy_local",
+    authEndpoint: "/broadcasting/auth",
+    clients: [ ],
+    database: "redis",
+    databaseConfig: {
+        redis: {
+            host: "drummlaw_redis",
+            port: 6379,
+            password: "Xvt5@E?ER,]q/GEq"
+        },
+        sqlite: {
+            databasePath: "/database/laravel-echo-server.sqlite"
+        }
+    },
+    devMode: true,
+    host: null,
+    port: "6001",
+    protocol: "https",
+    socketio: { },
+    secureOptions: 67108864,
+    sslCertPath: "/etc/certs/drummlaw.local.crt",
+    sslKeyPath: "/etc/certs/drummlaw.local.key",
+    sslCertChainPath: "",
+    sslPassphrase: "",
+    subscribers: {
+        http: true,
+        redis: true
+    },
+    apiOriginAllow: {
+        allowCors: true,
+        allowOrigin: "*",
+        allowMethods: "GET, POST",
+        allowHeaders: "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
+    }
+}

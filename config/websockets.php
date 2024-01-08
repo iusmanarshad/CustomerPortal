@@ -48,7 +48,7 @@ return [
      * Leave this empty if you want to accept requests from all hosts.
      */
     'allowed_origins' => [
-        //
+        '*'
     ],
 
     /*
@@ -116,15 +116,15 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => "/opt/bitnami/apache/conf/myportal.drummlaw.com.crt",
-        //'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
+//        'local_cert' => "/opt/bitnami/apache/conf/myportal.drummlaw.com.crt",
+        'local_cert' => '/etc/certs/drummlaw.local.crt', //env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
 
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => "/opt/bitnami/apache/conf/myportal.drummlaw.com.key",
-        //'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
+//        'local_pk' => "/opt/bitnami/apache/conf/myportal.drummlaw.com.key",
+        'local_pk' => 'etc/certs/drummlaw.local.key', //env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
 
         /*
          * Passphrase for your local_cert file.

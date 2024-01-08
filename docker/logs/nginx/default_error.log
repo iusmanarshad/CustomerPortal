@@ -1,0 +1,1 @@
+2024/01/08 13:51:28 [info] 31#31: *129 SSL_do_handshake() failed (SSL: error:14094418:SSL routines:ssl3_read_bytes:tlsv1 alert unknown ca:SSL alert number 48) while SSL handshaking, client: 172.19.0.5, server: 0.0.0.0:443

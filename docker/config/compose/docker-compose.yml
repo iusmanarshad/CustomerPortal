@@ -1,0 +1,90 @@
+version: '3.9'
+
+services:
+
+  web:
+    image: nginx:1.20-alpine
+    container_name: ${SERVICE_PROXY}_${ENV}
+    restart: unless-stopped
+    working_dir: /var/www
+    env_file: .env
+    volumes:
+      - ./:/var/www
+      - ./docker/config/nginx/includes:/etc/nginx/includes
+      - ./docker/config/nginx/conf/${ENV}.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/logs/nginx:/var/log/nginx
+      - ${CERTS_DIRECTORY}:/etc/nginx/certs
+    depends_on:
+      - core
+    ports:
+      - 80:80
+      - 443:443
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
+      retries: 3
+      timeout: 5s
+    networks:
+      network:
+        aliases:
+          - fams.local
+
+  core:
+    # image: fhzspt/php-8.1-alpine:dev
+    build:
+      context: ./
+      dockerfile: ./docker/config/php/php-dockerfile
+    container_name: ${SERVICE_CORE}_${ENV}
+    restart: unless-stopped
+    working_dir: /var/www
+    env_file:
+      - .env
+    environment:
+      SERVICE_NAME: ${SERVICE_CORE}
+      SERVICE_TAGS: ${ENV}
+      APP_URL: ${APP_URL}
+      DB_CONNECTION: ${CORE_DB_CONNECTION}
+      DB_HOST: ${SERVICE_CORE_DB}
+      DB_DATABASE: ${CORE_DB_NAME}_${ENV}
+      DB_USERNAME: ${CORE_DB_USER}
+      DB_PASSWORD: ${CORE_DB_PASSWORD}
+      DB_PREFIX: ${CORE_DB_PREFIX}
+    volumes:
+      - ./:/var/www
+      - ./docker/config/php/core.${ENV}.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ${CERTS_DIRECTORY}:/etc/certs
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - 9000
+    networks:
+      - network
+
+  db:
+    image: mysql:${VERSION_MYSQL}
+    container_name: ${SERVICE_CORE_DB}
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - fdbdata:/var/lib/mysql
+      - ./docker/logs/db/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${CORE_DB_PASSWORD_ROOT}
+      MYSQL_USER: ${CORE_DB_USER}
+      MYSQL_PASSWORD: ${CORE_DB_PASSWORD}
+      MYSQL_DATABASE: ${CORE_DB_NAME}_${ENV}
+    healthcheck:
+      test: "mysqladmin ping -u root -p${CORE_DB_PASSWORD_ROOT}"
+      retries: 3
+      timeout: 5s
+    ports:
+      - ${CORE_DB_PORT_MASTER_EXT}:${CORE_DB_PORT_INT}
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  fdbdata:

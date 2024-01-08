@@ -1,0 +1,12 @@
+{
+    "debug": true,
+    "port": 6001,
+    "appManager.array.apps": [
+        {
+            "id": "dlaw-prod",
+            "key": "r46SlIyFzUvL4Av3Zq3bA669",
+            "secret": "5f574f12dd68350075245b5c",
+            "webhooks": []
+        }
+    ]
+}
