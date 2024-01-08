@@ -607,6 +607,13 @@
 												</div>
 											</form>
 										</li>
+                                        <li class="dropdown main-profile-menu nav-item">
+                                            <div class="d-flex justify-content-center align-items-center h-100">
+                                                <h6 class="tx-15 text-primary font-weight-semibold mb-0">
+                                                    {{ auth()->user() ? auth()->user()->first_name . ' ' . auth()->user()->last_name : '' }}
+                                                </h6>
+                                            </div>
+                                        </li>
 										<li class="dropdown main-profile-menu nav-item">
 											<a class="new nav-link profile-user rounded-circle shadow d-flex avatar"
 												href="javascript:void(0)" data-bs-toggle="dropdown">
@@ -618,12 +625,14 @@
 														<div class="avatar">
                                                             <i class="far fa-user-circle"></i>
                                                         </div>
-														<div class="ms-3 my-auto">
-															<h6 class="tx-15 text-black font-weight-semibold mb-0">Usman Arshad</h6>
+                                                        <div class="ms-3 my-auto">
+                                                            <h6 class="tx-15 text-black font-weight-semibold mb-0">
+                                                                {{ auth()->user() ? auth()->user()->first_name . ' ' . auth()->user()->last_name : '' }}
+                                                            </h6>
                                                             <span class="text-black op-8 tx-11">
-                                                                Web Developer
+                                                                {{ auth()->user()->email ?? '' }}
                                                             </span>
-														</div>
+                                                        </div>
 													</div>
 												</li>
 												<li><a class="dropdown-item" href="javascript:void(0)"><i
