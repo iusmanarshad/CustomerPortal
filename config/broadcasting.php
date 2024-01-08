@@ -38,7 +38,7 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'host' => env('PUSHER_HOST'),
-                'port' => env('LARAVEL_WEBSOCKETS_PORT'),
+                'port' => 443,
                 'scheme' => env('PUSHER_SCHEME'),
                 'useTLS' => env('PUSHER_USE_TLS'),
                 //'encrypted' => true,
