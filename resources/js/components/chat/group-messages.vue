@@ -15,25 +15,29 @@ export default {
         <div class="content-inner chat" id="messages">
             <template v-for="message in messages">
                 <div class="d-flex justify-content-end chat_block" v-if="isSentByMe(message)">
-                    <div class="msg_block_send">
-                        <div class="msg_container_send">
-                            <div class="msg_cotainer_send-main">
-                                <span>{{ message.message }}</span>
+                    <div class="d-flex justify-content-end w-75">
+                        <div class="msg_block_send">
+                            <div class="msg_container_send">
+                                <div class="msg_cotainer_send-main">
+                                    <span>{{ message.message }}</span>
+                                </div>
+                                <span class="msg_time_send" style="width: 100px; text-align: right">{{ message.timestamp }}</span>
                             </div>
-                            <span class="msg_time_send" style="width: 100px; text-align: right">{{ message.timestamp }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start chat_block" v-else>
-                    <div class="me-1 d-flex align-items-end">
-                        <span class="avatar avatar-status" style="background: #D3D3D3; height: 48px; width: 48px;"></span>
-                    </div>
-                    <div class="msg_block">
-                        <div class="msg_container d-flex flex-column align-items-start">
-                            <div class="msg_cotainer-main">
-                                <span>{{ message.message }}</span>
+                    <div class="d-flex justify-content-start w-75">
+                        <div class="me-1 d-flex align-items-end">
+                            <span class="avatar avatar-status" style="background: #D3D3D3; height: 48px; width: 48px;"></span>
+                        </div>
+                        <div class="msg_block">
+                            <div class="msg_container d-flex flex-column align-items-start">
+                                <div class="msg_cotainer-main">
+                                    <span>{{ message.message }}</span>
+                                </div>
+                                <span class="msg_time_send position-static" style="width: 100px">{{ message.timestamp }}</span>
                             </div>
-                            <span class="msg_time_send position-static" style="width: 100px">{{ message.timestamp }}</span>
                         </div>
                     </div>
                 </div>
