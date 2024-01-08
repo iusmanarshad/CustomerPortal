@@ -43,8 +43,8 @@ return [
                 'useTLS' => env('PUSHER_USE_TLS'),
                 'encrypted' => true,
                 'curl_options' => [
-                    CURLOPT_SSL_VERIFYHOST => 2,
-                    CURLOPT_SSL_VERIFYPEER => 2,
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
                 ],
             ],
             'client_options' => [
