@@ -31,7 +31,7 @@ return [
             'capacity' => null,
             'enable_client_messages' => false,
             'enable_statistics' => true,
-            'encrypted' => true,
+            //'encrypted' => true,
         ],
     ],
 
@@ -129,9 +129,9 @@ return [
          * Passphrase for your local_cert file.
          */
         'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
-        'verify_peer' => false,
+        // 'verify_peer' => false,
 
-        'allow_self_signed' => true,
+        // 'allow_self_signed' => true,
     ],
 
     /*
