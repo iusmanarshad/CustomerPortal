@@ -25,8 +25,8 @@ export default {
                             </div>
                             <div class="flex-1">
                                 <div class="flex-between mb-1">
-                                    <h6 class="mb-0">
-                                        {{ group.name }}
+                                    <h6 class="d-flex justify-content-between align-items-center mb-0">
+                                        <span>{{ group.name }}</span>
                                         <span class="badge badge-top rounded-pill bg-danger mx-3" :class="{'invisible': group.unread_messages == 0}" style="position: inherit !important;" :id="group.slug + '_unread-message-count'">
                                             {{ group.unread_messages }}
                                         </span>
