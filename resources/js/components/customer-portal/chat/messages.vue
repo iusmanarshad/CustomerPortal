@@ -147,7 +147,11 @@ export default {
                     parentContainer.scrollTop = childContainer.scrollHeight
                 }
                 console.log('scrolled to bottom')
-                self.readMessages();
+                if (self.selectedGroup) {
+                    self.readMessages();
+                } else {
+                    self.fetchUnreadMessages()
+                }
             }, 100)
         },
         selectMember(id) {
@@ -253,6 +257,22 @@ export default {
                 console.log(error);
                 this.loading = false;
                 document.querySelector('.loader-container').style.display = 'none';
+            });
+        },
+        fetchUnreadMessages() {
+            axios({
+                method: 'get',
+                url: 'api/customer-portal/messages/unread-count',
+                baseURL: window.location.origin,
+                params: {
+                    user_id: this.userId,
+                }
+            }).then(response => {
+                console.log(response);
+                this.updateUnreadMessageBadges(response.data.announcements, response.data.messages)
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
             });
         },
         readMessages() {
