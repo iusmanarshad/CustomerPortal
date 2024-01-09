@@ -12,7 +12,7 @@
         </div>
     </div>
     <!-- /breadcrumb -->
-    <portal-messages :user-id="{{ auth()->user()->id }}" :associate-id="{{ auth()->user()->associate_id ?? '' }}"></portal-messages>
+    <portal-messages :user-id="{{ auth()->user()->id }}" :associate-id="{{ auth()->user()->id }}"></portal-messages>
 
 @endsection
 
