@@ -79,7 +79,7 @@
                                             <div>
                                                 <h5>Group Members</h5>
                                             </div>
-                                            <a class="btn btn-sm btn-def tx-muted" href="javascript:void(0);" @click="editGroupMembers" data-bs-toggle="tooltip" title="Edit Group Members"><i class="fe fe-edit" data-bs-toggle="modal" data-bs-target="#addGroupMembers"></i></a>
+                                            <a class="btn btn-sm btn-def tx-muted" href="javascript:void(0);" @click="editGroupMembers" data-bs-toggle="tooltip" title="Edit Group Members"><i class="fe fe-user-plus fe-bold tx-30 tx-bold" data-bs-toggle="modal" data-bs-target="#addGroupMembers"></i></a>
                                         </div>
                                         <template v-if="selectedGroup.members.length > 0">
                                             <!-- chat members -->
