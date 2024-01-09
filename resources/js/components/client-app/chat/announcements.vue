@@ -182,8 +182,43 @@ export default {
             });
         },
     },
-    mounted() {
+    created() {
         this.fetchGroups(true);
+    },
+    mounted() {
+        const self = this;
+
+        var presenceChannel = window.Echo.join('announcement')
+            .here((users) => {
+                console.log('webhooks connected')
+                console.log(users.length)
+                this.usersCount = users.length;
+            })
+            .joining((user) => {
+                //console.log(user)
+                this.usersCount = this.usersCount+1;
+            })
+            .leaving((user) => {
+                //console.log(user)
+                this.usersCount = this.usersCount-1;
+                if (this.usersCount < 0) {
+                    this.usersCount = 0;
+                }
+            })
+            .listen('ChatMessageSent', (e) => {
+                    console.log('new message sent')
+
+                    self.appendMessage(e.message)
+                    self.fetchGroups(false);
+                    /*console.log('show notification')
+                        console.log(e.message);
+                        self.newMessage = e.message;
+                        self.showNotification = true;
+
+                        setTimeout(function () {
+                            self.hideNotification();
+                        }, 5000)*/
+            });
     },
     watch: {
 
