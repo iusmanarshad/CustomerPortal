@@ -93,8 +93,32 @@ export default {
                     parentContainer.scrollTop = childContainer.scrollHeight
                 }
                 console.log('scrolled to bottom')
-                self.readMessages();
+                if (self.selectedGroup) {
+                    self.readMessages();
+                } else {
+                    self.fetchUnreadMessages()
+                }
             }, 100)
+        },
+        appendMessage(message) {
+            this.messages.push(message);
+            this.scrollToBottom();
+        },
+        fetchUnreadMessages() {
+            axios({
+                method: 'get',
+                url: 'api/client-app/messages/unread-count',
+                baseURL: window.location.origin,
+                params: {
+                    user_id: this.userId,
+                }
+            }).then(response => {
+                console.log(response);
+                this.updateUnreadMessageBadges(response.data.announcements)
+            }).catch((error) => {
+                console.log(error);
+                this.loading = false;
+            });
         },
         readMessages() {
             axios({
@@ -205,19 +229,21 @@ export default {
                     this.usersCount = 0;
                 }
             })
-            .listen('ChatMessageSent', (e) => {
-                    console.log('new message sent')
+            .listen('AnnouncementMessageSent', (e) => {
+                console.log('new message sent')
 
-                    self.appendMessage(e.message)
-                    self.fetchGroups(false);
-                    /*console.log('show notification')
-                        console.log(e.message);
-                        self.newMessage = e.message;
-                        self.showNotification = true;
+                console.log('refreshing messages')
+                self.appendMessage(e.message)
+                console.log('refreshing groups')
+                self.fetchGroups(false);
+                /*console.log('show notification')
+                    console.log(e.message);
+                    self.newMessage = e.message;
+                    self.showNotification = true;
 
-                        setTimeout(function () {
-                            self.hideNotification();
-                        }, 5000)*/
+                    setTimeout(function () {
+                        self.hideNotification();
+                    }, 5000)*/
             });
     },
     watch: {
