@@ -9,6 +9,7 @@ use App\Http\Resources\AdminChannelResource;
 use App\Models\ChatChannel;
 use App\Models\ChatChannelMember;
 use App\Models\ChatChannelMessage;
+use App\Models\User;
 use App\Services\ChatService;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,13 @@ class ClientAnnouncementController extends Controller
 
     public function getGroups()
     {
-        $memberships = ChatChannelMember::where('user_id', '=', auth()->user()->id)->get();
+        $user = auth()->user();
+        if ($user->role_id == 3) {
+            $clientUser = User::where('id', '=', $user->associate_id)->first();
+        } else {
+            $clientUser = $user;
+        }
+        $memberships = ChatChannelMember::where('user_id', '=', $clientUser->id)->get();
         $groups = ChatChannel::query()
             ->where('type', '=', ChannelTypeEnum::ANNOUNCEMENT)
             ->whereIn('id', $memberships->pluck('channel_id')->toArray())
